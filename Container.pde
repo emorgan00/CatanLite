@@ -22,4 +22,9 @@ class Container extends GameObject {
 		// Do nothing.
 	}
 
+	void debugDraw(float x, float y) {
+		super.debugDraw(x, y);
+		rect(x+this.x, y+this.y, w, h);
+	}
+
 }

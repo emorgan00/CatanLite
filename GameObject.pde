@@ -10,6 +10,7 @@ abstract class GameObject {
 		this.id = id;
 		this.x = x;
 		this.y = y;
+		this.children = new ArrayList<GameObject>();
 	}
 
 	void addChild(GameObject child) {
@@ -58,5 +59,12 @@ abstract class GameObject {
 
 	//	Describes the behavior when this object is clicked.
 	abstract void click();
+
+	void debugDraw(float x, float y) {
+		stroke(255);
+		if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 32);
+		else fill(0, 0, 0, 0);
+		draw(x, y);
+	}
 
 }
