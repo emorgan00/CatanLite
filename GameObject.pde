@@ -61,6 +61,8 @@ abstract class GameObject {
 	abstract void click();
 
 	void debugDraw(float x, float y) {
+		fill(255);
+		text(id, x+this.x, y+this.y+12);
 		stroke(255);
 		if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 32);
 		else fill(0, 0, 0, 0);

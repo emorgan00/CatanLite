@@ -1,8 +1,13 @@
 GameObject VIEWPORT;
+PFont DEBUG_FONT;
 
 void setup() {
+	// setup window
 	size(1000, 1000);
-	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
+
+	// initialize global constants
+	VIEWPORT = new Container("VIEWPORT", 10, 10, width-20, height-20);
+	DEBUG_FONT = createFont("Courier New", 24, true);
 }
 
 void draw() {
