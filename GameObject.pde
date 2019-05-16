@@ -6,10 +6,10 @@ abstract class GameObject {
 	ArrayList<GameObject> children;
 	GameObject parent;
 
-	GameObject(float x, float y, String id) {
+	GameObject(String id, float x, float y) {
+		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.id = id;
 	}
 
 	void addChild(GameObject child) {
@@ -38,20 +38,22 @@ abstract class GameObject {
 
 	//	Return the frontmost object which is currently being hovered.
 	//	Returning <this> is allowed.
-	GameObject getLowestHovered() {
+	GameObject getLowestHovered(float mx, float my) {
+		float rx = mx-this.x;
+		float ry = my-this.y;
 		for (GameObject child : children) {
-			if (child.isHovered()) {
-				return child.getLowestHovered();
+			if (child.isHovered(rx, ry)) {
+				return child.getLowestHovered(rx, ry);
 			}
 		}
-		if (isHovered()) return this;
+		if (isHovered(mx, my)) return this;
 		return null;
 	}
 
 	//	Draw this object onto the screen, with the origin at (x, y).
 	abstract void draw(float x, float y);
 
-	//	Return true if the mouse is inside the bounding-box of this object.
+	//	Return true if the mouse is inside the bounding-box of this object, with the mouse at (mx, my).
 	abstract boolean isHovered(float mx, float my);
 
 	//	Describes the behavior when this object is clicked.

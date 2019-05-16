@@ -1,7 +1,8 @@
 GameObject VIEWPORT;
 
 void setup() {
-	// VIEWPORT = new GameObject(0, 0, "VIEWPORT", null);
+	size(1000, 1000);
+	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 }
 
 void draw() {
