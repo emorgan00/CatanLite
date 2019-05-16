@@ -18,6 +18,7 @@ abstract class GameObject {
 		child.parent = this;
 	}
 
+	// search through all direct children to find the desired child.
 	GameObject getChild(String id) {
 		for (GameObject child : children) {
 			if (child.id == id) return child;
@@ -25,6 +26,7 @@ abstract class GameObject {
 		return null;
 	}
 
+	// recursively search through all descendants to find the desired child.
 	GameObject findChild(String id) {
 		GameObject check;
 		for (GameObject child : children) {
@@ -32,6 +34,18 @@ abstract class GameObject {
 			check = child.findChild(id);
 			if (check != null) return check;
 		}
+		return null;
+	}
+
+	// return the frontmost object which is currently being hovered.
+	// returning <this> is allowed.
+	GameObject getLowestHovered() {
+		for (GameObject child : children) {
+			if (child.isHovered()) {
+				return child.getLowestHovered();
+			}
+		}
+		if isHovered() return this;
 		return null;
 	}
 
