@@ -62,11 +62,10 @@ abstract class GameObject {
 
 	void debugDraw(float x, float y) {
 		fill(255);
-		text(id, x+this.x, y+this.y+12);
+		text(id, x+this.x, y+this.y+10);
 		stroke(255);
 		if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 32);
 		else fill(0, 0, 0, 0);
-		draw(x, y);
 	}
 
 }
