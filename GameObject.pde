@@ -6,11 +6,10 @@ abstract class GameObject {
 	ArrayList<GameObject> children;
 	GameObject parent;
 
-	GameObject(float x, float y, String id, GameObject parent) {
+	GameObject(float x, float y, String id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
-		this.parent = parent;
 	}
 
 	void addChild(GameObject child) {
