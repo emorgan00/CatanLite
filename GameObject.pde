@@ -18,7 +18,7 @@ abstract class GameObject {
 		child.parent = this;
 	}
 
-	// search through all direct children to find the desired child.
+	//	Search through all direct children to find the desired child.
 	GameObject getChild(String id) {
 		for (GameObject child : children) {
 			if (child.id == id) return child;
@@ -26,7 +26,7 @@ abstract class GameObject {
 		return null;
 	}
 
-	// recursively search through all descendants to find the desired child.
+	//	Recursively search through all descendants to find the desired child.
 	GameObject findChild(String id) {
 		GameObject check;
 		for (GameObject child : children) {
@@ -37,16 +37,25 @@ abstract class GameObject {
 		return null;
 	}
 
-	// return the frontmost object which is currently being hovered.
-	// returning <this> is allowed.
+	//	Return the frontmost object which is currently being hovered.
+	//	Returning <this> is allowed.
 	GameObject getLowestHovered() {
 		for (GameObject child : children) {
 			if (child.isHovered()) {
 				return child.getLowestHovered();
 			}
 		}
-		if isHovered() return this;
+		if (isHovered()) return this;
 		return null;
 	}
+
+	//	Draw this object onto the screen, with the origin at (x, y).
+	abstract void draw(float x, float y);
+
+	//	Return true if the mouse is inside the bounding-box of this object.
+	abstract boolean isHovered(float mx, float my);
+
+	//	Describes the behavior when this object is clicked.
+	abstract void click();
 
 }
