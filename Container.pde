@@ -9,9 +9,9 @@ class Container extends GameObject {
 		this.h = h;
 	}
 
-	void setImage(String path) {
-		back = loadImage(path);
-		back.resize((int)w, (int)h);
+	void setImage(PImage img) {
+		img.resize((int)w, (int)h);
+		back = img.copy();
 	}
 
 	void draw(float x, float y) {
