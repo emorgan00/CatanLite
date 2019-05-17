@@ -7,7 +7,7 @@ void setup() {
 
 	// note: the image handling should at some point all be moved to a seperate file to reduce clutter here
 	PImage water = loadImage("water.jpg");
-	PImage hexmask = loadImage("hexmask.jpg");
+	PImage hexmask = loadImage("hexmask.png");
 
 	// initialize global constants
 	DEBUG_FONT = createFont("Courier New", 24, true);
@@ -24,17 +24,17 @@ void setup() {
 	c.setImage(test);
 	VIEWPORT.addChild(c);
 
-	test = loadImage("wool.jpg");
+	test = loadImage("ore.jpg");
 	test.mask(hexmask);
 
-	c = new Container("HEX_CONTAINER", 200, 133, 200, 200);
+	c = new Container("HEX_CONTAINER", 200, 136, 200, 200);
 	c.setImage(test);
 	VIEWPORT.addChild(c);
 
 	test = loadImage("wood.jpg");
 	test.mask(hexmask);
 
-	c = new Container("HEX_CONTAINER", 50, 216, 200, 200);
+	c = new Container("HEX_CONTAINER", 50, 222, 200, 200);
 	c.setImage(test);
 	VIEWPORT.addChild(c);
 }
