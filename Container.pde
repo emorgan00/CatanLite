@@ -1,6 +1,7 @@
 class Container extends GameObject {
 
 	float w, h;
+	PImage back;
 
 	Container(String id, float x, float y, float w, float h) {
 		super(id, x, y);
@@ -8,7 +9,14 @@ class Container extends GameObject {
 		this.h = h;
 	}
 
+	void setImage(String path) {
+		back = loadImage(path);
+		back.resize((int)w, (int)h);
+	}
+
 	void draw(float x, float y) {
+		if (back != null)
+			image(back, x+this.x, y+this.y);
 		for (GameObject child : children) {
 			child.draw(x+this.x, y+this.y);
 		}
