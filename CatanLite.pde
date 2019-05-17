@@ -15,5 +15,6 @@ void setup() {
 
 void draw() {
 	background(0, 0, 0);
+	VIEWPORT.draw(0, 0);
 	VIEWPORT.debugDraw(0, 0);
 }

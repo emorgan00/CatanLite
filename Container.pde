@@ -29,5 +29,4 @@ class Container extends GameObject {
 			child.debugDraw(x+this.x, y+this.y);
 		}
 	}
-
 }
