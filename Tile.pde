@@ -32,7 +32,7 @@ class Tile extends GameObject {
   }
   
   void draw(float x, float y) {
-    if (isHovered(mouseX,mouseY)) fill(255, 0, 0, 32);
+    if (isHovered(mouseX-x-this.x,mouseY-y-this.y)) fill(255, 0, 0, 32);
     else fill(0, 0, 0, 0);
     createHex(this.x+x,this.y+y);
   }
