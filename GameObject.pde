@@ -57,9 +57,6 @@ abstract class GameObject {
 	//	Return true if the mouse is inside the bounding-box of this object, with the mouse at (mx, my).
 	abstract boolean isHovered(float mx, float my);
 
-	//	Describes the behavior when this object is clicked.
-	abstract void click();
-
 	void debugDraw(float x, float y) {
 		fill(255);
 		stroke(255);

@@ -26,10 +26,6 @@ class Container extends GameObject {
 		return mx > x && my > y && mx < x+w && my < y+h;
 	}
 
-	void click() {
-		// Do nothing.
-	}
-
 	void debugDraw(float x, float y) {
 		super.debugDraw(x, y);
 		rect(x+this.x, y+this.y, w, h);
