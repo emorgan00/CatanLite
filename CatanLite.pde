@@ -5,37 +5,24 @@ void setup() {
 	// setup window
 	size(1500, 1000, OPENGL);
 
-	// note: the image handling should at some point all be moved to a seperate file to reduce clutter here
-	PImage water = loadImage("water.jpg");
-	PImage hexmask = loadImage("hexmask.png");
-
 	// initialize global constants
+	loadImages();
 	DEBUG_FONT = createFont("Courier New", 24, true);
 
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
-	VIEWPORT.setImage(water);
+	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-
-	PImage test = loadImage("brick.jpg");
-	test.mask(hexmask);
-
 	Container c = new Container("HEX_CONTAINER", 50, 50, 200, 200);
-	c.setImage(test);
+	c.setImage(hexImage("wool"));
 	VIEWPORT.addChild(c);
-
-	test = loadImage("ore.jpg");
-	test.mask(hexmask);
 
 	c = new Container("HEX_CONTAINER", 200, 136, 200, 200);
-	c.setImage(test);
+	c.setImage(hexImage("wheat"));
 	VIEWPORT.addChild(c);
 
-	test = loadImage("wood.jpg");
-	test.mask(hexmask);
-
 	c = new Container("HEX_CONTAINER", 50, 222, 200, 200);
-	c.setImage(test);
+	c.setImage(hexImage("ore"));
 	VIEWPORT.addChild(c);
 }
 
