@@ -18,7 +18,7 @@ class Tile extends GameObject {
   }
   
   //creates a regular hexagon centered at (x,y) with side length of len
-  void createHex(float len) {
+  void createHex(float x, float y) {
     hex = createShape();
     hex.beginShape();
     hex.vertex(x-len/2,y-len*0.8660254);
@@ -32,8 +32,9 @@ class Tile extends GameObject {
   }
   
   void draw(float x, float y) {
-    if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 32);
+    if (isHovered(mouseX,mouseY)) fill(255, 0, 0, 32);
     else fill(0, 0, 0, 0);
+    createHex(this.x+x,this.y+y);
   }
   
   //checks whether mouse is within the bounding square
