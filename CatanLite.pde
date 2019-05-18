@@ -21,7 +21,7 @@ void setup() {
 
 void draw() {
 	VIEWPORT.display(0, 0);
-	debug();
+	//debug();
 }
 
 void debug() {

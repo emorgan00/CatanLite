@@ -49,7 +49,12 @@ class Board extends Container {
 			// create tile
 			Resource r = resources.get(i);
 			Tile t = new Tile("TILE_"+i, t_x, t_y, t_width, r);
-			if (r != Resource.DESERT) {
+			if (r == Resource.DESERT) {
+				float r_width = t_width*0.2;
+				Container robber = new Container("ROBBER", (t_width-r_width)*0.5, t_width*0.5-r_width, r_width, r_width*2);
+				robber.setImage(copyImage("robber"));
+				t.addChild(robber);
+			} else {
 				t.setValue(values.get(v_index));
 				v_index++;
 			}
