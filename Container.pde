@@ -76,7 +76,7 @@ class Container {
 
 	void debugDraw(float x, float y) {
 		fill(255);
-		text(id, x+this.x, y+this.y+10);
+		text(id, x+this.x, y+this.y);
 		if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 16);
 		else fill(0, 0, 0, 0);
 		rect(x+this.x, y+this.y, w, h);

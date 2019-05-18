@@ -1,5 +1,5 @@
 Container VIEWPORT;
-PFont DEBUG_FONT;
+PFont DEBUG_FONT, NUMBER_FONT;
 
 void setup() {
 	// setup window
@@ -7,18 +7,28 @@ void setup() {
 
 	// initialize global constants
 	loadImages();
-	DEBUG_FONT = createFont("Courier New", 24, true);
+	DEBUG_FONT = createFont("Lucida Sans", 12, true);
+	NUMBER_FONT = createFont("Georgia", 64, true);
 
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.DESERT);
+	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.BRICK);
 	VIEWPORT.addChild(t);
+
+	TileMarker tm = new TileMarker("Test_Marker", 75, 75, 50, 2);
+	t.addChild(tm);
 }
 
 void draw() {
-	background(0, 0, 0);
-	VIEWPORT.draw(0, 0);
+	VIEWPORT.display(0, 0);
+	//debug();
+}
+
+void debug() {
+	stroke(255);
+	textFont(DEBUG_FONT);
+	textAlign(LEFT, TOP);
 	for (Container child : VIEWPORT.children) child.debugDraw(0, 0);
 }
