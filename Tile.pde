@@ -14,7 +14,17 @@ class Tile extends Container {
 		setImage(hexImage(resource.imageName()));
 	}
 
-	//checks whether mouse is within the bounding hexagon
+	void setValue(int value) {
+		this.value = value;
+		TileMarker marker = (TileMarker)this.getChild("MARKER");
+		if (marker == null) {
+			addChild(new TileMarker("MARKER", w*0.375, h*0.375, w*0.25, value));
+		} else {
+			marker.value = value;
+		}
+	} 
+
+	// checks whether mouse is within the bounding hexagon
 	boolean isHovered(float mx, float my) {
 		mx -= x;
 		my -= y+0.067*w;

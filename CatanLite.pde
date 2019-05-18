@@ -15,15 +15,13 @@ void setup() {
 
 	// testing
 	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.BRICK);
+	t.setValue((int)(Math.random()*11)+2);
 	VIEWPORT.addChild(t);
-
-	TileMarker tm = new TileMarker("Test_Marker", 75, 75, 50, 2);
-	t.addChild(tm);
 }
 
 void draw() {
 	VIEWPORT.display(0, 0);
-	//debug();
+	debug();
 }
 
 void debug() {
