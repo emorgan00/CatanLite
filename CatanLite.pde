@@ -14,10 +14,7 @@ void setup() {
 	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-	Tile t = new Tile("Test_Tile", 100, 100, 200, Resource.DESERT);
-	t.setValue((int)(Math.random()*11)+2);
-
-	Board b = new Board("Test_Board", 100, 100, 800);
+	Board b = new Board("Test_Board", 200, 0, height/1.116);
 	b.generateTiles();
 	VIEWPORT.addChild(b);
 }
