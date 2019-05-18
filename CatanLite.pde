@@ -1,5 +1,6 @@
 GameObject VIEWPORT;
 PFont DEBUG_FONT;
+Tile t;
 
 void setup() {
 	// setup window
@@ -11,9 +12,12 @@ void setup() {
 
 	// testing
 	VIEWPORT.addChild(new Container("TEST_CONTAINER", 15, 15, 200, 200));
+
+  t = new Tile("Test_Tile", 200, 200, 50);
 }
 
 void draw() {
 	background(0, 0, 0);
 	VIEWPORT.debugDraw(0, 0);
+  t.draw(0,0);
 }
