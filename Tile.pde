@@ -21,12 +21,12 @@ class Tile extends GameObject {
   void createHex(float x, float y) {
     hex = createShape();
     hex.beginShape();
-    hex.vertex(x-len/2,y-len*0.8660254);
-    hex.vertex(x+len/2,y-len*0.8660254);
-    hex.vertex(x+len,y);
-    hex.vertex(x+len/2,y+len*0.8660254);
-    hex.vertex(x-len/2,y+len*0.8660254);
-    hex.vertex(x-len,y);
+    hex.vertex(x-len*0.8660254,y-len/2);
+    hex.vertex(x-len*0.8660254,y+len/2);
+    hex.vertex(x,y+len);
+    hex.vertex(x+len*0.8660254,y+len/2);
+    hex.vertex(x+len*0.8660254,y-len/2);
+    hex.vertex(x,y-len);
     hex.endShape(CLOSE);
     shape(hex,x,y);
   }
@@ -39,7 +39,7 @@ class Tile extends GameObject {
   
   //checks whether mouse is within the bounding square
   boolean isHovered(float mx, float my) {
-    return mx > x-len && mx < x+len && my > y-len*0.8660254 && my < y+len*0.8660254;
+    return my > y-len && my < y+len && mx > x-len*0.8660254 && mx < x+len*0.8660254;
   }
   
   //fill in later
