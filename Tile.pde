@@ -14,10 +14,6 @@ class Tile extends Container {
 		setImage(hexImage(resource.imageName()));
 	}
 
-	void draw(float x, float y) {
-		super.draw(x, y);
-	}
-
 	//checks whether mouse is within the bounding hexagon
 	boolean isHovered(float mx, float my) {
 		mx -= x;

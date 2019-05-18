@@ -59,12 +59,15 @@ class Container {
 		return null;
 	}
 
-	void draw(float x, float y) {
-		if (img != null)
-			image(img, x+this.x, y+this.y);
+	void display(float x, float y) {
+		draw(x, y);
 		for (Container child : children) {
-			child.draw(x+this.x, y+this.y);
+			child.display(x+this.x, y+this.y);
 		}
+	}
+
+	void draw(float x, float y) {
+		if (img != null) image(img, x+this.x, y+this.y);
 	}
 
 	boolean isHovered(float mx, float my) {
@@ -73,7 +76,6 @@ class Container {
 
 	void debugDraw(float x, float y) {
 		fill(255);
-		stroke(255);
 		text(id, x+this.x, y+this.y+10);
 		if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 16);
 		else fill(0, 0, 0, 0);
