@@ -1,3 +1,5 @@
+import java.util.*;
+
 Container VIEWPORT;
 PFont DEBUG_FONT, NUMBER_FONT;
 
@@ -14,13 +16,14 @@ void setup() {
 	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-	Board b = new Board("Test_Board", 200, 0, height/1.116);
+	Board b = new Board("Test_Board", 300, 0, height/1.116);
 	b.generateTiles();
 	VIEWPORT.addChild(b);
 }
 
 void draw() {
 	VIEWPORT.display(0, 0);
+	runEvent();
 	//debug();
 }
 

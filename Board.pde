@@ -1,5 +1,3 @@
-import java.util.Collections;
-
 // these are constants associated with tile placements and values
 static final int[] rows = {0, 1, 1, 2, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 7, 7, 8};
 static final int[] cols = {2, 1, 3, 0, 2, 4, 1, 3, 0, 2, 4, 1, 3, 0, 2, 4, 1, 3, 2};
