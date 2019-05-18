@@ -13,7 +13,8 @@ class TileMarker extends Container {
 		textFont(NUMBER_FONT);
 		textSize(w*0.65);
 		textAlign(CENTER, CENTER);
-		fill(0);
+		if (value == 6 || value == 8) fill(220, 0, 0);
+		else fill(0);
 		text(""+value, x+this.x+w*0.5, y+this.y+h*0.4);
 	}
 
