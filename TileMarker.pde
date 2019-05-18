@@ -14,7 +14,7 @@ class TileMarker extends Container {
 		textSize(w*0.65);
 		textAlign(CENTER, CENTER);
 		fill(0);
-		text(""+value, x+this.x+w*0.5, y+this.y+h*0.36);
+		text(""+value, x+this.x+w*0.5, y+this.y+h*0.4);
 	}
 
 	boolean isHovered(float mx, float my) {

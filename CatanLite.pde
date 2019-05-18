@@ -8,13 +8,13 @@ void setup() {
 	// initialize global constants
 	loadImages();
 	DEBUG_FONT = createFont("Lucida Sans", 12, true);
-	NUMBER_FONT = createFont("Georgia", 64, true);
+	NUMBER_FONT = createFont("Cambria", 64, true);
 
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.BRICK);
+	Tile t = new Tile("Test_Tile", 100, 100, 800, Resource.BRICK);
 	t.setValue((int)(Math.random()*11)+2);
 	VIEWPORT.addChild(t);
 }
