@@ -1,6 +1,5 @@
 Container VIEWPORT;
 PFont DEBUG_FONT;
-Tile t;
 
 void setup() {
 	// setup window
@@ -14,7 +13,8 @@ void setup() {
 	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-	t = new Tile("Test_Tile", 200, 200, 50);
+	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.WOOD);
+	VIEWPORT.addChild(t);
 	Container c = new Container("HEX_CONTAINER", 50, 50, 200, 200);
 	c.setImage(hexImage("wool"));
 	VIEWPORT.addChild(c);
@@ -30,7 +30,6 @@ void setup() {
 
 void draw() {
 	background(0, 0, 0);
-	t.draw(0,0);
 	VIEWPORT.draw(0, 0);
 	for (Container child : VIEWPORT.children) child.debugDraw(0, 0);
 }
