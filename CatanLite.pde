@@ -1,13 +1,15 @@
 import java.util.*;
 
-Container VIEWPORT;
+// globals
+Container VIEWPORT, ROBBER;
+Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT;
 
 void setup() {
 	// setup window
-	size(1500, 1000, OPENGL);
+	size(1500, 1000);
 
-	// initialize global constants
+	// initialize globals
 	loadImages();
 	DEBUG_FONT = createFont("Lucida Sans", 12, true);
 	NUMBER_FONT = createFont("Cambria", 64, true);
@@ -15,10 +17,11 @@ void setup() {
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
+	BOARD = new Board("Test_Board", 300, 0, height/1.116);
+	VIEWPORT.addChild(BOARD);
+
 	// testing
-	Board b = new Board("Test_Board", 300, 0, height/1.116);
-	b.generateTiles();
-	VIEWPORT.addChild(b);
+	BOARD.generateTiles();
 }
 
 void draw() {
