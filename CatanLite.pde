@@ -9,23 +9,12 @@ void setup() {
 	loadImages();
 	DEBUG_FONT = createFont("Courier New", 24, true);
 
-	VIEWPORT = new Container("VIEWPORT", 0., 0., (float)width, (float)height);
+	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
 	// testing
-	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.WOOD);
+	Tile t = new Tile("Test_Tile", 400, 400, 200, Resource.DESERT);
 	VIEWPORT.addChild(t);
-	Container c = new Container("HEX_CONTAINER", 50, 50, 200, 200);
-	c.setImage(hexImage("wool"));
-	VIEWPORT.addChild(c);
-
-	c = new Container("HEX_CONTAINER", 200, 136, 200, 200);
-	c.setImage(hexImage("wheat"));
-	VIEWPORT.addChild(c);
-
-	c = new Container("HEX_CONTAINER", 50, 222, 200, 200);
-	c.setImage(hexImage("ore"));
-	VIEWPORT.addChild(c);
 }
 
 void draw() {

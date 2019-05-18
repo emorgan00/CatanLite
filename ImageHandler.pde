@@ -19,6 +19,7 @@ PImage copyImage(String name) {
 
 PImage hexImage(String name) {
 	PImage out = copyImage(name);
+	out.blend(IMG.get("hexborder"), 0, 0, 1000, 1000, 0, 0, 1000, 1000, BLEND);
 	out.mask(IMG.get("hexmask"));
 	return out;
 }
