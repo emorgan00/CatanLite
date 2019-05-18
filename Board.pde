@@ -61,7 +61,7 @@ class Board extends Container {
 	}
 
 	void clearTiles() {
-		for (int i = children.size(); i >= 0; i--) {
+		for (int i = children.size()-1; i >= 0; i--) {
 			if (children.get(i) instanceof Tile)
 				children.remove(i);
 		}

@@ -17,7 +17,7 @@ void setup() {
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
-	BOARD = new Board("Test_Board", 300, 0, height/1.116);
+	BOARD = new Board("BOARD", 300, 0, height/1.116);
 	VIEWPORT.addChild(BOARD);
 
 	// testing
@@ -31,8 +31,18 @@ void draw() {
 }
 
 void debug() {
+
+	// draw all objects' debug info
 	stroke(255);
 	textFont(DEBUG_FONT);
 	textAlign(LEFT, TOP);
 	for (Container child : VIEWPORT.children) child.debugDraw(0, 0);
+	fill(255);
+
+	// tell us what is being hovered
+	Container hov = VIEWPORT.getLowestHovered(mouseX, mouseY);
+	text("lowest hovered: "+hov, 0, 0);
+
+	// tell us the current event
+	text("current event: "+CURRENT_EVENT, 0, 15);
 }

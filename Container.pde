@@ -16,6 +16,10 @@ class Container {
 		this.children = new ArrayList<Container>();
 	}
 
+	String toString() {
+		return id;
+	}
+
 	void addChild(Container child) {
 		this.children.add(child);
 		child.parent = this;
