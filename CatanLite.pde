@@ -1,23 +1,36 @@
-GameObject VIEWPORT;
+Container VIEWPORT;
 PFont DEBUG_FONT;
 Tile t;
 
 void setup() {
 	// setup window
-	size(1000, 1000);
+	size(1500, 1000, OPENGL);
 
 	// initialize global constants
-	VIEWPORT = new Container("VIEWPORT", 10, 10, width-20, height-20);
+	loadImages();
 	DEBUG_FONT = createFont("Courier New", 24, true);
 
-	// testing
-	VIEWPORT.addChild(new Container("TEST_CONTAINER", 15, 15, 200, 200));
+	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
+	VIEWPORT.setImage(copyImage("water"));
 
+	// testing
   t = new Tile("Test_Tile", 200, 200, 50);
+	Container c = new Container("HEX_CONTAINER", 50, 50, 200, 200);
+	c.setImage(hexImage("wool"));
+	VIEWPORT.addChild(c);
+
+	c = new Container("HEX_CONTAINER", 200, 136, 200, 200);
+	c.setImage(hexImage("wheat"));
+	VIEWPORT.addChild(c);
+
+	c = new Container("HEX_CONTAINER", 50, 222, 200, 200);
+	c.setImage(hexImage("ore"));
+	VIEWPORT.addChild(c);
 }
 
 void draw() {
 	background(0, 0, 0);
-	VIEWPORT.debugDraw(0, 0);
   t.draw(0,0);
+	VIEWPORT.draw(0, 0);
+	for (GameObject child : VIEWPORT.children) child.debugDraw(0, 0);
 }
