@@ -1,23 +1,68 @@
-class Container extends GameObject {
+class Container {
 
-	float w, h;
-	PImage back;
+	float x, y, w, h;
+	String id;
+	PImage img;
+
+	ArrayList<Container> children;
+	Container parent;
 
 	Container(String id, float x, float y, float w, float h) {
-		super(id, x, y);
+		this.id = id;
+		this.x = x;
+		this.y = y;
 		this.w = w;
 		this.h = h;
+		this.children = new ArrayList<Container>();
+	}
+
+	void addChild(Container child) {
+		this.children.add(child);
+		child.parent = this;
 	}
 
 	void setImage(PImage img) {
 		img.resize((int)w, (int)h);
-		back = img.copy();
+		this.img = img;
+	}
+
+	//	Search through all direct children to find the desired child.
+	Container getChild(String id) {
+		for (Container child : children) {
+			if (child.id == id) return child;
+		}
+		return null;
+	}
+
+	//	Recursively search through all descendants to find the desired child.
+	Container findChild(String id) {
+		Container check;
+		for (Container child : children) {
+			if (child.id == id) return child;
+			check = child.findChild(id);
+			if (check != null) return check;
+		}
+		return null;
+	}
+
+	//	Return the frontmost object which is currently being hovered.
+	//	Returning <this> is allowed.
+	Container getLowestHovered(float mx, float my) {
+		float rx = mx-this.x;
+		float ry = my-this.y;
+		for (Container child : children) {
+			if (child.isHovered(rx, ry)) {
+				return child.getLowestHovered(rx, ry);
+			}
+		}
+		if (isHovered(mx, my)) return this;
+		return null;
 	}
 
 	void draw(float x, float y) {
-		if (back != null)
-			image(back, x+this.x, y+this.y);
-		for (GameObject child : children) {
+		if (img != null)
+			image(img, x+this.x, y+this.y);
+		for (Container child : children) {
 			child.draw(x+this.x, y+this.y);
 		}
 	}
@@ -27,9 +72,13 @@ class Container extends GameObject {
 	}
 
 	void debugDraw(float x, float y) {
-		super.debugDraw(x, y);
+		fill(255);
+		stroke(255);
+		text(id, x+this.x, y+this.y+10);
+		if (isHovered(mouseX-x, mouseY-y)) fill(255, 0, 0, 16);
+		else fill(0, 0, 0, 0);
 		rect(x+this.x, y+this.y, w, h);
-		for (GameObject child : children) {
+		for (Container child : children) {
 			child.debugDraw(x+this.x, y+this.y);
 		}
 	}
