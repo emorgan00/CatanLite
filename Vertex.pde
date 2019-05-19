@@ -1,27 +1,21 @@
-enum VertexType {
-	LEFT, RIGHT;
-}
-
 class Vertex extends Container {
 
-	private VertexType type;
 	boolean hasSettlement, hasCity;
 
 	ArrayList<Link> links;
 	ArrayList<Tile> tiles;
 
-	Vertex(String id, float x, float y, float w, VertexType type) {
+	Vertex(String id, float x, float y, float w) {
 		super(id, x, y, w, w*1.1547);
 		hasSettlement = false;
 		hasCity = false;
-		this.type = type;
 
 		links = new ArrayList<Link>();
 		tiles = new ArrayList<Tile>();
 	}
 
 	String toString() {
-		return String.format(id+" "+type);
+		return String.format(id);
 	}
 
 	void draw(float x, float y) {

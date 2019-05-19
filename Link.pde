@@ -18,7 +18,7 @@ class Link extends Container {
 		else type = LinkType.NEGATIVE;
 		// if horizontal, resize
 		if (type == LinkType.HORIZONTAL) {
-			x -= w*0.1732;
+			y -= w*0.1732;
 			h = w*0.3464;
 		}
 		
@@ -33,14 +33,12 @@ class Link extends Container {
 		mx -= x;
 		my -= y;
 		if (type == LinkType.HORIZONTAL) {
-			return (my > 0 && my < h && mx > 0.1*w && mx < 0.9*w);
+			return (my > 0 && my < h && mx > 0 && mx < w);
 		} else if (type == LinkType.POSITIVE) {
-			mx += 0.2*w;
-			if (my < 0 || my > h || mx < 0 || mx > 1.4*w) return false; // out of bounds
+			if (my < 0 || my > h || mx < -0.2*w || mx > 1.2*w) return false; // out of bounds
 			return Math.abs(1.732*mx-my) < 0.6928*w;
 		} else {
-			mx += 0.2*w;
-			if (my < 0 || my > h || mx < 0 || mx > 1.4*w) return false; // out of bounds
+			if (my < 0 || my > h || mx < -0.2*w || mx > 1.2*w) return false; // out of bounds
 			return Math.abs(1.732*(w-mx)-my) < 0.6928*w;
 		}
 	}

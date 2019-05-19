@@ -14,6 +14,13 @@ static final int[] vertex_cols = {
 	12, 16, 1, 3, 7, 9, 13, 15, 4, 6, 10, 12, 7, 9};
 
 // these are constants associated with linking objects
+static final int[][] vertex_links = {
+	{1, 3}, {4}, {7, 3}, {8}, {9, 5}, {10}, {12, 7}, {13}, {14, 9}, {15}, {16, 11}, {17},
+	{18}, {19, 14}, {20}, {21, 16}, {22}, {23}, {24, 19}, {25}, {26, 21}, {27}, {28, 23}, {29},
+	{30}, {31, 26}, {32}, {33, 28}, {34}, {35}, {36, 31}, {37}, {38, 33}, {39}, {40, 35}, {41},
+	{42}, {43, 38}, {44}, {45, 40}, {46}, {47}, {43}, {48}, {49, 44}, {50}, {51, 46}, {},
+	{49}, {52}, {53, 51}, {}, {53}, {}
+};
 
 class Board extends Container {
 
@@ -33,6 +40,7 @@ class Board extends Container {
 		tiles = new ArrayList<Tile>();
 		links = new ArrayList<Link>();
 		addVertices();
+		addLinks();
 	}
 
 	// special ordering of drawing
@@ -105,6 +113,8 @@ class Board extends Container {
 			if (children.get(i) instanceof Tile)
 				children.remove(i);
 		}
+		tiles.clear();
+		for (Vertex v : vertices) v.tiles.clear();
 	}
 
 	void addVertices() {
@@ -115,7 +125,7 @@ class Board extends Container {
 		for (int i = 0; i < 54; i++) {
 			float c_x = t_offset+col_inc*vertex_cols[i];
 			float c_y = row_offset+row_inc*vertex_rows[i];
-			Vertex v = new Vertex("V_"+i, c_x-v_width/2, c_y-v_width*0.577, v_width, vertex_cols[i]%3 == 0 ? VertexType.RIGHT : VertexType.LEFT);
+			Vertex v = new Vertex("V_"+i, c_x-v_width/2, c_y-v_width*0.577, v_width);
 			addChild(v);
 			vertices.add(v);
 
@@ -124,7 +134,21 @@ class Board extends Container {
 	}
 
 	void addLinks() {
-
+		float x_offset = t_width*0.075;
+		float y_offset = x_offset*1.154;
+		for (int i = 0; i < 54; i++) {
+			Vertex current = vertices.get(i);
+			for (int j : vertex_links[i]) {
+				Vertex other = vertices.get(j);
+				// establish link between current & other
+				Link l = new Link("L_"+i+"_"+j, current.x+x_offset, current.y+y_offset, other.x+x_offset, other.y+y_offset);
+				l.vertices.add(current);
+				l.vertices.add(other);
+				current.links.add(l);
+				other.links.add(l);
+				addChild(l);
+				links.add(l);
+			}
+		}
 	}
-
 }
