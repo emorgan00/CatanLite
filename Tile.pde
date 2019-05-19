@@ -1,7 +1,7 @@
 class Tile extends Container {
 
 	Resource resource;
-	int value;
+	private int value;
 
 	//ArrayList<Vertex> neighbors;
 
