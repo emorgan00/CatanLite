@@ -23,15 +23,13 @@ void setup() {
 	// testing
 	BOARD.generateTiles();
 	Link l = new Link("Test_Link", 40, 40, 100, 160);
-	Vertex v = new Vertex("Test_Vertex", 40, 200, 40, VertexType.RIGHT);
 	VIEWPORT.addChild(l);
-	VIEWPORT.addChild(v);
 }
 
 void draw() {
 	VIEWPORT.display(0, 0);
 	runEvent();
-	debug();
+	//debug();
 }
 
 void debug() {

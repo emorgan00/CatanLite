@@ -23,3 +23,9 @@ PImage hexImage(String name) {
 	out.mask(IMG.get("hexmask"));
 	return out;
 }
+
+PImage pieceImage(String name) {
+	PImage out = copyImage("piecetexture");
+	out.mask(copyImage(name));
+	return out;
+}

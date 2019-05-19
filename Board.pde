@@ -13,16 +13,40 @@ static final int[] vertex_cols = {
 	7, 9, 13, 15, 0, 4, 6, 10, 12, 16, 1, 3, 7, 9, 13, 15, 0, 4, 6, 10,
 	12, 16, 1, 3, 7, 9, 13, 15, 4, 6, 10, 12, 7, 9};
 
+// these are constants associated with linking objects
+
 class Board extends Container {
 
 	float t_width;
 	float t_offset;
 
+	private ArrayList<Vertex> vertices;
+	private ArrayList<Tile> tiles;
+	private ArrayList<Link> links;
+
 	Board(String id, float x, float y, float w) {
 		super(id, x, y, w*1.1, w*1.116);
 		t_width = w/4;
 		t_offset = w*0.05;
+
+		vertices = new ArrayList<Vertex>();
+		tiles = new ArrayList<Tile>();
+		links = new ArrayList<Link>();
 		addVertices();
+	}
+
+	// special ordering of drawing
+	void display(float x, float y) {
+		draw(x, y);
+		for (Container child : tiles) {
+			child.display(x+this.x, y+this.y);
+		}
+		for (Container child : links) {
+			child.display(x+this.x, y+this.y);
+		}
+		for (Container child : vertices) {
+			child.display(x+this.x, y+this.y);
+		}
 	}
 
 	void generateTiles() {
@@ -72,6 +96,7 @@ class Board extends Container {
 				v_index++;
 			}
 			addChild(t);
+			tiles.add(t);
 		}
 	}
 
@@ -90,9 +115,16 @@ class Board extends Container {
 		for (int i = 0; i < 54; i++) {
 			float c_x = t_offset+col_inc*vertex_cols[i];
 			float c_y = row_offset+row_inc*vertex_rows[i];
-			Vertex v = new Vertex("V_"+i, c_x-v_width/2, c_y-v_width/2*1.1547, v_width, vertex_cols[i]%3 == 0 ? VertexType.RIGHT : VertexType.LEFT);
+			Vertex v = new Vertex("V_"+i, c_x-v_width/2, c_y-v_width*0.577, v_width, vertex_cols[i]%3 == 0 ? VertexType.RIGHT : VertexType.LEFT);
 			addChild(v);
+			vertices.add(v);
+
+			v.setImage(pieceImage("settlement"));
 		}
+	}
+
+	void addLinks() {
+
 	}
 
 }

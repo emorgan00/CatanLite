@@ -24,6 +24,12 @@ class Vertex extends Container {
 		return String.format(id+" "+type);
 	}
 
+	void draw(float x, float y) {
+		tint(0, 255, 0);
+		super.draw(x, y);
+		tint(0, 0, 0, 0);
+	}
+
 	boolean isHovered(float mx, float my) {
 		mx -= x;
 		my -= y;
