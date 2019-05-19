@@ -3,13 +3,15 @@ class Tile extends Container {
 	Resource resource;
 	private int value;
 
-	//ArrayList<Vertex> neighbors;
+	ArrayList<Vertex> vertices;
 
 	Tile(String id, float x, float y, float w, Resource resource) {
 		super(id, x, y, w, w);
 		value = 0;
 		this.resource = resource;
 		setImage(hexImage(resource.imageName()));
+		
+		vertices = new ArrayList<Vertex>();
 	}
 
 	void setValue(int value) {

@@ -6,13 +6,18 @@ class Vertex extends Container {
 
 	private VertexType type;
 	boolean hasSettlement, hasCity;
-	//ArrayList<Vertex> vertices;
+
+	ArrayList<Link> links;
+	ArrayList<Tile> tiles;
 
 	Vertex(String id, float x, float y, float w, VertexType type) {
 		super(id, x, y, w, w*1.1547);
 		hasSettlement = false;
 		hasCity = false;
 		this.type = type;
+
+		links = new ArrayList<Link>();
+		tiles = new ArrayList<Tile>();
 	}
 
 	String toString() {

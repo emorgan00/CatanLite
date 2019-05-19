@@ -6,7 +6,8 @@ class Link extends Container {
 
 	private LinkType type;
 	boolean hasRoad;
-	//ArrayList<Vertex> vertices;
+
+	ArrayList<Vertex> vertices;
 
 	Link(String id, float sx, float sy, float ex, float ey) {
 		super(id, Math.min(sx, ex), Math.min(sy, ey), Math.abs(sx-ex), Math.abs(sy-ey));
@@ -20,6 +21,8 @@ class Link extends Container {
 			x -= w*0.1732;
 			h = w*0.3464;
 		}
+		
+		vertices = new ArrayList<Vertex>();
 	}
 
 	String toString() {
