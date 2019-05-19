@@ -17,7 +17,7 @@ void setup() {
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
-	BOARD = new Board("BOARD", 300, 0, height/1.116);
+	BOARD = new Board("BOARD", 300, 20, height/1.116-40);
 	VIEWPORT.addChild(BOARD);
 
 	// testing
