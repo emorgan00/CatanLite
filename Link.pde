@@ -37,11 +37,11 @@ class Link extends Container {
 		} else if (type == LinkType.POSITIVE) {
 			mx += 0.2*w;
 			if (my < 0 || my > h || mx < 0 || mx > 1.4*w) return false; // out of bounds
-			return Math.abs(1.732*mx-my) < 0.6928*w && Math.abs(-.5772*mx-my+1.1548*w) < 0.9237*w;
+			return Math.abs(1.732*mx-my) < 0.6928*w;
 		} else {
 			mx += 0.2*w;
 			if (my < 0 || my > h || mx < 0 || mx > 1.4*w) return false; // out of bounds
-			return Math.abs(1.732*(w-mx)-my) < 0.6928*w && Math.abs(-.5772*(w-mx)-my+1.1548*w) < 0.9237*w;
+			return Math.abs(1.732*(w-mx)-my) < 0.6928*w;
 		}
 	}
 

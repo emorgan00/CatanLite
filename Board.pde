@@ -119,7 +119,7 @@ class Board extends Container {
 			addChild(v);
 			vertices.add(v);
 
-			v.setImage(pieceImage("settlement"));
+			if (Math.random() < 0.1) v.setImage(pieceImage("city"));
 		}
 	}
 

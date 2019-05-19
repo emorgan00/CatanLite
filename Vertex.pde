@@ -27,18 +27,7 @@ class Vertex extends Container {
 	void draw(float x, float y) {
 		tint(0, 255, 0);
 		super.draw(x, y);
-		tint(0, 0, 0, 0);
-	}
-
-	boolean isHovered(float mx, float my) {
-		mx -= x;
-		my -= y;
-		if (my < 0 || my > h || mx < 0 || mx > w) return false; // out of bounds
-		if (type == VertexType.RIGHT) {
-			return Math.abs(2*my-h)*w/h+mx < w;
-		} else {
-			return Math.abs(2*my-h)*w/h+(w-mx) < w;
-		}
+		noTint();
 	}
 
 }
