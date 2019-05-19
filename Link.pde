@@ -25,6 +25,12 @@ class Link extends Container {
 		vertices = new ArrayList<Vertex>();
 	}
 
+	void draw(float x, float y) {
+		tint(0, 255, 0);
+		super.draw(x, y);
+		noTint();
+	}
+
 	String toString() {
 		return String.format(id+" "+type);
 	}

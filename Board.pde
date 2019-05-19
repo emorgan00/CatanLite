@@ -146,9 +146,6 @@ class Board extends Container {
 			Vertex v = new Vertex("V_"+i, c_x-v_width/2, c_y-v_width*0.577, v_width);
 			addChild(v);
 			vertices.add(v);
-
-			if (Math.random() < 0.2) v.setImage(copyImage("settlement"));
-			else if (Math.random() < 0.2) v.setImage(copyImage("city"));
 		}
 	}
 
