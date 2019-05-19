@@ -13,8 +13,12 @@ class Link extends Container {
 		hasRoad = false;
 		// determine direction of link
 		if (sy == ey) type = LinkType.HORIZONTAL;
-		else if ((ey-sy)*(ex-ey) > 0) type = LinkType.POSITIVE;
+		else if ((ey-sy)*(ex-sx) > 0) type = LinkType.POSITIVE;
 		else type = LinkType.NEGATIVE;
+	}
+
+	String toString() {
+		return String.format(id+" "+type);
 	}
 
 }

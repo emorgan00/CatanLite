@@ -22,6 +22,8 @@ void setup() {
 
 	// testing
 	BOARD.generateTiles();
+	Link l = new Link("Test_Link", 40, 40, 200, 200);
+	VIEWPORT.addChild(l);
 }
 
 void draw() {
