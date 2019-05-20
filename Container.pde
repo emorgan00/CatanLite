@@ -4,6 +4,8 @@ class Container {
 	String id;
 	PImage img;
 
+  boolean active;
+
 	ArrayList<Container> children;
 	Container parent;
 
@@ -14,6 +16,7 @@ class Container {
 		this.w = w;
 		this.h = h;
 		this.children = new ArrayList<Container>();
+    active = true;
 	}
 
 	String toString() {
@@ -64,10 +67,12 @@ class Container {
 	}
 
 	void display(float x, float y) {
-		draw(x, y);
-		for (Container child : children) {
-			child.display(x+this.x, y+this.y);
-		}
+    if (active) {
+		  draw(x, y);
+		  for (Container child : children) {
+			  child.display(x+this.x, y+this.y);
+		  }
+    }
 	}
 
 	void draw(float x, float y) {
@@ -75,6 +80,9 @@ class Container {
 	}
 
 	boolean isHovered(float mx, float my) {
+    if (!active) {
+      return false;
+    }
 		return mx > x && my > y && mx < x+w && my < y+h;
 	}
 
