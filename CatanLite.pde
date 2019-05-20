@@ -28,7 +28,7 @@ void setup() {
 void draw() {
 	VIEWPORT.display(0, 0);
 	runEvent();
-	//debug();
+	debug();
 }
 
 void debug() {
@@ -46,8 +46,4 @@ void debug() {
 
 	// tell us the current event
 	text("current event: "+CURRENT_EVENT, 0, 15);
-}
-
-void mouseClicked() {
-	BOARD.active = !BOARD.active;
 }

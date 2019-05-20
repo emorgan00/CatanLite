@@ -104,4 +104,17 @@ class Container {
 		if (this == VIEWPORT) return 0;
 		return y+parent.absY();
 	}
+
+	void detach() { // completely detach this object from everything else, add it to the viewport, preserving location
+		x = absX();
+		y = absY();
+		parent.children.remove(this);
+		VIEWPORT.addChild(this);
+	}
+
+	void resize(float w, float h) {
+		this.w = w;
+		this.h = h;
+		setImage(this.img);
+	}
 }
