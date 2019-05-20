@@ -94,4 +94,14 @@ class Container {
 			child.debugDraw(x+this.x, y+this.y);
 		}
 	}
+
+	float absX() { // return the absolute x value of this relative to the viewport
+		if (this == VIEWPORT) return 0;
+		return x+parent.absX();
+	}
+
+	float absY() { // return the absolute y value of this relative to the viewport
+		if (this == VIEWPORT) return 0;
+		return y+parent.absY();
+	}
 }
