@@ -13,11 +13,12 @@ class MoveRobberEvent extends Event {
 	}
 
 	void tick() {
+		
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 
 		// check if the mouse has been interacted with
 		if (mousePressed && !mousePrevious && hov == ROBBER) { // mouse down
-			
+
 			selected = true;
 			ROBBER.detach();
 			// zoom the robber a little

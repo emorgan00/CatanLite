@@ -4,6 +4,7 @@ import java.util.*;
 Container VIEWPORT, ROBBER;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT;
+boolean DEBUG;
 
 void setup() {
 	// setup window
@@ -21,6 +22,7 @@ void setup() {
 	VIEWPORT.addChild(BOARD);
 
 	// testing
+	DEBUG = false;
 	BOARD.generateTiles();
 	addEvent(new MoveRobberEvent());
 }
@@ -28,7 +30,7 @@ void setup() {
 void draw() {
 	VIEWPORT.display(0, 0);
 	runEvent();
-	debug();
+	if (DEBUG) debug();
 }
 
 void debug() {
@@ -46,4 +48,8 @@ void debug() {
 
 	// tell us the current event
 	text("current event: "+CURRENT_EVENT, 0, 15);
+}
+
+void keyPressed() {
+	if (keyCode == SHIFT) DEBUG = !DEBUG;
 }
