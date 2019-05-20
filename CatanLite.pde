@@ -22,6 +22,7 @@ void setup() {
 
 	// testing
 	BOARD.generateTiles();
+	addEvent(new MoveRobberEvent());
 }
 
 void draw() {
