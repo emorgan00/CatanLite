@@ -1,4 +1,5 @@
 class Player {
+
   int red;
   int green;
   int blue;
