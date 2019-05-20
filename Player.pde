@@ -1,11 +1,8 @@
 class Player {
 
-  int red;
-  int green;
-  int blue;
+  int red, green, blue;
   
-  ArrayList<Vertex> settlements;
-  ArrayList<Vertex> cities;
+  ArrayList<Vertex> settlements, cities;
   ArrayList<Link> roads;
   
   Player(int r, int g, int b) {
