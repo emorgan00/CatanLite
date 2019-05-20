@@ -52,15 +52,17 @@ class Board extends Container {
 
 	// special ordering of drawing
 	void display(float x, float y) {
-		draw(x, y);
-		for (Container child : tiles) {
-			child.display(x+this.x, y+this.y);
-		}
-		for (Container child : links) {
-			child.display(x+this.x, y+this.y);
-		}
-		for (Container child : vertices) {
-			child.display(x+this.x, y+this.y);
+		if (active) {
+			draw(x, y);
+			for (Container child : tiles) {
+				child.display(x+this.x, y+this.y);
+			}
+			for (Container child : links) {
+				child.display(x+this.x, y+this.y);
+			}
+			for (Container child : vertices) {
+				child.display(x+this.x, y+this.y);
+			}
 		}
 	}
 

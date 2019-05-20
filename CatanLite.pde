@@ -46,3 +46,7 @@ void debug() {
 	// tell us the current event
 	text("current event: "+CURRENT_EVENT, 0, 15);
 }
+
+void mouseClicked() {
+	BOARD.active = !BOARD.active;
+}

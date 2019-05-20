@@ -26,6 +26,7 @@ class Tile extends Container {
 
 	// checks whether mouse is within the bounding hexagon
 	boolean isHovered(float mx, float my) {
+		if (!active) return false;
 		mx -= x;
 		my -= y+0.067*w;
 		float hex_h = h*0.866;
