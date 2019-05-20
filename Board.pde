@@ -33,22 +33,21 @@ static final int[][] tile_links = {
 class Board extends Container {
 
 	float t_width;
-	float t_offset;
 
 	private ArrayList<Vertex> vertices;
 	private ArrayList<Tile> tiles;
 	private ArrayList<Link> links;
 
 	Board(String id, float x, float y, float w) {
-		super(id, x, y, w*1.1, w*1.116);
-		t_width = w/4;
-		t_offset = w*0.05;
+		super(id, x, y, w, w*1.03923);
+		t_width = w/5;
 
 		vertices = new ArrayList<Vertex>();
 		tiles = new ArrayList<Tile>();
 		links = new ArrayList<Link>();
 		addVertices();
 		addLinks();
+		setImage(IMG.get("board"));
 	}
 
 	// special ordering of drawing
@@ -96,12 +95,12 @@ class Board extends Container {
 		for (int i = 0; i < 19; i++) {
 
 			// determine position of each tile
-			float t_y = t_radius*0.5*tile_rows[i];
-			float t_x = t_width*0.75*tile_cols[i];
+			float t_y = t_radius*0.5*(tile_rows[i]+1);
+			float t_x = t_width*0.75*(tile_cols[i]+0.6667);
 
 			// create tile
 			Resource r = resources.get(i);
-			Tile t = new Tile("TILE_"+i, t_offset+t_x, t_y, t_width, r);
+			Tile t = new Tile("TILE_"+i, t_x, t_y, t_width, r);
 			if (r == Resource.DESERT) {
 				float r_width = t_width*0.15;
 				ROBBER = new Container("ROBBER", (t_width-r_width)*0.5, t_width*0.5-r_width, r_width, r_width*2);
@@ -138,11 +137,11 @@ class Board extends Container {
 	void addVertices() {
 		float col_inc = t_width/4;
 		float row_inc = col_inc*(float)Math.sqrt(3);
-		float row_offset = t_width*0.067;
 		float v_width = t_width*0.15;
+		float row_offset = t_width*0.067;
 		for (int i = 0; i < 54; i++) {
-			float c_x = t_offset+col_inc*vertex_cols[i];
-			float c_y = row_offset+row_inc*vertex_rows[i];
+			float c_x = col_inc*(vertex_cols[i]+2);
+			float c_y = row_offset+row_inc*(vertex_rows[i]+1);
 			Vertex v = new Vertex("V_"+i, c_x-v_width/2, c_y-v_width*0.577, v_width);
 			addChild(v);
 			vertices.add(v);

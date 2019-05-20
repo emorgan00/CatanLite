@@ -7,7 +7,7 @@ PFont DEBUG_FONT, NUMBER_FONT;
 
 void setup() {
 	// setup window
-	size(1500, 1000);
+	size(2400, 1600);
 
 	// initialize globals
 	loadImages();
@@ -17,7 +17,7 @@ void setup() {
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage(copyImage("water"));
 
-	BOARD = new Board("BOARD", 300, 20, height/1.116-40);
+	BOARD = new Board("BOARD", (width-height/1.03923)/2, 0, height/1.03923);
 	VIEWPORT.addChild(BOARD);
 
 	// testing

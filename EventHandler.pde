@@ -1,4 +1,4 @@
-Deque<Event> EVENT_QUEUE = new ArrayDeque<Event>();
+Deque<Event> EVENT_STACK = new ArrayDeque<Event>();
 Event CURRENT_EVENT;
 
 void runEvent() {
@@ -8,13 +8,13 @@ void runEvent() {
 			CURRENT_EVENT = null;
 		}
 	}
-	if (CURRENT_EVENT == null && EVENT_QUEUE.size() > 0) {
-		CURRENT_EVENT = EVENT_QUEUE.removeFirst();
+	if (CURRENT_EVENT == null && EVENT_STACK.size() > 0) {
+		CURRENT_EVENT = EVENT_STACK.removeFirst();
 	}
 }
 
-void queueEvent(Event event) {
-	EVENT_QUEUE.addLast(event);
+void addEvent(Event event) {
+	EVENT_STACK.addFirst(event);
 }
 
 abstract class Event {
