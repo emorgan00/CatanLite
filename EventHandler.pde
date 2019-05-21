@@ -3,6 +3,10 @@ Event CURRENT_EVENT;
 
 void runEvent() {
 	if (CURRENT_EVENT != null) {
+		if (CURRENT_EVENT.waiting) {
+			CURRENT_EVENT.waiting = false;
+			CURRENT_EVENT.load();
+		}
 		CURRENT_EVENT.tick();
 		if (!CURRENT_EVENT.active) {
 			CURRENT_EVENT = null;
@@ -19,13 +23,17 @@ void addEvent(Event event) {
 
 abstract class Event {
 
-	boolean active;
+	boolean active, waiting;
 
 	Event() {
 		active = true;
+		waiting = true;
 	}
 
-	// this method will be called by the Event queue once per draw.
+	// this method will be called by the Event stack when the Event is loaded for the first time
+	abstract void load();
+
+	// this method will be called by the Event stack once per draw.
 	abstract void tick();
 
 	void close() {

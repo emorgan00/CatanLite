@@ -4,7 +4,7 @@ import java.util.*;
 Container VIEWPORT, ROBBER;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT;
-boolean DEBUG;
+boolean DEBUG = false;
 
 void setup() {
 	// setup window
@@ -22,8 +22,8 @@ void setup() {
 	VIEWPORT.addChild(BOARD);
 
 	// testing
-	DEBUG = false;
 	BOARD.generateTiles();
+	addEvent(new MoveRobberEvent());
 	addEvent(new MoveRobberEvent());
 }
 

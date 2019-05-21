@@ -4,7 +4,7 @@ class MoveRobberEvent extends Event {
 	float source_x, source_y;
 	Container source_tile;
 
-	MoveRobberEvent() {
+	void load() {
 		selected = false;
 		mousePrevious = false;
 		source_x = ROBBER.x;
@@ -26,7 +26,7 @@ class MoveRobberEvent extends Event {
 			ROBBER.y -= ROBBER.h*0.1;
 			ROBBER.resize(ROBBER.w*1.2, ROBBER.h*1.2);
 
-		} else if (!mousePressed && mousePrevious && selected) { //mouse up
+		} else if (!mousePressed && mousePrevious && selected) { // mouse up
 
 			selected = false;
 			ROBBER.parent.children.remove(ROBBER);

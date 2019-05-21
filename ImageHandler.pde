@@ -4,19 +4,14 @@ static String[] hex_images = {
 	"brick", "wool", "wood", "wheat", "ore", "desert"
 };
 
-void loadImages() {
-
-	// this should be called once in setup.
+void loadImages() { // this should be called once in setup.
 	File data = new File(dataPath(""));
 	IMG = new HashMap<String, PImage>();
-
 	for (File file : data.listFiles()) {
 		String name = file.getName();
 		IMG.put(name.substring(0, name.indexOf(".")), loadImage(name));
 	}
-
 	for (String s : hex_images) hexImage(s);
-
 }
 
 PImage getImage(String name, float w, float h) {
@@ -25,7 +20,6 @@ PImage getImage(String name, float w, float h) {
 	String id = String.format("%s_%d_%d", name, i_w, i_h);
 	if (!IMG.containsKey(id)) {
 		PImage resize = IMG.get(name).copy();
-		println("oh no! copied an image!");
 		resize.resize(i_w, i_h);
 		IMG.put(id, resize);
 	}
