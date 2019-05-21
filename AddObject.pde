@@ -31,3 +31,36 @@ class AddSettlementEvent extends Event {
     mousePrevious = mousePressed;
   }
 }
+
+class AddCityEvent extends Event {
+  Player player;
+  Container city;
+  boolean mousePrevious;
+  
+  AddCityEvent(Player player) {
+    this.player = player;
+  }
+  
+  void load() {
+    Vertex v = BOARD.vertices.get(0);
+    city = new Container("dummy",mouseX,mouseY,v.w,v.h);
+    VIEWPORT.addChild(city);
+    city.setImage("city");
+  }
+  
+  void tick() {
+    Container hov = BOARD.getLowestHovered(mouseX, mouseY);
+    
+    city.x = mouseX;
+    city.y = mouseY;
+    if (!mousePressed && mousePrevious) {
+      if (hov instanceof Vertex && ((Vertex)hov).hasSettlement) {
+        VIEWPORT.children.remove(city);
+        ((Vertex)hov).hasCity = true;
+        hov.setImage("city");
+        close();
+      }
+    }
+    mousePrevious = mousePressed;
+  }
+}
