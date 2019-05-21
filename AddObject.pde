@@ -56,6 +56,7 @@ class AddCityEvent extends Event {
     if (!mousePressed && mousePrevious) {
       if (hov instanceof Vertex && ((Vertex)hov).hasSettlement) {
         VIEWPORT.children.remove(city);
+        ((Vertex)hov).hasSettlement = false;
         ((Vertex)hov).hasCity = true;
         hov.setImage("city");
         close();
@@ -78,7 +79,7 @@ class AddRoadEvent extends Event {
     Link l = BOARD.links.get(0);
     road = new Container("dummy",mouseX,mouseY,l.w,l.h);
     VIEWPORT.addChild(road);
-    road.setImage("road");
+    road.setImage("road_h");
   }
   
   void tick() {
@@ -90,7 +91,15 @@ class AddRoadEvent extends Event {
       if (hov instanceof Link && !((Link)hov).hasRoad) {
         VIEWPORT.children.remove(road);
         ((Link)hov).hasRoad = true;
-        hov.setImage("road");
+        if (((Link)hov).type == LinkType.HORIZONTAL) {
+          hov.setImage("road_h");
+        }
+        else if (((Link)hov).type == LinkType.POSITIVE) {
+          hov.setImage("road_p");
+        }
+        else {
+          hov.setImage("road_n");
+        }
         close();
       }
     }

@@ -4,7 +4,7 @@ enum LinkType {
 
 class Link extends Container {
 
-	private LinkType type;
+	LinkType type;
 	boolean hasRoad;
 
 	ArrayList<Vertex> vertices;
