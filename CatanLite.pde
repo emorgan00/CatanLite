@@ -16,7 +16,7 @@ void setup() {
 	NUMBER_FONT = createFont("Cambria", 64, true);
 
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
-	VIEWPORT.setImage(copyImage("water"));
+	VIEWPORT.setImage("water");
 
 	BOARD = new Board("BOARD", (width-height/1.03923)/2, 0, height/1.03923);
 	VIEWPORT.addChild(BOARD);

@@ -42,9 +42,6 @@ class MoveRobberEvent extends Event {
 			ROBBER.resize(ROBBER.w/1.2, ROBBER.h/1.2);
 			ROBBER.x = source_x;
 			ROBBER.y = source_y;
-
-			// fix fuzzy image
-			ROBBER.setImage(copyImage("robber"));
 		}
 		mousePrevious = mousePressed;
 

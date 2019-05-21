@@ -5,7 +5,7 @@ class TileMarker extends Container {
 	TileMarker(String id, float x, float y, float w, int value) {
 		super(id, x, y, w, w);
 		this.value = value;
-		setImage(copyImage("marker"));
+		setImage("marker");
 	}
 
 	void draw(float x, float y) {

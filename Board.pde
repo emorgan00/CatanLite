@@ -47,7 +47,7 @@ class Board extends Container {
 		links = new ArrayList<Link>();
 		addVertices();
 		addLinks();
-		setImage(IMG.get("board"));
+		setImage("board");
 	}
 
 	// special ordering of drawing
@@ -106,7 +106,7 @@ class Board extends Container {
 			if (r == Resource.DESERT) {
 				float r_width = t_width*0.15;
 				ROBBER = new Container("ROBBER", (t_width-r_width)*0.5, t_width*0.5-r_width, r_width, r_width*2);
-				ROBBER.setImage(copyImage("robber"));
+				ROBBER.setImage("robber");
 				t.addChild(ROBBER);
 			} else {
 				t.setValue(values.get(v_index));

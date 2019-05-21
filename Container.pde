@@ -1,7 +1,7 @@
 class Container {
 
 	float x, y, w, h;
-	String id;
+	String id, img_name;
 	PImage img;
 
 	boolean active;
@@ -28,9 +28,9 @@ class Container {
 		child.parent = this;
 	}
 
-	void setImage(PImage img) {
-		img.resize((int)w, (int)h);
-		this.img = img;
+	void setImage(String name) {
+		img_name = name;
+		this.img = getImage(name, w, h);
 	}
 
 	//	Search through all direct children to find the desired child.
@@ -115,6 +115,6 @@ class Container {
 	void resize(float w, float h) {
 		this.w = w;
 		this.h = h;
-		setImage(this.img);
+		setImage(img_name);
 	}
 }

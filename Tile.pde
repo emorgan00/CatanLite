@@ -9,7 +9,7 @@ class Tile extends Container {
 		super(id, x, y, w, w);
 		value = 0;
 		this.resource = resource;
-		setImage(hexImage(resource.imageName()));
+		setImage(resource.imageName());
 		
 		vertices = new ArrayList<Vertex>();
 	}

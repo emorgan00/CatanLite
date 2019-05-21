@@ -1,5 +1,9 @@
 HashMap<String, PImage> IMG;
 
+static String[] hex_images = {
+	"brick", "wool", "wood", "wheat", "ore", "desert"
+};
+
 void loadImages() {
 
 	// this should be called once in setup.
@@ -11,15 +15,26 @@ void loadImages() {
 		IMG.put(name.substring(0, name.indexOf(".")), loadImage(name));
 	}
 
+	for (String s : hex_images) hexImage(s);
+
 }
 
-PImage copyImage(String name) {
-	return IMG.get(name).copy();
+PImage getImage(String name, float w, float h) {
+	int i_w = (int)w;
+	int i_h = (int)h;
+	String id = String.format("%s_%d_%d", name, i_w, i_h);
+	if (!IMG.containsKey(id)) {
+		PImage resize = IMG.get(name).copy();
+		println("oh no! copied an image!");
+		resize.resize(i_w, i_h);
+		IMG.put(id, resize);
+	}
+	return IMG.get(id);
 }
 
-PImage hexImage(String name) {
-	PImage out = copyImage(name);
+void hexImage(String name) {
+	PImage out = IMG.get(name).copy();
 	out.blend(IMG.get("hexborder"), 0, 0, 1000, 1000, 0, 0, 1000, 1000, BLEND);
 	out.mask(IMG.get("hexmask"));
-	return out;
+	IMG.put("hex_"+name, out);
 }
