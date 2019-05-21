@@ -64,3 +64,36 @@ class AddCityEvent extends Event {
     mousePrevious = mousePressed;
   }
 }
+
+class AddRoadEvent extends Event {
+  Player player;
+  Container road;
+  boolean mousePrevious;
+  
+  AddRoadEvent(Player player) {
+    this.player = player;
+  }
+  
+  void load() {
+    Link l = BOARD.links.get(0);
+    road = new Container("dummy",mouseX,mouseY,l.w,l.h);
+    VIEWPORT.addChild(road);
+    road.setImage("road");
+  }
+  
+  void tick() {
+    Container hov = BOARD.getLowestHovered(mouseX, mouseY);
+    
+    road.x = mouseX;
+    road.y = mouseY;
+    if (!mousePressed && mousePrevious) {
+      if (hov instanceof Link && !((Link)hov).hasRoad) {
+        VIEWPORT.children.remove(road);
+        ((Link)hov).hasRoad = true;
+        hov.setImage("road");
+        close();
+      }
+    }
+    mousePrevious = mousePressed;
+  }
+}
