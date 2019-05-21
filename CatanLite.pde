@@ -26,6 +26,8 @@ void setup() {
 	BOARD.generateTiles();
 	addEvent(new MoveRobberEvent());
 	addEvent(new MoveRobberEvent());
+  addEvent(new AddRoadEvent(p));
+  addEvent(new AddCityEvent(p));
   addEvent(new AddSettlementEvent(p));
 }
 
