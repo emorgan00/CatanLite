@@ -22,9 +22,11 @@ void setup() {
 	VIEWPORT.addChild(BOARD);
 
 	// testing
+  Player p = new Player(255,0,0);
 	BOARD.generateTiles();
 	addEvent(new MoveRobberEvent());
 	addEvent(new MoveRobberEvent());
+  addEvent(new AddSettlementEvent(p));
 }
 
 void draw() {
