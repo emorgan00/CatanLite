@@ -8,7 +8,7 @@ boolean DEBUG = false;
 
 void setup() {
 	// setup window
-	size(2400, 1600);
+	fullScreen();
 
 	// initialize globals
 	loadImages();
