@@ -66,7 +66,14 @@ class AddCityEvent extends Event {
 		if (hov instanceof Vertex && ((Vertex)hov).owner == player && ((Vertex)hov).hasSettlement) {
 			dummy.x = hov.absX()-dummy.w*0.08;
 			dummy.y = hov.absY()-dummy.h*0.08;
-			if (!mousePressed && mousePrevious) {
+      boolean isAble = true;
+      for (int x = 0; x < ((Vertex)hov).vertices.size(); x++) {
+        Vertex v = ((Vertex)hov).vertices.get(x);
+        if (v.owner != null && v.owner != player) {
+          isAble = false;
+        }
+      }
+			if (!mousePressed && mousePrevious && isAble) {
 				VIEWPORT.children.remove(dummy);
 				((Vertex)hov).hasSettlement = false;
 				((Vertex)hov).hasCity = true;
