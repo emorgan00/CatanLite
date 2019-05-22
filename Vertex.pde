@@ -1,6 +1,7 @@
 class Vertex extends Container {
 
 	boolean hasSettlement, hasCity;
+	Player owner;
 
 	ArrayList<Link> links;
 	ArrayList<Tile> tiles;

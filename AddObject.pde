@@ -1,7 +1,7 @@
 class AddSettlementEvent extends Event {
 	
 	Player player;
-	Container settlement;
+	Vertex dummy;
 	boolean mousePrevious;
 	
 	AddSettlementEvent(Player player) {
@@ -10,31 +10,35 @@ class AddSettlementEvent extends Event {
 	
 	void load() {
 		Vertex v = BOARD.vertices.get(0);
-		settlement = new Container("dummy",mouseX,mouseY,v.w,v.h);
-		VIEWPORT.addChild(settlement);
-		settlement.setImage("settlement");
+		dummy = new Vertex("DUMMY", mouseX, mouseY, v.w*1.2);
+		VIEWPORT.addChild(dummy);
+		dummy.setImage("settlement");
 	}
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-		
-		settlement.x = mouseX;
-		settlement.y = mouseY;
-		if (!mousePressed && mousePrevious) {
-			if (hov instanceof Vertex && !((Vertex)hov).hasSettlement && !((Vertex)hov).hasCity) {
-				VIEWPORT.children.remove(settlement);
+		if (hov instanceof Vertex && ((Vertex)hov).owner == null) {
+			dummy.x = hov.absX()-dummy.w*0.08;
+			dummy.y = hov.absY()-dummy.h*0.08;
+			if (!mousePressed && mousePrevious) {
+				VIEWPORT.children.remove(dummy);
 				((Vertex)hov).hasSettlement = true;
 				hov.setImage("settlement");
+				((Vertex)hov).owner = player;
 				close();
 			}
+		} else {
+			dummy.x = mouseX-dummy.w/2;
+			dummy.y = mouseY-dummy.h/2;
 		}
 		mousePrevious = mousePressed;
 	}
 }
 
 class AddCityEvent extends Event {
+	
 	Player player;
-	Container city;
+	Vertex dummy;
 	boolean mousePrevious;
 	
 	AddCityEvent(Player player) {
@@ -43,24 +47,26 @@ class AddCityEvent extends Event {
 	
 	void load() {
 		Vertex v = BOARD.vertices.get(0);
-		city = new Container("dummy",mouseX,mouseY,v.w,v.h);
-		VIEWPORT.addChild(city);
-		city.setImage("city");
+		dummy = new Vertex("DUMMY", mouseX, mouseY, v.w*1.2);
+		VIEWPORT.addChild(dummy);
+		dummy.setImage("city");
 	}
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-		
-		city.x = mouseX;
-		city.y = mouseY;
-		if (!mousePressed && mousePrevious) {
-			if (hov instanceof Vertex && ((Vertex)hov).hasSettlement) {
-				VIEWPORT.children.remove(city);
+		if (hov instanceof Vertex && ((Vertex)hov).owner == player && ((Vertex)hov).hasSettlement) {
+			dummy.x = hov.absX()-dummy.w*0.08;
+			dummy.y = hov.absY()-dummy.h*0.08;
+			if (!mousePressed && mousePrevious) {
+				VIEWPORT.children.remove(dummy);
 				((Vertex)hov).hasSettlement = false;
 				((Vertex)hov).hasCity = true;
 				hov.setImage("city");
 				close();
 			}
+		} else {
+			dummy.x = mouseX-dummy.w/2;
+			dummy.y = mouseY-dummy.h/2;
 		}
 		mousePrevious = mousePressed;
 	}

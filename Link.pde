@@ -6,6 +6,7 @@ class Link extends Container {
 
 	LinkType type;
 	boolean hasRoad;
+	Player owner;
 
 	ArrayList<Vertex> vertices;
 
