@@ -1,5 +1,11 @@
 enum LinkType {
 	HORIZONTAL, POSITIVE, NEGATIVE;
+
+	String imageName() {
+		if (this == HORIZONTAL) return "road_h";
+		else if (this == POSITIVE) return "road_p";
+		else return "road_n";
+	}
 }
 
 class Link extends Container {

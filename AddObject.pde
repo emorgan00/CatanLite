@@ -75,8 +75,9 @@ class AddCityEvent extends Event {
 }
 
 class AddRoadEvent extends Event {
+	
 	Player player;
-	Container road;
+	Link dummy, pastHov;
 	boolean mousePrevious;
 	
 	AddRoadEvent(Player player) {
@@ -85,31 +86,33 @@ class AddRoadEvent extends Event {
 	
 	void load() {
 		Link l = BOARD.links.get(0);
-		road = new Container("dummy",mouseX,mouseY,l.w,l.h);
-		VIEWPORT.addChild(road);
-		road.setImage("road_h");
+		dummy = new Link("DUMMY", mouseX, mouseY, mouseX+l.w*1.2, mouseY+l.h*1.2);
+		VIEWPORT.addChild(dummy);
+		dummy.setImage(l.type.imageName());
+		dummy.owner = player;
 	}
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-		
-		road.x = mouseX;
-		road.y = mouseY;
-		if (!mousePressed && mousePrevious) {
-			if (hov instanceof Link && !((Link)hov).hasRoad) {
-				VIEWPORT.children.remove(road);
+		if (hov instanceof Link && ((Link)hov).owner == null) {
+			if (hov != pastHov) {
+				pastHov = ((Link)hov);
+				dummy.w = ((Link)hov).w*1.2;
+				dummy.h = ((Link)hov).h*1.2;
+				dummy.setImage(((Link)hov).type.imageName());
+			}
+			dummy.x = hov.absX()-dummy.w*0.08;
+			dummy.y = hov.absY()-dummy.h*0.08;
+			if (!mousePressed && mousePrevious) {
+				VIEWPORT.children.remove(dummy);
 				((Link)hov).hasRoad = true;
-				if (((Link)hov).type == LinkType.HORIZONTAL) {
-					hov.setImage("road_h");
-				}
-				else if (((Link)hov).type == LinkType.POSITIVE) {
-					hov.setImage("road_p");
-				}
-				else {
-					hov.setImage("road_n");
-				}
+				hov.setImage(((Link)hov).type.imageName());
+				((Link)hov).owner = player;
 				close();
 			}
+		} else {
+			dummy.x = mouseX-dummy.w/2;
+			dummy.y = mouseY-dummy.h/2;
 		}
 		mousePrevious = mousePressed;
 	}
