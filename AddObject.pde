@@ -13,6 +13,7 @@ class AddSettlementEvent extends Event {
 		dummy = new Vertex("DUMMY", mouseX, mouseY, v.w*1.2);
 		VIEWPORT.addChild(dummy);
 		dummy.setImage("settlement");
+		dummy.owner = player;
 	}
 	
 	void tick() {
@@ -50,6 +51,7 @@ class AddCityEvent extends Event {
 		dummy = new Vertex("DUMMY", mouseX, mouseY, v.w*1.2);
 		VIEWPORT.addChild(dummy);
 		dummy.setImage("city");
+		dummy.owner = player;
 	}
 	
 	void tick() {

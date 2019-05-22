@@ -20,9 +20,11 @@ class Vertex extends Container {
 	}
 
 	void draw(float x, float y) {
-		tint(0, 255, 0);
-		super.draw(x, y);
-		noTint();
+		if (owner != null) {
+			tint(owner.red, owner.green, owner.blue);
+			super.draw(x, y);
+			noTint();
+		}
 	}
 
 }
