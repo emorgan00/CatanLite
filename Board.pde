@@ -159,6 +159,7 @@ class Board extends Container {
 				Vertex other = vertices.get(j);
 				// establish link between current & other
         current.vertices.add(other);
+        other.vertices.add(current);
 				Link l = new Link("L_"+i+"_"+j, current.x+x_offset, current.y+y_offset, other.x+x_offset, other.y+y_offset);
 				l.vertices.add(current);
 				l.vertices.add(other);
