@@ -22,13 +22,13 @@ void setup() {
 	VIEWPORT.addChild(BOARD);
 
 	// testing
-  Player p = new Player(255,0,0);
+	Player p = new Player(255,0,0);
 	BOARD.generateTiles();
 	addEvent(new MoveRobberEvent());
 	addEvent(new MoveRobberEvent());
-  addEvent(new AddRoadEvent(p));
-  addEvent(new AddCityEvent(p));
-  addEvent(new AddSettlementEvent(p));
+	addEvent(new AddRoadEvent(p));
+	addEvent(new AddCityEvent(p));
+	addEvent(new AddSettlementEvent(p));
 }
 
 void draw() {
