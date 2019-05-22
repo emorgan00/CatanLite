@@ -5,6 +5,7 @@ Container VIEWPORT, ROBBER;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT;
 boolean DEBUG = false;
+ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
 	// setup window
@@ -22,13 +23,20 @@ void setup() {
 	VIEWPORT.addChild(BOARD);
 
 	// testing
-	Player p0 = new Player(255, 0, 0);
-	Player p1 = new Player(0, 255, 0);
-	Player p2 = new Player(0, 0, 255);
 	BOARD.generateTiles();
-	addEvent(new AddRoadEvent(p0));
-	addEvent(new AddRoadEvent(p1));
-	addEvent(new AddRoadEvent(p2));
+	PLAYERS.add(new Player(255, 165, 0));
+	PLAYERS.add(new Player(255, 255, 255));
+	PLAYERS.add(new Player(20, 30, 220));
+	for (int i = 0; i < PLAYERS.size(); i++) {
+		Player p = PLAYERS.get(i);
+		addEvent(new AddRoadEvent(p));
+		addEvent(new AddSettlementEvent(p));
+	}
+	for (int i = PLAYERS.size()-1; i >= 0; i--) {
+		Player p = PLAYERS.get(i);
+		addEvent(new AddRoadEvent(p));
+		addEvent(new AddSettlementEvent(p));
+	}
 }
 
 void draw() {
