@@ -19,23 +19,21 @@ class AddSettlementEvent extends Event {
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 		if (hov instanceof Vertex && ((Vertex)hov).owner == null) {
-			boolean isAble = true;
+			dummy.x = hov.absX()-dummy.w*0.08;
+      dummy.y = hov.absY()-dummy.h*0.08;
+      boolean isAble = true;
       for (int x = 0; x < ((Vertex)hov).vertices.size(); x++) {
         Vertex v = ((Vertex)hov).vertices.get(x);
         if (v.owner != null && v.owner != player) {
           isAble = false;
         }
       }
-      if (isAble) {
-        dummy.x = hov.absX()-dummy.w*0.08;
-			  dummy.y = hov.absY()-dummy.h*0.08;
-			  if (!mousePressed && mousePrevious && isAble) {
-				  VIEWPORT.children.remove(dummy);
-				  ((Vertex)hov).hasSettlement = true;
-				  hov.setImage("settlement");
-				  ((Vertex)hov).owner = player;
-				  close();
-        }
+			if (!mousePressed && mousePrevious && isAble) {
+			 VIEWPORT.children.remove(dummy);
+			 ((Vertex)hov).hasSettlement = true;
+			 hov.setImage("settlement");
+			 ((Vertex)hov).owner = player;
+			 close();
 			}
 		} else {
 			dummy.x = mouseX-dummy.w/2;
