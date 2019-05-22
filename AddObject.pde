@@ -117,7 +117,13 @@ class AddRoadEvent extends Event {
 			}
 			dummy.x = hov.absX()-dummy.w*0.08;
 			dummy.y = hov.absY()-dummy.h*0.08;
-			if (!mousePressed && mousePrevious) {
+      boolean isAble = false;
+      for (int x = 0; x < ((Link)hov).vertices.size(); x++) {
+        if (((Link)hov).vertices.get(x).owner == player) {
+          isAble = true;
+        }
+      }
+			if (!mousePressed && mousePrevious && isAble) {
 				VIEWPORT.children.remove(dummy);
 				((Link)hov).hasRoad = true;
 				hov.setImage(((Link)hov).type.imageName());
