@@ -5,7 +5,6 @@ class Vertex extends Container {
 
 	ArrayList<Link> links;
 	ArrayList<Tile> tiles;
-  ArrayList<Vertex> vertices;
 
 	Vertex(String id, float x, float y, float w) {
 		super(id, x, y, w, w*1.1547);
@@ -14,7 +13,6 @@ class Vertex extends Container {
 
 		links = new ArrayList<Link>();
 		tiles = new ArrayList<Tile>();
-    vertices = new ArrayList<Vertex>();
 	}
 
 	String toString() {
