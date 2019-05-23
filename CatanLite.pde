@@ -29,13 +29,13 @@ void setup() {
 	PLAYERS.add(new Player(20, 30, 220));
 	for (int i = 0; i < PLAYERS.size(); i++) {
 		Player p = PLAYERS.get(i);
-		addEvent(new AddRoadEvent(p));
-		addEvent(new AddSettlementEvent(p));
+		addEvent(new AddRoadEvent(p, true));
+		addEvent(new AddSettlementEvent(p, true));
 	}
 	for (int i = PLAYERS.size()-1; i >= 0; i--) {
 		Player p = PLAYERS.get(i);
-		addEvent(new AddRoadEvent(p));
-		addEvent(new AddSettlementEvent(p));
+		addEvent(new AddRoadEvent(p, true));
+		addEvent(new AddSettlementEvent(p, true));
 	}
 }
 

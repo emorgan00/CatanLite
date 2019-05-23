@@ -2,10 +2,12 @@ class AddSettlementEvent extends Event {
 	
 	Player player;
 	Vertex dummy;
-	boolean mousePrevious;
+	boolean mousePrevious, setup;
 	
-	AddSettlementEvent(Player player) {
+	AddSettlementEvent(Player player, boolean setup) {
 		this.player = player;
+		// in setup mode, settlements can go anywhere. otherwise, they need to be placed by a road.
+		this.setup = setup;
 	}
 	
 	void load() {
@@ -25,6 +27,14 @@ class AddSettlementEvent extends Event {
 				for (Vertex v : l.vertices) {
 					if (v != hov && v.owner != null) isAble = false;;
 				}
+			}
+
+			if (!setup) {
+				boolean roadFlag = false;
+				for (Link l : ((Vertex)hov).links) {
+					if (l.owner == player) roadFlag = true;
+				}
+				if (!roadFlag) isAble = false;
 			}
 
 			if (isAble) {
@@ -73,29 +83,17 @@ class AddCityEvent extends Event {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 		if (hov instanceof Vertex && ((Vertex)hov).owner == player && ((Vertex)hov).hasSettlement) {
 
-			boolean isAble = true;
-			for (Link l : ((Vertex)hov).links) {
-				for (Vertex v : l.vertices) {
-					if (v != hov && v.owner != null) isAble = false;;
-				}
+			dummy.x = hov.absX()-dummy.w*0.08;
+			dummy.y = hov.absY()-dummy.h*0.08;
+
+			if (!mousePressed && mousePrevious) {
+				VIEWPORT.children.remove(dummy);
+				((Vertex)hov).hasSettlement = false;
+				((Vertex)hov).hasCity = true;
+				hov.setImage("city");
+				close();
 			}
 
-			if (isAble) {
-				dummy.x = hov.absX()-dummy.w*0.08;
-				dummy.y = hov.absY()-dummy.h*0.08;
-
-				if (!mousePressed && mousePrevious) {
-					VIEWPORT.children.remove(dummy);
-					((Vertex)hov).hasSettlement = false;
-					((Vertex)hov).hasCity = true;
-					hov.setImage("city");
-					close();
-				}
-
-			} else {
-				dummy.x = mouseX-dummy.w/2;
-				dummy.y = mouseY-dummy.h/2;
-			}
 		} else {
 			dummy.x = mouseX-dummy.w/2;
 			dummy.y = mouseY-dummy.h/2;
@@ -108,10 +106,12 @@ class AddRoadEvent extends Event {
 	
 	Player player;
 	Link dummy, pastHov;
-	boolean mousePrevious;
+	boolean mousePrevious, setup;
 	
-	AddRoadEvent(Player player) {
+	AddRoadEvent(Player player, boolean setup) {
 		this.player = player;
+		// in setup mode, roads need to go next to a settlement. otherwise, they need to be placed by another road.
+		this.setup = setup;
 	}
 	
 	void load() {
@@ -125,11 +125,22 @@ class AddRoadEvent extends Event {
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 		if (hov instanceof Link && ((Link)hov).owner == null) {
+
 			boolean isAble = false;
-			for (int x = 0; x < ((Link)hov).vertices.size(); x++) {
-				if (((Link)hov).vertices.get(x).owner == player) {
-					isAble = true;
+			if (setup) {
+				for (Vertex v : ((Link)hov).vertices) {
+					if (v.owner == player) isAble = true;
 				}
+			} else {
+				boolean roadFlag = false;
+				for (Vertex v : ((Link)hov).vertices) {
+					if (v.owner == player || v.owner == null) {
+						for (Link l : v.links) {
+							if (l != hov && l.owner == player) roadFlag = true;
+						}
+					}
+				}
+				if (roadFlag) isAble = true;
 			}
 
 			if (isAble) {
@@ -141,7 +152,7 @@ class AddRoadEvent extends Event {
 				}
 				dummy.x = hov.absX()-dummy.w*0.08;
 				dummy.y = hov.absY()-dummy.h*0.08;
-				
+
 				if (!mousePressed && mousePrevious) {
 					VIEWPORT.children.remove(dummy);
 					((Link)hov).hasRoad = true;
