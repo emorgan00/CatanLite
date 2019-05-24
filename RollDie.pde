@@ -10,6 +10,8 @@ class RollDiceEvent extends Event {
   }
   
   void tick() {
+    left.roll();
+    right.roll();
     close();
   }
 }
