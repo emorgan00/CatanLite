@@ -50,3 +50,9 @@ Benjamin Avrahami and Ethan Morgan's APCS2 Final Project
     * Adjusted snapping to location
   * Ethan:
     * Prevented snapping to invalid locations
+
+5/23/19:
+  * Benjamin:
+    * Uploaded images of building costs, longest road, and largest army
+    * Made pictures appear on left side of screen
+
