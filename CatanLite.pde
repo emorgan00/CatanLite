@@ -22,18 +22,9 @@ void setup() {
 	BOARD = new Board("BOARD", (width-height/1.03923)/2, 0, height/1.03923);
 	VIEWPORT.addChild(BOARD);
 
-  COSTS = new Container("COSTS",width/25, height/20, width/5, height/3);
-  VIEWPORT.addChild(COSTS);
-  COSTS.setImage("build_costs");
-  
-  ARMY = new Container("ARMY", width/100, 2*height/3, width/8, 2*height/7);
-  VIEWPORT.addChild(ARMY);
-  ARMY.setImage("largest_army");
-  
-  ROAD = new Container("ROAD", 12.6*width/100, 2*height/3, width/8, 2*height/7);
-  VIEWPORT.addChild(ROAD);
-  ROAD.setImage("longest_road");
-  
+	Card test = new ResourceCard("test", 200, 200, 400, Resource.WOOD);
+	VIEWPORT.addChild(test);
+
 	// testing
 	BOARD.generateTiles();
 	PLAYERS.add(new Player(255, 165, 0));
