@@ -1,5 +1,10 @@
 Benjamin Avrahami and Ethan Morgan's APCS2 Final Project
 
+to do list:
+  * add ability to cancel build events, this should only be possible when setup == false
+  * add the DiceBox class, should have the ability to draw a pair of dice with any numbers on the faces
+  * add Card class, should have a Resource field
+
 5/16/19:
   * Benjamin:
     * Managed to create generalized hexagon
