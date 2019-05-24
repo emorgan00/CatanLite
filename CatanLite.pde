@@ -1,7 +1,7 @@
 import java.util.*;
 
 // globals
-Container VIEWPORT, ROBBER;
+Container VIEWPORT, ROBBER, COSTS;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT;
 boolean DEBUG = false;
@@ -22,6 +22,10 @@ void setup() {
 	BOARD = new Board("BOARD", (width-height/1.03923)/2, 0, height/1.03923);
 	VIEWPORT.addChild(BOARD);
 
+  COSTS = new Container("COSTS",width/25,height/20,width/5,height/3);
+  VIEWPORT.addChild(COSTS);
+  COSTS.setImage("build_costs");
+  
 	// testing
 	BOARD.generateTiles();
 	PLAYERS.add(new Player(255, 165, 0));
