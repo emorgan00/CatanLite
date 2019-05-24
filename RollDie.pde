@@ -9,5 +9,7 @@ class RollDiceEvent extends Event {
     VIEWPORT.addChild(right);
   }
   
-  void tick() {}
+  void tick() {
+    close();
+  }
 }
