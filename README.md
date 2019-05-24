@@ -61,3 +61,8 @@ to do list:
     * Uploaded images of building costs, longest road, and largest army
     * Made pictures appear on left side of screen
 
+5/24/19:
+  * Benjamin:
+    * Uploaded images of resource cards
+    * Started die and rollDie
+
