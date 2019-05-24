@@ -1,7 +1,7 @@
 import java.util.*;
 
 // globals
-Container VIEWPORT, ROBBER, COSTS;
+Container VIEWPORT, ROBBER, COSTS, ARMY, ROAD;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT;
 boolean DEBUG = false;
@@ -22,9 +22,17 @@ void setup() {
 	BOARD = new Board("BOARD", (width-height/1.03923)/2, 0, height/1.03923);
 	VIEWPORT.addChild(BOARD);
 
-  COSTS = new Container("COSTS",width/25,height/20,width/5,height/3);
+  COSTS = new Container("COSTS",width/25, height/20, width/5, height/3);
   VIEWPORT.addChild(COSTS);
   COSTS.setImage("build_costs");
+  
+  ARMY = new Container("ARMY", width/100, 2*height/3, width/8, 2*height/7);
+  VIEWPORT.addChild(ARMY);
+  ARMY.setImage("largest_army");
+  
+  ROAD = new Container("ROAD", 12.6*width/100, 2*height/3, width/8, 2*height/7);
+  VIEWPORT.addChild(ROAD);
+  ROAD.setImage("longest_road");
   
 	// testing
 	BOARD.generateTiles();
