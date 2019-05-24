@@ -1,4 +1,4 @@
-class Die {
+class Die extends Container {
   
   int number;
   
