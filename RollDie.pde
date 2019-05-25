@@ -3,8 +3,8 @@ class RollDiceEvent extends Event {
   Die left, right;
   
   void load() {
-    left = new Die("Left_Die",width/20,2*height/5,width/10,height/10);
-    right = new Die("Right_Die",width/5,2*height/5,width/10,height/10);
+    left = new Die("Left_Die",width/25,2*height/5,width/20,width/20);
+    right = new Die("Right_Die",width/10,2*height/5,width/20,width/20);
     VIEWPORT.addChild(left);
     VIEWPORT.addChild(right);
   }
