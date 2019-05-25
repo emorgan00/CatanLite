@@ -20,22 +20,23 @@ class SliderKnob extends Container {
 
 	void draw(float x, float y) {
 		stroke(0);
+		strokeWeight(1);
 		fill(r, g, b);
 		rect(x+this.x, y+this.y, w, h);
 	}
-
 }
 
 class AddPlayerEvent extends Event {
 
 	MessageBox box;
 	SliderKnob selected;
+	Button add, cancel;
 	float miny, maxy;
-	boolean mousePrevious, enterDown;
+	boolean mousePrevious;
 	Player player;
 
 	void load() {
-		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, "", "Press Enter to continue...", CENTER, TOP);
+		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, "", "", CENTER, TOP);
 		VIEWPORT.addChild(box);
 
 		RGBSlider slider = new RGBSlider("R", box, 0);
@@ -48,8 +49,13 @@ class AddPlayerEvent extends Event {
 		miny = 0;
 		maxy = slider.h-slider.w/2;
 
+		add = new Button("BUTTON", box.w*0.50, box.h*0.8, box.w*0.16, box.h*0.07, "Add Player");
+		box.addChild(add);
+		cancel = new Button("BUTTON", box.w*0.68, box.h*0.8, box.w*0.16, box.h*0.07, "Cancel");
+		box.addChild(cancel);
+
 		player = new Player(255, 255, 255);
-		Vertex v = new Vertex("COLOR_DISPLAY", box.w*0.54, box.y*0.1, box.w*0.26);
+		Vertex v = new Vertex("COLOR_DISPLAY", box.w*0.54, box.h*0.1, box.w*0.26);
 		v.owner = player;
 		v.setImage("city");
 		box.addChild(v);
@@ -77,15 +83,18 @@ class AddPlayerEvent extends Event {
 		}
 
 		// exit if enter pressed
-		if (keyPressed && key == ENTER) {
-			enterDown = true;
-		} else if (enterDown) {
+		if (mousePressed && hov instanceof Button) {
+			((Button)hov).pressed = true;
+		} else if (hov instanceof Button && (((Button)hov).pressed)) {
 			VIEWPORT.children.remove(box);
-			PLAYERS.add(player);
+			if (hov == add) PLAYERS.add(player);
 			close();
-			// these two things are for testing purposed:
+			// these two things are for testing purposes:
 			addEvent(new AddRoadEvent(player, true));
 			addEvent(new AddSettlementEvent(player, true));
+		} else {
+			add.pressed = false;
+			cancel.pressed = false;
 		}
 	}
 }
