@@ -1,10 +1,23 @@
 class MessageBox extends Container {
 
 	String text;
+	int hAlign, vAlign;
+	float tx, ty;
 
-	MessageBox(String id, float x, float y, float w, float h, String text) {
+	MessageBox(String id, float x, float y, float w, float h, String text, int hAlign, int vAlign) {
 		super(id, x, y, w, h);
 		this.text = text;
+
+		if (hAlign == CENTER) tx = w/2;
+		else if (hAlign == RIGHT) tx = w*0.98;
+		else if (hAlign == LEFT) tx = w*0.02;
+
+		if (vAlign == CENTER) ty = h/2;
+		else if (vAlign == BOTTOM) ty = h*0.98;
+		else if (vAlign == TOP) ty = h*0.02;
+
+		this.hAlign = hAlign;
+		this.vAlign = vAlign;
 	}
 
 	void draw(float x, float y) {
@@ -12,9 +25,9 @@ class MessageBox extends Container {
 		// main text
 		textFont(MESSAGE_FONT);
 		textSize(width*0.015);
-		textAlign(CENTER, CENTER);
+		textAlign(hAlign, vAlign);
 		fill(0);
-		text(text, x+this.x+w/2, y+this.y+h/2);
+		text(text, x+this.x+tx, y+this.y+ty);
 		// corner text
 		textFont(MESSAGE_FONT_I);
 		textSize(width*0.01);
@@ -36,7 +49,7 @@ class MessageBoxEvent extends Event {
 	}
 
 	void load() {
-		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text);
+		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text, CENTER, CENTER);
 		box.setImage("parchment");
 		VIEWPORT.addChild(box);
 		if (hideOthers) {
