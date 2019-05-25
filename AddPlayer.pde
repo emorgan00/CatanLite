@@ -82,7 +82,7 @@ class AddPlayerEvent extends Event {
 			else if (selected.id.equals("B")) player.blue = c;
 		}
 
-		// exit if enter pressed
+		// exit if button pressed
 		if (mousePressed && hov instanceof Button) {
 			((Button)hov).pressed = true;
 		} else if (hov instanceof Button && (((Button)hov).pressed)) {

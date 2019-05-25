@@ -1,20 +1,19 @@
 Deque<Event> EVENT_STACK = new ArrayDeque<Event>();
-Event CURRENT_EVENT;
 
 void runEvent() {
-	if (CURRENT_EVENT != null) {
-		if (CURRENT_EVENT.waiting) {
-			CURRENT_EVENT.waiting = false;
-			CURRENT_EVENT.load();
-		}
-		CURRENT_EVENT.tick();
-		if (!CURRENT_EVENT.active) {
-			CURRENT_EVENT = null;
-		}
+	// remove inactive Events from the stack
+	while (EVENT_STACK.size() > 0 && !EVENT_STACK.getFirst().active) {
+		EVENT_STACK.removeFirst();
 	}
-	if (CURRENT_EVENT == null && EVENT_STACK.size() > 0) {
-		CURRENT_EVENT = EVENT_STACK.removeFirst();
+	// load topmost event
+	Event event = EVENT_STACK.peekFirst();
+	if (event == null) return;
+	// run load() if event is new
+	if (event.waiting) {
+		event.waiting = false;
+		event.load();
 	}
+	event.tick();
 }
 
 void addEvent(Event event) {

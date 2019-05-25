@@ -50,9 +50,10 @@ void debug() {
 	text("lowest hovered: "+hov, 0, 0);
 
 	// tell us the current event
-	text("current event: "+CURRENT_EVENT, 0, 15);
+	text("current event: "+EVENT_STACK.peekFirst(), 0, 15);
 }
 
 void keyPressed() {
 	if (keyCode == SHIFT) DEBUG = !DEBUG;
+	else addEvent(new AddPlayerEvent());
 }
