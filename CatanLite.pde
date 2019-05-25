@@ -19,24 +19,27 @@ void setup() {
 	VIEWPORT = new Container("VIEWPORT", 0, 0, width, height);
 	VIEWPORT.setImage("table");
 
-	BOARD = new Board("BOARD", (width-height/1.3)/2, 0, height/1.3);
+	BOARD = new Board("BOARD", (width-height/1.3)/2, height/100, height/1.3);
 	VIEWPORT.addChild(BOARD);
 
 	// testing
 	BOARD.generateTiles();
 
-	Card test = new ResourceCard("test", 200, 200, 200, Resource.WOOD);
-	VIEWPORT.addChild(test);
-	test = new ResourceCard("test", 420, 200, 200, Resource.WOOL);
-	VIEWPORT.addChild(test);
-	test = new ResourceCard("test", 640, 200, 200, Resource.ORE);
-	VIEWPORT.addChild(test);
-	test = new ResourceCard("test", 860, 200, 200, Resource.WHEAT);
-	VIEWPORT.addChild(test);
-	test = new ResourceCard("test", 1080, 200, 200, Resource.BRICK);
-	VIEWPORT.addChild(test);
+	PLAYERS.add(new Player(255, 165, 0));
+	PLAYERS.add(new Player(255, 255, 255));
+	PLAYERS.add(new Player(20, 30, 220));
+	for (int i = 0; i < PLAYERS.size(); i++) {
+		Player p = PLAYERS.get(i);
+		addEvent(new AddRoadEvent(p, true));
+		addEvent(new AddSettlementEvent(p, true));
+	}
+	for (int i = PLAYERS.size()-1; i >= 0; i--) {
+		Player p = PLAYERS.get(i);
+		addEvent(new AddRoadEvent(p, true));
+		addEvent(new AddSettlementEvent(p, true));
+	}
 
-	addEvent(new RollDiceEvent());
+	addEvent(new MessageBoxEvent("hello world!"));
 }
 
 void draw() {
