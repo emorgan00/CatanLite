@@ -18,6 +18,7 @@ class MessageBox extends Container {
 
 		this.hAlign = hAlign;
 		this.vAlign = vAlign;
+		setImage("parchment");
 	}
 
 	void draw(float x, float y) {
@@ -28,11 +29,6 @@ class MessageBox extends Container {
 		textAlign(hAlign, vAlign);
 		fill(0);
 		text(text, x+this.x+tx, y+this.y+ty);
-		// corner text
-		textFont(MESSAGE_FONT_I);
-		textSize(width*0.01);
-		textAlign(RIGHT, BOTTOM);
-		text("Click to continue...", x+this.x+w*0.97, y+this.y+h*0.97);
 	}
 
 }
@@ -50,7 +46,6 @@ class MessageBoxEvent extends Event {
 
 	void load() {
 		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text, CENTER, CENTER);
-		box.setImage("parchment");
 		VIEWPORT.addChild(box);
 		if (hideOthers) {
 			boardActive = BOARD.active;
@@ -66,6 +61,11 @@ class MessageBoxEvent extends Event {
 			}
 			close();
 		}
+		// corner text
+		textFont(MESSAGE_FONT_I);
+		textSize(width*0.01);
+		textAlign(RIGHT, BOTTOM);
+		text("Click to continue...", box.x+box.w*0.97, box.y+box.h*0.97);
 	}
 
 }

@@ -26,22 +26,7 @@ void setup() {
 
 	// testing
 	BOARD.generateTiles();
-
-	PLAYERS.add(new Player(255, 165, 0));
-	PLAYERS.add(new Player(255, 255, 255));
-	PLAYERS.add(new Player(20, 30, 220));
-	for (int i = 0; i < PLAYERS.size(); i++) {
-		Player p = PLAYERS.get(i);
-		addEvent(new AddRoadEvent(p, true));
-		addEvent(new AddSettlementEvent(p, true));
-	}
-	for (int i = PLAYERS.size()-1; i >= 0; i--) {
-		Player p = PLAYERS.get(i);
-		addEvent(new AddRoadEvent(p, true));
-		addEvent(new AddSettlementEvent(p, true));
-	}
-	// example:
-	addEvent(new MessageBoxEvent("Notice:\n\nPLAYER 1 has built the longest road\nand now holds the longest road card.", false));
+	addEvent(new AddPlayerEvent());
 }
 
 void draw() {
