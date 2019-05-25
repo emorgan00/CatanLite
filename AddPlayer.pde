@@ -35,7 +35,7 @@ class AddPlayerEvent extends Event {
 	Player player;
 
 	void load() {
-		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, "", CENTER, TOP);
+		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, "", "Press Enter to continue...", CENTER, TOP);
 		VIEWPORT.addChild(box);
 
 		RGBSlider slider = new RGBSlider("R", box, 0);
@@ -76,13 +76,6 @@ class AddPlayerEvent extends Event {
 			else if (selected.id.equals("B")) player.blue = c;
 		}
 
-		// corner text
-		textFont(MESSAGE_FONT_I);
-		textSize(width*0.01);
-		textAlign(RIGHT, BOTTOM);
-		fill(0);
-		text("Press Enter to continue...", box.x+box.w*0.97, box.y+box.h*0.97);
-
 		// exit if enter pressed
 		if (keyPressed && key == ENTER) {
 			enterDown = true;
@@ -90,6 +83,9 @@ class AddPlayerEvent extends Event {
 			VIEWPORT.children.remove(box);
 			PLAYERS.add(player);
 			close();
+			// these two things are for testing purposed:
+			addEvent(new AddRoadEvent(player, true));
+			addEvent(new AddSettlementEvent(player, true));
 		}
 	}
 }

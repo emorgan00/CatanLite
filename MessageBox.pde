@@ -1,12 +1,13 @@
 class MessageBox extends Container {
 
-	String text;
+	String text, cornerText;
 	int hAlign, vAlign;
 	float tx, ty;
 
-	MessageBox(String id, float x, float y, float w, float h, String text, int hAlign, int vAlign) {
+	MessageBox(String id, float x, float y, float w, float h, String text, String cornerText, int hAlign, int vAlign) {
 		super(id, x, y, w, h);
 		this.text = text;
+		this.cornerText = cornerText;
 
 		if (hAlign == CENTER) tx = w/2;
 		else if (hAlign == RIGHT) tx = w*0.98;
@@ -23,12 +24,20 @@ class MessageBox extends Container {
 
 	void draw(float x, float y) {
 		super.draw(x, y);
+
 		// main text
 		textFont(MESSAGE_FONT);
 		textSize(width*0.015);
 		textAlign(hAlign, vAlign);
 		fill(0);
 		text(text, x+this.x+tx, y+this.y+ty);
+
+		// corner text
+		textFont(MESSAGE_FONT_I);
+		textSize(width*0.01);
+		textAlign(RIGHT, BOTTOM);
+		fill(0);
+		text(cornerText, absX()+w*0.97, absY()+h*0.97);
 	}
 
 }
@@ -45,7 +54,7 @@ class MessageBoxEvent extends Event {
 	}
 
 	void load() {
-		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text, CENTER, CENTER);
+		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text, "Click to continue...", CENTER, CENTER);
 		VIEWPORT.addChild(box);
 		if (hideOthers) {
 			boardActive = BOARD.active;
@@ -61,11 +70,6 @@ class MessageBoxEvent extends Event {
 			}
 			close();
 		}
-		// corner text
-		textFont(MESSAGE_FONT_I);
-		textSize(width*0.01);
-		textAlign(RIGHT, BOTTOM);
-		text("Click to continue...", box.x+box.w*0.97, box.y+box.h*0.97);
 	}
 
 }
