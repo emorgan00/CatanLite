@@ -65,4 +65,6 @@ to do list:
   * Benjamin:
     * Uploaded images of resource cards
     * Started die and rollDie
+  * Ethan:
+    * Started Cards
 
