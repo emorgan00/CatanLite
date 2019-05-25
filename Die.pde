@@ -2,8 +2,8 @@ class Die extends Container {
 	
 	int number;
 	
-	public Die(String id, float x, float y, float w, float h) {
-		super(id,x,y,w,h);
+	Die(String id, float x, float y, float w) {
+		super(id, x, y, w, w);
 		roll();
 	}
 	
