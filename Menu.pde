@@ -80,6 +80,7 @@ class PlayerMenuEvent extends Event {
 				queueRefresh = true;
 			} else if (hov == start && PLAYERS.size() > 1) {
 				VIEWPORT.children.remove(box);
+				newGame();
 				close();
 			} else { // "remove" button
 				for (int j = PLAYERS.size()-1; j > -1; j -= 1) {
