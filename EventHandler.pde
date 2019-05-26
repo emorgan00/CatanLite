@@ -39,4 +39,7 @@ abstract class Event {
 		active = false;
 	}
 
+	// send a key press to this event
+	void keyPressed() {}
+
 }

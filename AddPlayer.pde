@@ -35,7 +35,6 @@ class AddPlayerEvent extends Event {
 
 	float miny, maxy;
 	boolean mousePrevious;
-	char lastChar;
 	Player player;
 
 	void load() {
@@ -102,17 +101,13 @@ class AddPlayerEvent extends Event {
 			add.pressed = false;
 			cancel.pressed = false;
 		}
+	}
 
-		// update the player name
-		if (keyPressed && lastChar != key) {
-			if (Character.isLetter(key) || key == ' ') {
-				name.text = name.text+key;
-			} else if (key == BACKSPACE && name.text.length() > 0) {
-				name.text = name.text.substring(0, name.text.length()-1);
-			}
-			lastChar = key;
-		} else if (!keyPressed) {
-			lastChar = 0;
+	void keyPressed() {
+		if (Character.isLetter(key) || Character.isDigit(key) || key == ' ') {
+			name.text = name.text+key;
+		} else if (key == BACKSPACE && name.text.length() > 0) {
+			name.text = name.text.substring(0, name.text.length()-1);
 		}
 	}
 }

@@ -56,5 +56,10 @@ void debug() {
 
 void keyPressed() {
 	if (keyCode == SHIFT) DEBUG = !DEBUG;
-	else if (keyCode == ENTER) addEvent(new AddPlayerEvent());
+	if (keyCode == ENTER) addEvent(new AddPlayerEvent());
+
+	Event event = EVENT_STACK.peekFirst();
+	if (event != null) {
+		event.keyPressed();
+	}		
 }
