@@ -1,7 +1,7 @@
 import java.util.*;
 
 // globals
-Container VIEWPORT, ROBBER, COSTS, ARMY, ROAD;
+Container VIEWPORT, ROBBER, ARMY, ROAD, DICE;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT, MESSAGE_FONT, MESSAGE_FONT_I;
 boolean DEBUG = false;
@@ -22,11 +22,16 @@ void setup() {
 	VIEWPORT.setImage("table");
 
 	BOARD = new Board("BOARD", (width-height/1.3)/2, height/100, height/1.3);
-	BOARD.active = false;
 	VIEWPORT.addChild(BOARD);
+
+	DICE = new Container("DICE", width*0.095, height*0.4, width*0.11, width/20);
+	DICE.addChild(new Die("LEFT_DIE", 0, 0, width/20));
+	DICE.addChild(new Die("RIGHT_DIE", width*0.06, 0, width/20));
+	VIEWPORT.addChild(DICE);
 
 	// testing
 	BOARD.generateTiles();
+	hideAll();
 	addEvent(new PlayerMenuEvent());
 }
 

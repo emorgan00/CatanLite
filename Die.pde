@@ -9,23 +9,25 @@ class Die extends Container {
 	
 	void roll() {
 		number = (int)(Math.random()*6)+1;
+		setImage("die_"+number);
 	}
 }
 
 class RollDiceEvent extends Event {
 	
 	Die left, right;
+	int timer;
 	
 	void load() {
-		left = new Die("Left_Die",width/25,2*height/5,width/20);
-		right = new Die("Right_Die",width/10,2*height/5,width/20);
-		VIEWPORT.addChild(left);
-		VIEWPORT.addChild(right);
+		left = (Die)DICE.getChild("LEFT_DIE");
+		right = (Die)DICE.getChild("RIGHT_DIE");
+		timer = 60;
 	}
 	
 	void tick() {
 		left.roll();
 		right.roll();
-		close();
+		if (timer < 0) close();
+		timer--;
 	}
 }

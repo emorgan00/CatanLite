@@ -46,19 +46,18 @@ class MessageBoxEvent extends Event {
 
 	String text;
 	Container box;
-	boolean hideOthers, boardActive;
+	boolean hideOthers;
 
 	MessageBoxEvent(String text, boolean hideOthers) {
 		this.text = text;
-		this.hideOthers = hideOthers; // hide the board and stuff when this is displayedtive = false;
+		this.hideOthers = hideOthers; // hide the board and stuff when this is displayed.
 	}
 
 	void load() {
 		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text, "Click to continue...", CENTER, CENTER);
 		VIEWPORT.addChild(box);
 		if (hideOthers) {
-			boardActive = BOARD.active;
-			BOARD.active = false;
+			hideAll();
 		}
 	}
 
@@ -66,7 +65,7 @@ class MessageBoxEvent extends Event {
 		if (box.isHovered(mouseX, mouseY) && mousePressed) {
 			VIEWPORT.children.remove(box);
 			if (hideOthers) {
-				BOARD.active = boardActive;
+				showAll();
 			}
 			close();
 		}

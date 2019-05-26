@@ -15,4 +15,8 @@ class Player {
 		cities = new ArrayList<Vertex>();
 		roads = new ArrayList<Link>();
 	}
+
+	String toString() {
+		return name;
+	}
 }
