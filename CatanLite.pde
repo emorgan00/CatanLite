@@ -22,11 +22,12 @@ void setup() {
 	VIEWPORT.setImage("table");
 
 	BOARD = new Board("BOARD", (width-height/1.3)/2, height/100, height/1.3);
+	BOARD.active = false;
 	VIEWPORT.addChild(BOARD);
 
 	// testing
 	BOARD.generateTiles();
-	addEvent(new AddPlayerEvent());
+	addEvent(new PlayerMenuEvent());
 }
 
 void draw() {
@@ -55,5 +56,5 @@ void debug() {
 
 void keyPressed() {
 	if (keyCode == SHIFT) DEBUG = !DEBUG;
-	else addEvent(new AddPlayerEvent());
+	else if (keyCode == ENTER) addEvent(new AddPlayerEvent());
 }

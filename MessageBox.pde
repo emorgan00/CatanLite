@@ -10,12 +10,12 @@ class MessageBox extends Container {
 		this.cornerText = cornerText;
 
 		if (hAlign == CENTER) tx = w/2;
-		else if (hAlign == RIGHT) tx = w*0.98;
-		else if (hAlign == LEFT) tx = w*0.02;
+		else if (hAlign == RIGHT) tx = w*0.95;
+		else if (hAlign == LEFT) tx = w*0.05;
 
 		if (vAlign == CENTER) ty = h/2;
-		else if (vAlign == BOTTOM) ty = h*0.98;
-		else if (vAlign == TOP) ty = h*0.02;
+		else if (vAlign == BOTTOM) ty = h*0.95;
+		else if (vAlign == TOP) ty = h*0.05;
 
 		this.hAlign = hAlign;
 		this.vAlign = vAlign;
