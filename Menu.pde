@@ -76,11 +76,18 @@ class PlayerMenuEvent extends Event {
 			((Button)hov).pressed = true;
 		} else if (hov instanceof Button && ((Button)hov).pressed) {
 			if (hov == add) {
-				addEvent(new AddPlayerEvent());
+				if (PLAYERS.size() < 4) addEvent(new AddPlayerEvent());
 				queueRefresh = true;
 			} else if (hov == start && PLAYERS.size() > 1) {
 				VIEWPORT.children.remove(box);
 				close();
+			} else { // "remove" button
+				for (int j = PLAYERS.size()-1; j > -1; j -= 1) {
+					if (PLAYERS.get(j).name.equals(((Button)hov).id)) {
+						PLAYERS.remove(j);
+						refreshPlayers();
+					}
+				}
 			}
 			((Button)hov).pressed = false;
 		} else {
@@ -90,13 +97,14 @@ class PlayerMenuEvent extends Event {
 	}
 
 	void refreshPlayers() {
-		// clear old vertices
+		// clear old objects
 		for (int j = box.children.size()-1; j > -1; j -= 1) {
-			if (box.children.get(j) instanceof Vertex || box.children.get(j) instanceof Label) {
+			Container c = box.children.get(j);
+			if (c instanceof Vertex || c instanceof Label || c instanceof Button && c != add && c != start) {
 				box.children.remove(j);
 			}
 		}
-		// add new vertices
+		// add new vertices, labels, buttons
 		float x = box.w*0.125;
 		for (Player p : PLAYERS) {
 
@@ -107,6 +115,9 @@ class PlayerMenuEvent extends Event {
 
 			Label l = new Label("NAME_DISPLAY", x+v.w/2, box.h*0.5, p.name);
 			box.addChild(l);
+
+			Button b = new Button(p.name, l.x-box.w*0.08, box.h*0.6, box.w*0.16, box.h*0.07, "Remove");
+			box.addChild(b);
 
 			x += box.w*0.2;
 		}
