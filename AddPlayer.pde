@@ -51,9 +51,9 @@ class AddPlayerEvent extends Event {
 		miny = 0;
 		maxy = slider.h-slider.w/2;
 
-		add = new Button("BUTTON", box.w*0.50, box.h*0.8, box.w*0.16, box.h*0.07, "Add Player");
+		add = new Button("ADD", box.w*0.50, box.h*0.8, box.w*0.16, box.h*0.07, "Add Player");
 		box.addChild(add);
-		cancel = new Button("BUTTON", box.w*0.68, box.h*0.8, box.w*0.16, box.h*0.07, "Cancel");
+		cancel = new Button("CANCEL", box.w*0.68, box.h*0.8, box.w*0.16, box.h*0.07, "Cancel");
 		box.addChild(cancel);
 
 		player = new Player("Unnamed Player", 255, 255, 255);
@@ -69,7 +69,6 @@ class AddPlayerEvent extends Event {
 	}
 	
 	void tick() {
-
 		Container hov = box.getLowestHovered(mouseX, mouseY);
 
 		// check if the mouse has been interacted with
@@ -95,7 +94,7 @@ class AddPlayerEvent extends Event {
 		} else if (hov instanceof Button && (((Button)hov).pressed)) {
 			VIEWPORT.children.remove(box);
 			if (hov == add) PLAYERS.add(player);
-			player.name = name.text;
+			if (name.text.length() > 0) player.name = name.text;
 			close();
 		} else {
 			add.pressed = false;

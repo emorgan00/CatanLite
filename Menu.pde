@@ -49,15 +49,44 @@ class Label extends Container {
 class PlayerMenuEvent extends Event {
 
 	MessageBox box;
+	Button add, start;
+	boolean queueRefresh;
 
 	void load() {
 		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, "Add Players:", "", CENTER, TOP);
 		VIEWPORT.addChild(box);
 		refreshPlayers();
+
+		add = new Button("ADD", box.w*0.33, box.h*0.8, box.w*0.16, box.h*0.07, "Add Player");
+		box.addChild(add);
+		start = new Button("START", box.w*0.51, box.h*0.8, box.w*0.16, box.h*0.07, "Begin Game");
+		box.addChild(start);
 	}
 
 	void tick() {
-		refreshPlayers();
+		Container hov = box.getLowestHovered(mouseX, mouseY);
+
+		if (queueRefresh) {
+			refreshPlayers();
+			queueRefresh = false;
+		}
+
+		// button handling
+		if (mousePressed && hov instanceof Button) {
+			((Button)hov).pressed = true;
+		} else if (hov instanceof Button && ((Button)hov).pressed) {
+			if (hov == add) {
+				addEvent(new AddPlayerEvent());
+				queueRefresh = true;
+			} else if (hov == start && PLAYERS.size() > 1) {
+				VIEWPORT.children.remove(box);
+				close();
+			}
+			((Button)hov).pressed = false;
+		} else {
+			add.pressed = false;
+			start.pressed = false;
+		}
 	}
 
 	void refreshPlayers() {
