@@ -4,7 +4,7 @@ class Container {
 	String id, img_name;
 	PImage img;
 
-	boolean active;
+	boolean active, rotated;
 
 	ArrayList<Container> children;
 	Container parent;
@@ -76,7 +76,16 @@ class Container {
 	}
 
 	void draw(float x, float y) {
-		if (img != null) image(img, x+this.x, y+this.y);
+		if (img != null) {
+			if (rotated) {
+				pushMatrix();
+				translate(x+this.x, y+this.y+h);
+				rotate(-HALF_PI);
+				image(img, 0, 0);
+				popMatrix();
+			}
+			else image(img, x+this.x, y+this.y);
+		}
 	}
 
 	boolean isHovered(float mx, float my) {
@@ -116,5 +125,12 @@ class Container {
 		this.w = w;
 		this.h = h;
 		setImage(img_name);
+	}
+
+	void flip() {
+		float sto = w;
+		w = h;
+		h = sto;
+		rotated = !rotated;
 	}
 }

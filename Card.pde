@@ -3,7 +3,6 @@ class Card extends Container {
 	Card(String id, float x, float y, float w) {
 		super(id, x, y, w, w*1.478);
 	}
-
 }
 
 class ResourceCard extends Card {

@@ -33,6 +33,11 @@ void setup() {
 	BOARD.generateTiles();
 	hideAll();
 	addEvent(new PlayerMenuEvent());
+	Card c = new ResourceCard("test", 200, 200, 200, Resource.WOOD);
+	c.flip();
+	VIEWPORT.addChild(c);
+	c = new ResourceCard("test", 200, 450, 200, Resource.WOOD);
+	VIEWPORT.addChild(c);
 }
 
 void draw() {
