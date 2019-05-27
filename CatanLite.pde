@@ -31,7 +31,7 @@ void setup() {
 	VIEWPORT.addChild(DICE);
 
 	CARD_WIDTH = width*0.07;
-	CARDS = new Container("CARDS", width*0.75, 0, CARD_WIDTH*1.478, height*0.8);
+	CARDS = new Container("CARDS", width*0.8, 0, CARD_WIDTH*1.478, height*0.8);
 	CARDS.addChild(new ResourceCard("WOOD_STACK", 0, CARDS.h/2-CARD_WIDTH*3.5, Resource.WOOD));
 	CARDS.addChild(new ResourceCard("BRICK_STACK", 0, CARDS.h/2-CARD_WIDTH*2.3, Resource.BRICK));
 	CARDS.addChild(new ResourceCard("WOOL_STACK", 0, CARDS.h/2-CARD_WIDTH*1.1, Resource.WOOL));

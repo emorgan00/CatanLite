@@ -25,7 +25,10 @@ PImage getImage(String name, float w, float h) {
 	int i_w = (int)w;
 	int i_h = (int)h;
 	String id = String.format("%s_%d_%d", name, i_w, i_h);
-	if (!IMG.containsKey(id)) {
+	if (!IMG.containsKey(id)) { // we need to do a resize
+		if (!IMG.containsKey(name) && name.substring(0, 4).equals("rot_")) { // we need to do a rotation
+			rotatedImage(name.substring(4));
+		}
 		PImage resize = IMG.get(name).copy();
 		resize.resize(i_w, i_h);
 		IMG.put(id, resize);
@@ -44,4 +47,18 @@ void cardImage(String name) {
 	PImage out = IMG.get("cardborder").copy();
 	out.blend(IMG.get(name), 0, 0, 161, 238, 10, 10, 141, 218, BLEND);
 	IMG.put(name, out);
+}
+
+void rotatedImage(String name) {
+	PImage in = IMG.get(name);
+	in.loadPixels();
+	PImage out = createImage(in.height, in.width, ARGB);
+	out.loadPixels();
+	for (int x = 0; x < in.width; x++) {
+		for (int y = 0; y < in.height; y++) {
+			out.set(y, x, in.get(x, y));
+		}
+	}
+	out.updatePixels();
+	IMG.put("rot_"+name, out);
 }

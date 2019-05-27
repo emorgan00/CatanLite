@@ -76,16 +76,7 @@ class Container {
 	}
 
 	void draw(float x, float y) {
-		if (img != null) {
-			if (rotated) {
-				pushMatrix();
-				translate(x+this.x, y+this.y+h);
-				rotate(-HALF_PI);
-				image(img, 0, 0);
-				popMatrix();
-			}
-			else image(img, x+this.x, y+this.y);
-		}
+		if (img != null) image(img, x+this.x, y+this.y);
 	}
 
 	boolean isHovered(float mx, float my) {
@@ -132,5 +123,7 @@ class Container {
 		w = h;
 		h = sto;
 		rotated = !rotated;
+		if (rotated) setImage("rot_"+img_name);
+		else setImage(img_name);
 	}
 }
