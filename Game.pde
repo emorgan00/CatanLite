@@ -22,16 +22,19 @@ void loadGame() {
 
 }
 
-boolean boardActive, diceActive;
+boolean boardActive, diceActive, cardsActive;
 
 void hideAll() {
 	boardActive = BOARD.active;
 	BOARD.active = false;
 	diceActive = DICE.active;
 	DICE.active = false;
+	cardsActive = CARDS.active;
+	CARDS.active = false;
 }
 
 void showAll() {
 	BOARD.active = boardActive;
 	DICE.active = diceActive;
+	CARDS.active = cardsActive;
 }

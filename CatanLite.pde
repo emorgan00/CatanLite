@@ -1,10 +1,11 @@
 import java.util.*;
 
 // globals
-Container VIEWPORT, ROBBER, ARMY, ROAD, DICE;
+Container VIEWPORT, ROBBER, ARMY, ROAD, DICE, CARDS;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT, MESSAGE_FONT, MESSAGE_FONT_I;
 boolean DEBUG = false;
+float CARD_WIDTH;
 ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
@@ -29,15 +30,21 @@ void setup() {
 	DICE.addChild(new Die("RIGHT_DIE", width*0.06, 0, width/20));
 	VIEWPORT.addChild(DICE);
 
+	CARD_WIDTH = width*0.07;
+	CARDS = new Container("CARDS", width*0.75, 0, CARD_WIDTH*1.478, height*0.8);
+	CARDS.addChild(new ResourceCard("WOOD_STACK", 0, CARDS.h/2-CARD_WIDTH*3.5, Resource.WOOD));
+	CARDS.addChild(new ResourceCard("BRICK_STACK", 0, CARDS.h/2-CARD_WIDTH*2.3, Resource.BRICK));
+	CARDS.addChild(new ResourceCard("WOOL_STACK", 0, CARDS.h/2-CARD_WIDTH*1.1, Resource.WOOL));
+	CARDS.addChild(new ResourceCard("WHEAT_STACK", 0, CARDS.h/2+CARD_WIDTH*0.1, Resource.WHEAT));
+	CARDS.addChild(new ResourceCard("ORE_STACK", 0, CARDS.h/2+CARD_WIDTH*1.3, Resource.ORE));
+	CARDS.addChild(new ResourceCard("SCRATCHY_STACK", 0, CARDS.h/2+CARD_WIDTH*2.5, Resource.ORE));
+	for (Container c : CARDS.children) c.flip();
+	VIEWPORT.addChild(CARDS);
+
 	// testing
 	BOARD.generateTiles();
 	hideAll();
 	addEvent(new PlayerMenuEvent());
-	Card c = new ResourceCard("test", 200, 200, 200, Resource.WOOD);
-	c.flip();
-	VIEWPORT.addChild(c);
-	c = new ResourceCard("test", 200, 450, 200, Resource.WOOD);
-	VIEWPORT.addChild(c);
 }
 
 void draw() {
@@ -58,15 +65,18 @@ void debug() {
 
 	// tell us what is being hovered
 	Container hov = VIEWPORT.getLowestHovered(mouseX, mouseY);
-	text("lowest hovered: "+hov, 0, 0);
+	text("Lowest Hovered: "+hov, 0, 0);
 
 	// tell us the current event
-	text("current event: "+EVENT_STACK.peekFirst(), 0, 15);
+	text("Current Event: "+EVENT_STACK.peekFirst(), 0, 15);
+
+	// tell us the frameRate
+	text("FrameRate: "+frameRate, 0, 30);
 }
 
 void keyPressed() {
 	if (keyCode == SHIFT) DEBUG = !DEBUG;
-	if (keyCode == ENTER) addEvent(new AddPlayerEvent());
+	if (keyCode == ENTER) CARDS.active = !CARDS.active;
 
 	Event event = EVENT_STACK.peekFirst();
 	if (event != null) {

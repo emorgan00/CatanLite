@@ -3,7 +3,6 @@ Benjamin Avrahami and Ethan Morgan's APCS2 Final Project
 immediate to do list: (all of these are things we can do right now without needing other parts working to build off of)
   * (tricky) add PlayerSelectEvent, with parameter cancellable (for choosing who to rob and potentially who to trade with)
   * (easy) add CollectResourceEvent, called from TurnEvent when dicesum != 7
-  * (easy) add CardStack object, it will draw a dummy card representing the contents of the stack
   * (medium) add PlayerHand object
   * (tricky) add ability to cancel build events, this should only be possible when setup == false
 
