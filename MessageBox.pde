@@ -53,6 +53,10 @@ class MessageBoxEvent extends Event {
 		this.hideOthers = hideOthers; // hide the board and stuff when this is displayed.
 	}
 
+	String toString() {
+		return super.toString()+"(hideOthers = "+hideOthers+")";
+	}
+
 	void load() {
 		box = new MessageBox("MESSAGE_BOX", width*0.3, height*0.3, width*0.4, height*0.4, text, "Click to continue...", CENTER, CENTER);
 		VIEWPORT.addChild(box);

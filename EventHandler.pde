@@ -29,6 +29,10 @@ abstract class Event {
 		waiting = true;
 	}
 
+	String toString() {
+		return this.getClass().getCanonicalName();
+	}
+
 	// this method will be called by the Event stack when the Event is loaded for the first time
 	abstract void load();
 

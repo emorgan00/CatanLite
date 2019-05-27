@@ -9,6 +9,10 @@ class AddSettlementEvent extends Event {
 		// in setup mode, settlements can go anywhere. otherwise, they need to be placed by a road.
 		this.setup = setup;
 	}
+
+	String toString() {
+		return super.toString()+"(Player = "+player+", setup = "+setup+")";
+	}
 	
 	void load() {
 		Vertex v = BOARD.vertices.get(0);
@@ -70,6 +74,10 @@ class AddCityEvent extends Event {
 	AddCityEvent(Player player) {
 		this.player = player;
 	}
+
+	String toString() {
+		return super.toString()+"(Player = "+player+")";
+	}
 	
 	void load() {
 		Vertex v = BOARD.vertices.get(0);
@@ -112,6 +120,10 @@ class AddRoadEvent extends Event {
 		this.player = player;
 		// in setup mode, roads need to go next to a settlement. otherwise, they need to be placed by another road.
 		this.setup = setup;
+	}
+
+	String toString() {
+		return super.toString()+"(Player = "+player+", setup = "+setup+")";
 	}
 	
 	void load() {

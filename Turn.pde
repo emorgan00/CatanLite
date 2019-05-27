@@ -7,6 +7,10 @@ class TurnEvent extends Event {
 		player = p;
 	}
 
+	String toString() {
+		return super.toString()+"(Player = "+player+")";
+	}
+
 	void load() {
 		addEvent(new RollDiceEvent());
 		addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
@@ -21,9 +25,9 @@ class TurnEvent extends Event {
 			dicesum += ((Die)DICE.getChild("LEFT_DIE")).number;
 			dicesum += ((Die)DICE.getChild("RIGHT_DIE")).number;
 
-			if (true) {
+			if (dicesum == 7) {
 				addEvent(new MoveRobberEvent());
-				addEvent(new MessageBoxEvent(player+" has rolled a 7.\nThis means that they now get to move the robber\nand steal one resource from another player.", false));
+				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {
 				addEvent(new MessageBoxEvent("to do:\nadd tile produce methods/events", false));
 			}
