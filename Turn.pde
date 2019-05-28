@@ -12,9 +12,9 @@ class TurnEvent extends Event {
 	}
 
 	void load() {
-		addEvent(new RollDiceEvent());
-		addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
-		phase = 0; // we will next do robber/production
+	  addEvent(new RollDiceEvent());
+    addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
+    phase = 0; // we will next do robber/production
 	}
 
 	void tick() {
@@ -32,7 +32,8 @@ class TurnEvent extends Event {
 				addEvent(new MessageBoxEvent("to do:\nadd tile produce methods/events", false));
 			}
 
-			phase = 2;
+			phase = 0;
+      close();
 		}
 	}
 

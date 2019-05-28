@@ -1,6 +1,8 @@
 void newGame() { // set up a new game
 	showAll();
-
+  
+  addEvent(new TurnLoopEvent());
+  
 	// setup the board
 	for (int i = 0; i < PLAYERS.size(); i++) {
 		Player p = PLAYERS.get(i);
@@ -41,7 +43,7 @@ class TurnLoopEvent extends Event {
   void load() {}
   
   void tick() {
-    for (int x = PLAYERS.size()-1; x >=0; x++) {
+    for (int x = PLAYERS.size()-1; x >= 0; x--) {
       addEvent(new TurnEvent(PLAYERS.get(x)));
     }
   }
