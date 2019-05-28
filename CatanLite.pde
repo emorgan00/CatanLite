@@ -37,7 +37,9 @@ void setup() {
 	CARDS.addChild(new ResourceCard("WOOL_STACK", 0, CARDS.h/2-CARD_WIDTH*1.1, Resource.WOOL));
 	CARDS.addChild(new ResourceCard("WHEAT_STACK", 0, CARDS.h/2+CARD_WIDTH*0.1, Resource.WHEAT));
 	CARDS.addChild(new ResourceCard("ORE_STACK", 0, CARDS.h/2+CARD_WIDTH*1.3, Resource.ORE));
-	CARDS.addChild(new ResourceCard("SCRATCHY_STACK", 0, CARDS.h/2+CARD_WIDTH*2.5, Resource.ORE));
+	Card s = new Card("SCRATCHY_STACK", 0, CARDS.h/2+CARD_WIDTH*2.5);
+	s.setImage("scratchy");
+	CARDS.addChild(s);
 	for (Container c : CARDS.children) c.flip();
 	VIEWPORT.addChild(CARDS);
 

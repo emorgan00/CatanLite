@@ -5,7 +5,7 @@ static String[] hex_images = {
 };
 
 static String[] card_images = {
-	"brick_card", "wool_card", "wood_card", "wheat_card", "ore_card"
+	"brick_card", "wool_card", "wood_card", "wheat_card", "ore_card", "scratchy"
 };
 
 void loadImages() { // this should be called once in setup.
@@ -18,7 +18,8 @@ void loadImages() { // this should be called once in setup.
 	for (String s : hex_images) hexImage(s);
 	for (String s : card_images) cardImage(s);
 	// cropping board background
-	IMG.get("water").mask(IMG.get("hexmask_rotated"));
+	rotatedImage("hexmask");
+	IMG.get("water").mask(IMG.get("rot_hexmask"));
 }
 
 PImage getImage(String name, float w, float h) {
