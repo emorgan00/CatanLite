@@ -57,3 +57,20 @@ class TurnLoopEvent extends Event {
 		}
 	}
 }
+
+class DelayEvent extends Event {
+
+	long timer;
+
+	DelayEvent(long millis) {
+		timer = millis;
+	}
+
+	void load() {}
+
+	void tick() {
+		if (timer < 0) close();
+		timer -= DT;
+	}
+
+}

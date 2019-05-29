@@ -16,7 +16,7 @@ class Die extends Container {
 class RollDiceEvent extends Event {
 	
 	Die left, right;
-	float timer;
+	long timer;
 	
 	void load() {
 		left = (Die)DICE.getChild("LEFT_DIE");
