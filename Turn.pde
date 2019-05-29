@@ -32,7 +32,17 @@ class TurnEvent extends Event {
 				addEvent(new MoveRobberEvent());
 				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {
-				addEvent(new MessageBoxEvent("to do:\nadd tile produce methods/events", false));
+        for (int x = 0; x < BOARD.tiles.size(); x++) {
+          if (BOARD.tiles.get(x).value == dicesum) {
+            for (int i = 0; i < BOARD.tiles.get(x).vertices.size(); i++) {
+              Player p = BOARD.tiles.get(x).vertices.get(i).owner;
+              if (p != null) {
+                p.contents.addChild(new ResourceCard("Array_card",0,0,BOARD.tiles.get(x).resource));
+                addEvent(new MessageBoxEvent(p+" added a "+BOARD.tiles.get(x).resource, false));
+              }
+            }
+          }
+        }
 			}
 
 			phase = 0;
