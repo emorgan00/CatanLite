@@ -2,11 +2,11 @@ Benjamin Avrahami and Ethan Morgan's APCS2 Final Project
 
 immediate to do list: (all of these are things we can do right now without needing other parts working to build off of)
   * (tricky) add PlayerSelectEvent, with parameter cancellable (for choosing who to rob and potentially who to trade with)
-  * (easy) add CollectResourceEvent, called from TurnEvent when dicesum != 7, with Player and Resource as parameters
   * (medium) add CardArray object
   * (tricky) add ability to cancel build events, this should only be possible when setup == false
 
 down the line to do list: (no big deal if we don't get to these)
+  * (easy) add CollectResourceEvent, called from TurnEvent when dicesum != 7, with Player and Resource as parameters
   * (hard) add the ability to highlight and unhighlight objects, this will be a huge aesthetic improvement
   * (hard) add CardSelectEvent, with a CardArray as parameter
 
