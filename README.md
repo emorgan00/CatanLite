@@ -83,3 +83,9 @@ down the line to do list: (no big deal if we don't get to these)
   * Ethan:
     * Started TurnEvent
     * Added newGame
+
+5/28/19:
+  * Benjamin:
+      * Looped through turns
+      * Changed debug tool
+
