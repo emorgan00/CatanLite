@@ -1,8 +1,8 @@
 void newGame() { // set up a new game
 	showAll();
-
-	addEvent(new TurnEvent(PLAYERS.get(0)));
-
+  
+  addEvent(new TurnLoopEvent());
+  
 	// setup the board
 	for (int i = 0; i < PLAYERS.size(); i++) {
 		Player p = PLAYERS.get(i);
@@ -37,4 +37,14 @@ void showAll() {
 	BOARD.active = boardActive;
 	DICE.active = diceActive;
 	CARDS.active = cardsActive;
+}
+
+class TurnLoopEvent extends Event {
+  void load() {}
+  
+  void tick() {
+    for (int x = PLAYERS.size()-1; x >= 0; x--) {
+      addEvent(new TurnEvent(PLAYERS.get(x)));
+    }
+  }
 }
