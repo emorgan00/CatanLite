@@ -12,6 +12,9 @@ class TurnEvent extends Event {
 	}
 
 	void load() {
+		for (Player p : PLAYERS) p.contents.active = false;
+		player.contents.active = true;
+
 		addEvent(new RollDiceEvent());
     	addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
     	phase = 0; // we will next do robber/production
@@ -33,7 +36,7 @@ class TurnEvent extends Event {
 			}
 
 			phase = 0;
-      close();
+    		close();
 		}
 	}
 

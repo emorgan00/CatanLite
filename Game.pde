@@ -1,8 +1,14 @@
 void newGame() { // set up a new game
 	showAll();
-  
-  addEvent(new TurnLoopEvent());
-  
+
+	for (Player p : PLAYERS) {
+		p.contents = new Container("PLAYER_"+p.name, 0, height*0.7, width, height*0.3);
+		p.contents.active = false;
+		VIEWPORT.addChild(p.contents);
+	}
+
+	addEvent(new TurnLoopEvent());
+
 	// setup the board
 	for (int i = 0; i < PLAYERS.size(); i++) {
 		Player p = PLAYERS.get(i);

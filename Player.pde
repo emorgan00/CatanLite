@@ -5,6 +5,7 @@ class Player {
 	
 	ArrayList<Vertex> settlements, cities;
 	ArrayList<Link> roads;
+	Container contents;
 	
 	Player(String name, int r, int g, int b) {
 		red = r;
