@@ -6,6 +6,7 @@ Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT, MESSAGE_FONT, MESSAGE_FONT_I;
 boolean DEBUG = false;
 float CARD_WIDTH;
+long DT, past_time;
 ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
@@ -53,6 +54,10 @@ void draw() {
 	runEvent();
 	VIEWPORT.display(0, 0);
 	if (DEBUG) debug();
+
+	// updating DT
+	DT = System.currentTimeMillis()-past_time;
+	past_time = System.currentTimeMillis();
 }
 
 void debug() {

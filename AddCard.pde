@@ -3,8 +3,8 @@ class AddCardEvent extends Event {
 	CardArray destination;
 	Card item;
 
-	float stepx, stepy;
-	int timer;
+	float sx, sy, dx, dy;
+	long timer, maxtimer;
 
 	AddCardEvent(Player p, Resource r) {
 		Card source = (Card)CARDS.getChild(r.getStackName());
@@ -14,38 +14,39 @@ class AddCardEvent extends Event {
 	}
 
 	void load() {
-		float dx, dy;
+		sx = item.x;
+		sy = item.y;
 		if (destination.parent.active) { // we are giving to an active player
-			dx = destination.absX()-item.x;
-			dy = destination.absY()-item.y;
-			if (item instanceof DevelopmentCard) dx += CARD_WIDTH;
+			dx = destination.absX()-sx;
+			dy = destination.absY()-sy;
+			if (item instanceof DevelopmentCard) sx += CARD_WIDTH;
 
 			for (int i = 0; i < destination.children.size(); i++) {
 				if (destination.children.get(i) instanceof DevelopmentCard)
 					break;
 				if (item instanceof ResourceCard && ((ResourceCard)destination.children.get(i)).resource == ((ResourceCard)item).resource)
 					break;
-				dx += CARD_WIDTH/3;
+				sx += CARD_WIDTH/3;
 			}
 		} else { // the player is inactive
-			dx = width/2-item.x;
-			dy = -CARD_WIDTH*2-item.y;
+			dx = width/2-sx;
+			dy = -CARD_WIDTH*2-sy;
 		}
-		timer = (int)(Math.hypot(dx, dy)/width*20);
-		stepx = dx/timer;
-		stepy = dy/timer;
+		maxtimer = (long)(Math.hypot(dx, dy)/width*1000);
+		timer = 0;
 		VIEWPORT.addChild(item);
 	}
 
 	void tick() {
-		if (timer == 0) {
+		if (timer > maxtimer) {
 			destination.addChild(item);
 			VIEWPORT.children.remove(item);
 			close();
 		} else {
-			item.x += stepx;
-			item.y += stepy;
-			timer--;
+			float frac = ((float)timer)/maxtimer;
+			item.x = sx+dx*frac;
+			item.y = sy+dy*frac;
+			timer += DT;
 		}
 	}
 
