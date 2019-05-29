@@ -16,18 +16,20 @@ class Die extends Container {
 class RollDiceEvent extends Event {
 	
 	Die left, right;
-	int timer;
+	float timer;
 	
 	void load() {
 		left = (Die)DICE.getChild("LEFT_DIE");
 		right = (Die)DICE.getChild("RIGHT_DIE");
-		timer = 60;
+		timer = 1500;
 	}
 	
 	void tick() {
-		left.roll();
-		right.roll();
+		if (timer > 500) {
+			left.roll();
+			right.roll();
+		}
 		if (timer < 0) close();
-		timer--;
+		timer -= DT;
 	}
 }
