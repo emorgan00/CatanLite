@@ -35,13 +35,14 @@ class TurnEvent extends Event {
         for (int x = 0; x < BOARD.tiles.size(); x++) {
           if (BOARD.tiles.get(x).value == dicesum) {
             for (int i = 0; i < BOARD.tiles.get(x).vertices.size(); i++) {
-              if (BOARD.tiles.get(x).vertices.get(i).owner != null) {
-                BOARD.tiles.get(x).vertices.get(i).owner.contents.addChild(new ResourceCard("Array_card",0,0,BOARD.tiles.get(x).resource));
+              Player p = BOARD.tiles.get(x).vertices.get(i).owner;
+              if (p != null) {
+                p.contents.addChild(new ResourceCard("Array_card",0,0,BOARD.tiles.get(x).resource));
+                addEvent(new MessageBoxEvent(p+" added a "+BOARD.tiles.get(x).resource, false));
               }
             }
           }
         }
-				addEvent(new MessageBoxEvent("to do:\nadd tile produce methods/events", false));
 			}
 
 			phase = 0;
