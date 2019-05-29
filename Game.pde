@@ -48,6 +48,7 @@ void showAll() {
 }
 
 class TurnLoopEvent extends Event {
+	
 	void load() {}
 	
 	void tick() {

@@ -14,14 +14,17 @@ class AddCardEvent extends Event {
 	}
 
 	void load() {
-		timer = 60;
+		float dx, dy;
 		if (destination.parent.active) { // we are giving to an active player
-			stepx = (destination.x-item.x)/timer;
-			stepy = (destination.y-item.y)/timer;
+			dx = destination.absX()-item.x;
+			dy = destination.absY()-item.y;
 		} else { // the player is inactive
-			stepx = (width/2-item.x)/timer;
-			stepy = (-100-item.y)/timer;
+			dx = width/2-item.x;
+			dy = -CARD_WIDTH*2-item.y;
 		}
+		timer = (int)(Math.hypot(dx, dy)/width*20);
+		stepx = dx/timer;
+		stepy = dy/timer;
 		VIEWPORT.addChild(item);
 	}
 
@@ -31,8 +34,8 @@ class AddCardEvent extends Event {
 			VIEWPORT.children.remove(item);
 			close();
 		} else {
-			item.x -= stepx;
-			item.y -= stepy;
+			item.x += stepx;
+			item.y += stepy;
 			timer--;
 		}
 	}

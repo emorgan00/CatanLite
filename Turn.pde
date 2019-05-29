@@ -16,8 +16,8 @@ class TurnEvent extends Event {
 		player.contents.active = true;
 
 		addEvent(new RollDiceEvent());
-    	addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
-    	phase = 0; // we will next do robber/production
+		addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
+		phase = 0; // we will next do robber/production
 	}
 
 	void tick() {
@@ -32,21 +32,19 @@ class TurnEvent extends Event {
 				addEvent(new MoveRobberEvent());
 				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {
-        for (int x = 0; x < BOARD.tiles.size(); x++) {
-          if (BOARD.tiles.get(x).value == dicesum) {
-            for (int i = 0; i < BOARD.tiles.get(x).vertices.size(); i++) {
-              Player p = BOARD.tiles.get(x).vertices.get(i).owner;
-              if (p != null) {
-                p.contents.addChild(new ResourceCard("Array_card",0,0,BOARD.tiles.get(x).resource));
-                addEvent(new MessageBoxEvent(p+" added a "+BOARD.tiles.get(x).resource, false));
-              }
-            }
-          }
-        }
+				for (int x = 0; x < BOARD.tiles.size(); x++) {
+					if (BOARD.tiles.get(x).value == dicesum) {
+						for (int i = 0; i < BOARD.tiles.get(x).vertices.size(); i++) {
+							Player p = BOARD.tiles.get(x).vertices.get(i).owner;
+							if (p != null) {
+								addEvent(new AddCardEvent(p, BOARD.tiles.get(x).resource));
+							}
+						}
+					}
+				}
 			}
-
 			phase = 0;
-    		close();
+			close();
 		}
 	}
 
