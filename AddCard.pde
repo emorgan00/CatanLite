@@ -18,6 +18,15 @@ class AddCardEvent extends Event {
 		if (destination.parent.active) { // we are giving to an active player
 			dx = destination.absX()-item.x;
 			dy = destination.absY()-item.y;
+			if (item instanceof DevelopmentCard) dx += CARD_WIDTH;
+
+			for (int i = 0; i < destination.children.size(); i++) {
+				if (destination.children.get(i) instanceof DevelopmentCard)
+					break;
+				if (item instanceof ResourceCard && ((ResourceCard)destination.children.get(i)).resource == ((ResourceCard)item).resource)
+					break;
+				dx += CARD_WIDTH/3;
+			}
 		} else { // the player is inactive
 			dx = width/2-item.x;
 			dy = -CARD_WIDTH*2-item.y;
@@ -30,7 +39,7 @@ class AddCardEvent extends Event {
 
 	void tick() {
 		if (timer == 0) {
-			if (destination.parent.active) destination.addChild(item);
+			destination.addChild(item);
 			VIEWPORT.children.remove(item);
 			close();
 		} else {
