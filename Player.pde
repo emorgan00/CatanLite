@@ -5,6 +5,7 @@ class Player {
 	
 	ArrayList<Vertex> settlements, cities;
 	ArrayList<Link> roads;
+  ArrayList<Card> cards;
 	
 	Player(String name, int r, int g, int b) {
 		red = r;
@@ -14,9 +15,14 @@ class Player {
 		settlements = new ArrayList<Vertex>();
 		cities = new ArrayList<Vertex>();
 		roads = new ArrayList<Link>();
+    cards = new ArrayList<Card>();
 	}
 
 	String toString() {
 		return name;
 	}
+
+  void addCard(Card card) {
+    cards.add(card);
+  }
 }
