@@ -1,9 +1,11 @@
 void newGame() { // set up a new game
 	showAll();
 
+	// give each player a contents container and associated objects
 	for (Player p : PLAYERS) {
 		p.contents = new Container("PLAYER_"+p.name, 0, height*0.7, width, height*0.3);
 		p.contents.active = false;
+		p.contents.addChild(new CardArray("CARDS", width*0.05, height*0.12));
 		VIEWPORT.addChild(p.contents);
 	}
 

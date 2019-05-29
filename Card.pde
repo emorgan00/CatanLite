@@ -30,7 +30,7 @@ class DevelopmentCard extends Card {
 class CardArray extends Container {
 
 	CardArray(String id, float x, float y) {
-		super(id, x, y, 0, CARD_WIDTH);
+		super(id, x, y, 0, CARD_WIDTH*1.478);
 	}
 
 	void addChild(Container child) {

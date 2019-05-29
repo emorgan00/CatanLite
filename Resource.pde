@@ -20,6 +20,15 @@ enum Resource {
 		else return "desert";
 	}
 
+	String getStackName() {
+		if (this == BRICK) return "BRICK_STACK";
+		else if (this == WOOL) return "WOOL_STACK";
+		else if (this == ORE) return "ORE_STACK";
+		else if (this == WHEAT) return "WHEAT_STACK";
+		else if (this == WOOD) return "WOOD_STACK";
+		else return "SCRATCHY_STACK";
+	}
+
 }
 
 enum CardType {
