@@ -9,13 +9,13 @@ class AddCardEvent extends Event {
 	AddCardEvent(Player p, Resource r) {
 		Card source = (Card)CARDS.getChild(r.getStackName());
 		item = new ResourceCard(r.imageName(), source.absX(), source.absY(), r);
-		//item.flip();
+		item.rotated = true;
 		destination = (CardArray)p.contents.getChild("CARDS");
 	}
 
 	void load() {
 		sx = item.x;
-		sy = item.y;
+		sy = item.y+CARD_WIDTH;
 		if (destination.parent.active) { // we are giving to an active player
 			dx = destination.absX()-sx;
 			dy = destination.absY()-sy;
@@ -41,11 +41,13 @@ class AddCardEvent extends Event {
 		if (timer > maxtimer) {
 			destination.addChild(item);
 			VIEWPORT.children.remove(item);
+			item.rotated = false;
 			close();
 		} else {
 			float frac = ((float)timer)/maxtimer;
 			item.x = sx+dx*frac;
 			item.y = sy+dy*frac;
+			item.rotation = HALF_PI*(1-frac);
 			timer += DT;
 		}
 	}

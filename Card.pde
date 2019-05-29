@@ -1,7 +1,21 @@
 class Card extends Container {
 
+	boolean rotated;
+	float rotation;
+
 	Card(String id, float x, float y) {
 		super(id, x, y, CARD_WIDTH, CARD_WIDTH*1.478);
+	}
+
+	void draw(float x, float y) {
+		if (!rotated) super.draw(x, y);
+		else if (img != null) {
+			pushMatrix();
+			translate(x+this.x, y+this.y);
+			rotate(rotation);
+			image(img, 0, 0);
+			popMatrix();
+		}
 	}
 }
 
