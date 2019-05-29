@@ -32,12 +32,13 @@ class TurnEvent extends Event {
 				addEvent(new MoveRobberEvent());
 				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {
-				for (int x = 0; x < BOARD.tiles.size(); x++) {
-					if (BOARD.tiles.get(x).value == dicesum) {
-						for (int i = 0; i < BOARD.tiles.get(x).vertices.size(); i++) {
-							Player p = BOARD.tiles.get(x).vertices.get(i).owner;
+				for (Tile t : BOARD.tiles) {
+					if (t.value == dicesum && t != ROBBER.parent) {
+						for (Vertex v : t.vertices) {
+							Player p = v.owner;
 							if (p != null) {
-								addEvent(new AddCardEvent(p, BOARD.tiles.get(x).resource));
+								addEvent(new AddCardEvent(p, t.resource));
+								if (v.hasCity) addEvent(new AddCardEvent(p, t.resource));
 							}
 						}
 					}

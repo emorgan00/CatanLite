@@ -32,7 +32,7 @@ class AddCardEvent extends Event {
 			dx = width/2-sx;
 			dy = -CARD_WIDTH*2-sy;
 		}
-		maxtimer = (long)(Math.hypot(dx, dy)/width*1000);
+		maxtimer = (long)(Math.hypot(dx, dy)/width*700);
 		timer = 0;
 		VIEWPORT.addChild(item);
 	}
