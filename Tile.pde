@@ -1,8 +1,8 @@
 class Tile extends Container {
 
 	Resource resource;
-	private int value;
-
+	int value;
+  
 	ArrayList<Vertex> vertices;
 
 	Tile(String id, float x, float y, float w, Resource resource) {
