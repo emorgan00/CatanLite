@@ -46,7 +46,7 @@ class MessageBoxEvent extends Event {
 
 	String text;
 	Container box;
-	boolean hideOthers;
+	boolean hideOthers, mousePrevious;
 
 	MessageBoxEvent(String text, boolean hideOthers) {
 		this.text = text;
@@ -66,13 +66,14 @@ class MessageBoxEvent extends Event {
 	}
 
 	void tick() {
-		if (box.isHovered(mouseX, mouseY) && mousePressed) {
+		if (box.isHovered(mouseX, mouseY) && mousePrevious && !mousePressed) {
 			VIEWPORT.children.remove(box);
 			if (hideOthers) {
 				showAll();
 			}
 			close();
 		}
+		mousePrevious = mousePressed;
 	}
 
 }

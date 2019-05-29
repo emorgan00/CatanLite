@@ -40,11 +40,11 @@ void showAll() {
 }
 
 class TurnLoopEvent extends Event {
-  void load() {}
-  
-  void tick() {
-    for (int x = PLAYERS.size()-1; x >= 0; x--) {
-      addEvent(new TurnEvent(PLAYERS.get(x)));
-    }
-  }
+	void load() {}
+	
+	void tick() {
+		for (int x = PLAYERS.size()-1; x >= 0; x--) {
+			addEvent(new TurnEvent(PLAYERS.get(x)));
+		}
+	}
 }
