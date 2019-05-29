@@ -2,7 +2,7 @@ class MessageBox extends Container {
 
 	String text, cornerText;
 	int hAlign, vAlign;
-	float tx, ty;
+	float tx, ty, offset;
 
 	MessageBox(String id, float x, float y, float w, float h, String text, String cornerText, int hAlign, int vAlign) {
 		super(id, x, y, w, h);
@@ -19,11 +19,17 @@ class MessageBox extends Container {
 
 		this.hAlign = hAlign;
 		this.vAlign = vAlign;
+		offset = w*0.12;
 		setImage("parchment");
 	}
 
+	void setImage(String name) {
+		img_name = name;
+		this.img = getImage(name, w+2*offset, h+2*offset);
+	}
+
 	void draw(float x, float y) {
-		super.draw(x, y);
+		if (img != null) image(img, x+this.x-offset, y+this.y-offset);
 
 		// main text
 		textFont(MESSAGE_FONT);
