@@ -46,31 +46,3 @@ void showAll() {
 	DICE.active = diceActive;
 	CARDS.active = cardsActive;
 }
-
-class TurnLoopEvent extends Event {
-	
-	void load() {}
-	
-	void tick() {
-		for (int x = PLAYERS.size()-1; x >= 0; x--) {
-			addEvent(new TurnEvent(PLAYERS.get(x)));
-		}
-	}
-}
-
-class DelayEvent extends Event {
-
-	long timer;
-
-	DelayEvent(long millis) {
-		timer = millis;
-	}
-
-	void load() {}
-
-	void tick() {
-		if (timer < 0) close();
-		timer -= DT;
-	}
-
-}
