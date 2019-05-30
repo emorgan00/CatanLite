@@ -1,7 +1,7 @@
 import java.util.*;
 
 // globals
-Container VIEWPORT, ROBBER, ARMY, ROAD, DICE, CARDS;
+Container VIEWPORT, ROBBER, ARMY, ROAD, DICE, CARDS, ROAD_BUY, SETTLEMENT_BUY, CITY_BUY;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT, MESSAGE_FONT, MESSAGE_FONT_I;
 boolean DEBUG = false;
@@ -11,7 +11,7 @@ ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
 	// setup window
-	size(1800, 1200);
+	fullScreen();
 
 	// initialize globals
 	loadImages();
@@ -43,6 +43,18 @@ void setup() {
 	CARDS.addChild(s);
 	for (Container c : CARDS.children) c.flip();
 	VIEWPORT.addChild(CARDS);
+
+  ROAD_BUY = new Container("ROAD_BUY",9*width/10,8*height/10,height/20,width/20);
+  VIEWPORT.addChild(ROAD_BUY);
+  ROAD_BUY.setImage("road_p");
+  
+  SETTLEMENT_BUY = new Container("SETTLEMENT_BUY",19*width/20,8*height/10,height/20,width/20);
+  VIEWPORT.addChild(SETTLEMENT_BUY);
+  SETTLEMENT_BUY.setImage("settlement");
+  
+  CITY_BUY = new Container("CITY_BUY",37*width/40,9*height/10,height/20,width/20);
+  VIEWPORT.addChild(CITY_BUY);
+  CITY_BUY.setImage("city");
 
 	// testing
 	BOARD.generateTiles();
