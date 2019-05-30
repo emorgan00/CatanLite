@@ -82,3 +82,6 @@
 5/29/19:
   * Ethan:
     * Added the AddCardEvent
+  * Benjamin:
+    * Distributed cards to each player when die is rolled
+    * Placed city, road, and settlement to buy from
