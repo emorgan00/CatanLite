@@ -24,6 +24,10 @@ class AddSettlementEvent extends Event {
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
+    if (hov == null && !setup && !mousePressed && mousePrevious) {
+      VIEWPORT.children.remove(dummy);
+      close();
+    }
 		if (hov instanceof Vertex && ((Vertex)hov).owner == null) {
 
 			boolean isAble = true;
@@ -90,6 +94,10 @@ class AddCityEvent extends Event {
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
+    if (hov == null && !mousePressed && mousePrevious) {
+      VIEWPORT.children.remove(dummy);
+      close();
+    }
 		if (hov instanceof Vertex && ((Vertex)hov).owner == player && ((Vertex)hov).hasSettlement) {
 
 			dummy.x = hov.absX()-dummy.w*0.08;
@@ -138,6 +146,10 @@ class AddRoadEvent extends Event {
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
+    if (hov == null && !setup && !mousePressed && mousePrevious) {
+      VIEWPORT.children.remove(dummy);
+      close();
+    }
 		if (hov instanceof Link && ((Link)hov).owner == null) {
 
 			boolean isAble = false;
