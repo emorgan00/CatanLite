@@ -85,3 +85,9 @@
   * Benjamin:
     * Distributed cards to each player when die is rolled
     * Placed city, road, and settlement to buy from
+
+5/30/19:
+  * Benjamin:
+    * Allowed players to place extra cities, roads, and settlements onto the board
+    * Allowed players to cancel buying (by clicking outside the board)
+
