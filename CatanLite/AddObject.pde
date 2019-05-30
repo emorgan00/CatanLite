@@ -50,6 +50,7 @@ class AddSettlementEvent extends Event {
 					((Vertex)hov).hasSettlement = true;
 					hov.setImage("settlement");
 					((Vertex)hov).owner = player;
+          player.points++;
 					close();
 				}
 
@@ -99,6 +100,7 @@ class AddCityEvent extends Event {
 				((Vertex)hov).hasSettlement = false;
 				((Vertex)hov).hasCity = true;
 				hov.setImage("city");
+        player.points++;
 				close();
 			}
 

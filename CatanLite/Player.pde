@@ -2,6 +2,8 @@ class Player {
 
 	int red, green, blue;
 	String name;
+  
+  int points;
 	
 	ArrayList<Vertex> settlements, cities;
 	ArrayList<Link> roads;
@@ -12,6 +14,7 @@ class Player {
 		green = g;
 		blue = b;
 		this.name = name;
+    points = 0;
 		settlements = new ArrayList<Vertex>();
 		cities = new ArrayList<Vertex>();
 		roads = new ArrayList<Link>();
