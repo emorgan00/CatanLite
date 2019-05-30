@@ -30,7 +30,7 @@ void loadGame() {
 
 }
 
-boolean boardActive, diceActive, cardsActive;
+boolean boardActive, diceActive, cardsActive, roadActive, settlementActive, cityActive;
 
 void hideAll() {
 	boardActive = BOARD.active;
@@ -39,10 +39,19 @@ void hideAll() {
 	DICE.active = false;
 	cardsActive = CARDS.active;
 	CARDS.active = false;
+  roadActive = ROAD_BUY.active;
+  ROAD_BUY.active = false;
+  settlementActive = SETTLEMENT_BUY.active;
+  SETTLEMENT_BUY.active = false;
+  cityActive = CITY_BUY.active;
+  CITY_BUY.active = false;
 }
 
 void showAll() {
 	BOARD.active = boardActive;
 	DICE.active = diceActive;
 	CARDS.active = cardsActive;
+  ROAD_BUY.active = roadActive;
+  SETTLEMENT_BUY.active = settlementActive;
+  CITY_BUY.active = cityActive;
 }
