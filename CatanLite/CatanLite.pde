@@ -83,7 +83,6 @@ void debug() {
 
 void keyPressed() {
 	if (keyCode == TAB) DEBUG = !DEBUG;
-	if (keyCode == ENTER) CARDS.active = !CARDS.active;
 
 	Event event = EVENT_STACK.peekFirst();
 	if (event != null) {
