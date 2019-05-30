@@ -5,7 +5,22 @@ void newGame() { // set up a new game
 	for (Player p : PLAYERS) {
 		p.contents = new Container("PLAYER_"+p.name, 0, height*0.7, width, height*0.3);
 		p.contents.active = false;
-		p.contents.addChild(new CardArray("CARDS", width*0.05, height*0.12));
+		p.contents.addChild(new CardArray("CARDS", width*0.095, height*0.12));
+
+		// purchasable objects
+		Vertex road = new Vertex("ROAD_BUY", width*0.7, height*0.14, CARD_WIDTH*0.8);
+		road.h = road.w*1.732;
+		road.owner = p;
+		road.setImage("road_p");
+		p.contents.addChild(road);
+		Vertex settlement = new Vertex("SETTLEMENT_BUY", width*0.7+CARD_WIDTH, height*0.16, CARD_WIDTH*0.8);
+		settlement.owner = p;
+		settlement.setImage("settlement");
+		p.contents.addChild(settlement);
+		Vertex city = new Vertex("CITY_BUY", width*0.7+CARD_WIDTH*2, height*0.16, CARD_WIDTH*0.8);
+		city.owner = p;
+		city.setImage("city");
+		p.contents.addChild(city);
 		VIEWPORT.addChild(p.contents);
 	}
 
@@ -30,7 +45,7 @@ void loadGame() {
 
 }
 
-boolean boardActive, diceActive, cardsActive, roadActive, settlementActive, cityActive;
+boolean boardActive, diceActive, cardsActive;
 
 void hideAll() {
 	boardActive = BOARD.active;
@@ -39,19 +54,10 @@ void hideAll() {
 	DICE.active = false;
 	cardsActive = CARDS.active;
 	CARDS.active = false;
-  roadActive = ROAD_BUY.active;
-  ROAD_BUY.active = false;
-  settlementActive = SETTLEMENT_BUY.active;
-  SETTLEMENT_BUY.active = false;
-  cityActive = CITY_BUY.active;
-  CITY_BUY.active = false;
 }
 
 void showAll() {
 	BOARD.active = boardActive;
 	DICE.active = diceActive;
 	CARDS.active = cardsActive;
-  ROAD_BUY.active = roadActive;
-  SETTLEMENT_BUY.active = settlementActive;
-  CITY_BUY.active = cityActive;
 }

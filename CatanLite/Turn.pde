@@ -29,7 +29,6 @@ class TurnEvent extends Event {
 				addEvent(new MoveRobberEvent());
 				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {
-				addEvent(new DelayEvent(250));
 				for (Tile t : BOARD.tiles) {
 					if (t.value == dicesum && t != ROBBER.parent) {
 						for (Vertex v : t.vertices) {
@@ -44,12 +43,12 @@ class TurnEvent extends Event {
 			}
 			phase = 2;
 		} else if (phase == 2) {
-      if (keyPressed) {
-        if (key == ENTER) {
-          close();
-        }
-      }
-    }
+			if (keyPressed) {
+				if (key == ENTER) {
+					close();
+				}
+			}
+		}
 	}
 
 }

@@ -44,18 +44,6 @@ void setup() {
 	for (Container c : CARDS.children) c.flip();
 	VIEWPORT.addChild(CARDS);
 
-  ROAD_BUY = new Container("ROAD_BUY",9*width/10,8*height/10,height/20,width/20);
-  VIEWPORT.addChild(ROAD_BUY);
-  ROAD_BUY.setImage("road_p");
-  
-  SETTLEMENT_BUY = new Container("SETTLEMENT_BUY",19*width/20,8*height/10,height/20,width/20);
-  VIEWPORT.addChild(SETTLEMENT_BUY);
-  SETTLEMENT_BUY.setImage("settlement");
-  
-  CITY_BUY = new Container("CITY_BUY",37*width/40,9*height/10,height/20,width/20);
-  VIEWPORT.addChild(CITY_BUY);
-  CITY_BUY.setImage("city");
-
 	// testing
 	BOARD.generateTiles();
 	hideAll();
