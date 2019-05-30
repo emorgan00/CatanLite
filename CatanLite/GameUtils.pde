@@ -21,6 +21,7 @@ void newGame() { // set up a new game
 		city.owner = p;
 		city.setImage("city");
 		p.contents.addChild(city);
+		
 		VIEWPORT.addChild(p.contents);
 	}
 

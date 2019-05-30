@@ -16,12 +16,16 @@ class SliderKnob extends Container {
 		r = (parent.id.equals("R") ? 200 : 20);
 		g = (parent.id.equals("G") ? 200 : 20);
 		b = (parent.id.equals("B") ? 200 : 20);
+		setImage("paper");
 	}
 
 	void draw(float x, float y) {
+		tint(r, g, b);
+		super.draw(x, y);
+		noTint();
 		stroke(0);
 		strokeWeight(1);
-		fill(r, g, b);
+		fill(0, 0, 0, 0);
 		rect(x+this.x, y+this.y, w, h);
 	}
 }

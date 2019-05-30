@@ -1,7 +1,7 @@
 import java.util.*;
 
 // globals
-Container VIEWPORT, ROBBER, ARMY, ROAD, DICE, CARDS, ROAD_BUY, SETTLEMENT_BUY, CITY_BUY;
+Container VIEWPORT, ROBBER, ARMY, ROAD, DICE, CARDS;
 Board BOARD;
 PFont DEBUG_FONT, NUMBER_FONT, MESSAGE_FONT, MESSAGE_FONT_I;
 boolean DEBUG = false;
@@ -11,7 +11,7 @@ ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
 	// setup window
-	fullScreen();
+	size(1800, 1200);
 
 	// initialize globals
 	loadImages();
@@ -87,5 +87,5 @@ void keyPressed() {
 	Event event = EVENT_STACK.peekFirst();
 	if (event != null) {
 		event.keyPressed();
-	}		
+	}
 }
