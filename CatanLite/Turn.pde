@@ -42,9 +42,14 @@ class TurnEvent extends Event {
 					}
 				}
 			}
-			phase = 0;
-			close();
-		}
+			phase = 2;
+		} else if (phase == 2) {
+      if (keyPressed) {
+        if (key == ENTER) {
+          close();
+        }
+      }
+    }
 	}
 
 }
