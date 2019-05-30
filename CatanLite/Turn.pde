@@ -3,6 +3,8 @@ class TurnEvent extends Event {
 	Player player;
 	int phase;
 
+  boolean mousePrev;
+
 	TurnEvent(Player p) {
 		player = p;
 	}
@@ -43,11 +45,26 @@ class TurnEvent extends Event {
 			}
 			phase = 2;
 		} else if (phase == 2) {
-			if (keyPressed) {
+			if (!mousePressed && mousePrev) {
+        String s = player.contents.getLowestHovered(mouseX,mouseY).id;
+        if (s.equals("ROAD_BUY")) {
+          addEvent(new AddRoadEvent(player,false));
+        }
+        else if (s.equals("SETTLEMENT_BUY")) {
+          addEvent(new AddSettlementEvent(player,false));
+        }
+        else if (s.equals("CITY_BUY")) {
+          addEvent(new AddCityEvent(player));
+        }
+      }
+      
+      if (keyPressed) {
 				if (key == ENTER) {
 					close();
 				}
 			}
+
+      mousePrev = mousePressed;
 		}
 	}
 
