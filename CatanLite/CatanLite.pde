@@ -11,7 +11,7 @@ ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
 	// setup window
-	fullScreen();
+	size(1800, 1200);
 
 	// initialize globals
 	loadImages();
@@ -87,5 +87,5 @@ void keyPressed() {
 	Event event = EVENT_STACK.peekFirst();
 	if (event != null) {
 		event.keyPressed();
-	}		
+	}
 }
