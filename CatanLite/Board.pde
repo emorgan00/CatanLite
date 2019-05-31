@@ -168,4 +168,30 @@ class Board extends Container {
 			}
 		}
 	}
+
+	// checks whether mouse is within the bounding hexagon
+	boolean isHovered(float mx, float my) {
+		if (!active) return false;
+		my -= y;
+		mx -= x+0.067*w;
+		float hex_w = w*0.866;
+
+		if (my < 0 || my > h || mx < 0 || mx > hex_w) return false; // out of bounds
+
+		if (my < h*0.25) {
+			if (mx > hex_w/2) {
+				return hex_w-mx > hex_w*(0.5-my*2/h);
+			} else {
+				return mx > hex_w*(0.5-my*2/h);
+			}
+		} else if (my > h*0.75) {
+			if (mx > hex_w/2) {
+				return hex_w-mx > hex_w*(0.5-(h-my)*2/h);
+			} else {
+				return mx > hex_w*(0.5-(h-my)*2/h);
+			}
+		} else {
+			return true;
+		}
+	}
 }

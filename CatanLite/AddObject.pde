@@ -20,14 +20,16 @@ class AddSettlementEvent extends Event {
 		VIEWPORT.addChild(dummy);
 		dummy.setImage("settlement");
 		dummy.owner = player;
+		if (!setup) player.contents.getChild("SETTLEMENT_BUY").active = false;
 	}
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-    if (hov == null && !setup && !mousePressed && mousePrevious) {
-      VIEWPORT.children.remove(dummy);
-      close();
-    }
+		if (hov == null && !setup && !mousePressed && mousePrevious) {
+			VIEWPORT.children.remove(dummy);
+			player.contents.getChild("SETTLEMENT_BUY").active = true;
+			close();
+		}
 		if (hov instanceof Vertex && ((Vertex)hov).owner == null) {
 
 			boolean isAble = true;
@@ -54,7 +56,8 @@ class AddSettlementEvent extends Event {
 					((Vertex)hov).hasSettlement = true;
 					hov.setImage("settlement");
 					((Vertex)hov).owner = player;
-          player.points++;
+					player.points++;
+					if (!setup) player.contents.getChild("SETTLEMENT_BUY").active = true;
 					close();
 				}
 
@@ -90,14 +93,16 @@ class AddCityEvent extends Event {
 		VIEWPORT.addChild(dummy);
 		dummy.setImage("city");
 		dummy.owner = player;
+		player.contents.getChild("CITY_BUY").active = false;
 	}
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-    if (hov == null && !mousePressed && mousePrevious) {
-      VIEWPORT.children.remove(dummy);
-      close();
-    }
+		if (hov == null && !mousePressed && mousePrevious) {
+			VIEWPORT.children.remove(dummy);
+			player.contents.getChild("CITY_BUY").active = true;
+			close();
+		}
 		if (hov instanceof Vertex && ((Vertex)hov).owner == player && ((Vertex)hov).hasSettlement) {
 
 			dummy.x = hov.absX()-dummy.w*0.08;
@@ -108,7 +113,8 @@ class AddCityEvent extends Event {
 				((Vertex)hov).hasSettlement = false;
 				((Vertex)hov).hasCity = true;
 				hov.setImage("city");
-        player.points++;
+				player.points++;
+				player.contents.getChild("CITY_BUY").active = true;
 				close();
 			}
 
@@ -137,19 +143,21 @@ class AddRoadEvent extends Event {
 	}
 	
 	void load() {
-		Link l = BOARD.links.get(0);
+		Link l = BOARD.links.get(2);
 		dummy = new Link("DUMMY", mouseX, mouseY, mouseX+l.w*1.2, mouseY+l.h*1.2);
 		VIEWPORT.addChild(dummy);
 		dummy.setImage(l.type.imageName());
 		dummy.owner = player;
+		if (!setup) player.contents.getChild("ROAD_BUY").active = false;
 	}
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-    if (hov == null && !setup && !mousePressed && mousePrevious) {
-      VIEWPORT.children.remove(dummy);
-      close();
-    }
+		if (hov == null && !setup && !mousePressed && mousePrevious) {
+			VIEWPORT.children.remove(dummy);
+			player.contents.getChild("ROAD_BUY").active = true;
+			close();
+		}
 		if (hov instanceof Link && ((Link)hov).owner == null) {
 
 			boolean isAble = false;
@@ -184,16 +192,20 @@ class AddRoadEvent extends Event {
 					((Link)hov).hasRoad = true;
 					hov.setImage(((Link)hov).type.imageName());
 					((Link)hov).owner = player;
+					if (!setup) player.contents.getChild("ROAD_BUY").active = true;
 					close();
 				}
 			} else {
-				dummy.x = mouseX-dummy.w/2;
-				dummy.y = mouseY-dummy.h/2;
+				position();
 			}
 		} else {
-			dummy.x = mouseX-dummy.w/2;
-			dummy.y = mouseY-dummy.h/2;
+			position();
 		}
 		mousePrevious = mousePressed;
+	}
+
+	void position() {
+		dummy.x = mouseX-dummy.w/2;
+		dummy.y = mouseY-dummy.h/2;
 	}
 }

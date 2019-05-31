@@ -22,7 +22,7 @@ class Tile extends Container {
 		} else {
 			marker.value = value;
 		}
-	} 
+	}
 
 	// checks whether mouse is within the bounding hexagon
 	boolean isHovered(float mx, float my) {

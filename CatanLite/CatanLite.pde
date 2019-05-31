@@ -11,7 +11,7 @@ ArrayList<Player> PLAYERS = new ArrayList<Player>();
 
 void setup() {
 	// setup window
-	size(1800, 1200);
+	fullScreen();
 
 	// initialize globals
 	loadImages();
