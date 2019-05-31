@@ -8,7 +8,7 @@ class AddCardEvent extends Event {
 
 	AddCardEvent(Player p, Resource r) {
 		Card source = (Card)CARDS.getChild(r.getStackName());
-		item = new ResourceCard(r.imageName(), source.absX(), source.absY(), r);
+		item = new ResourceCard(r.cardImageName(), source.absX(), source.absY(), r);
 		item.rotated = true;
 		destination = (CardArray)p.contents.getChild("CARDS");
 	}
@@ -75,6 +75,10 @@ class RemoveCardsEvent extends Event {
 
 	// {brick, wool, ore, wheat, wood}
 	void addCards(CardArray array, int[] resources) {
+		println(array.children, resources);
+		int[] copy = new int[5];
+		for (int i = 0; i < 5; i++) copy[i] = resources[i];
+		resources = copy;
 		for (Container c : array.children) {
 			if (c instanceof ResourceCard) {
 				if (((ResourceCard)c).resource == Resource.BRICK && resources[0] > 0) {
@@ -99,6 +103,7 @@ class RemoveCardsEvent extends Event {
 				}
 			}
 		}
+		println(cards);
 	}
 
 	void load() {

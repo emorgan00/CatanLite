@@ -99,4 +99,19 @@ class CardArray extends Container {
 		return null;
 	}
 
+	// {brick, wool, ore, wheat, wood}
+	int[] resources() {
+		int[] out = new int[5];
+		for (Container c : children) {
+			if (c instanceof ResourceCard) {
+				if (((ResourceCard)c).resource == Resource.BRICK) out[0]++;
+				if (((ResourceCard)c).resource == Resource.WOOL) out[1]++;
+				if (((ResourceCard)c).resource == Resource.ORE) out[2]++;
+				if (((ResourceCard)c).resource == Resource.WHEAT) out[3]++;
+				if (((ResourceCard)c).resource == Resource.WOOD) out[4]++;
+			}
+		}
+		return out;
+	}
+
 }
