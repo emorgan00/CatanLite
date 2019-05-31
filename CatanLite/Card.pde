@@ -67,6 +67,7 @@ class CardArray extends Container {
 			}
 			if (!added) children.add(child);
 		}
+		child.parent = this;
 		refresh();
 	}
 

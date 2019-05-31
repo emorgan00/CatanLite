@@ -27,7 +27,6 @@ class AddSettlementEvent extends Event {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 		if (hov == null && !setup && !mousePressed && mousePrevious) {
 			VIEWPORT.children.remove(dummy);
-			player.contents.getChild("SETTLEMENT_BUY").active = true;
 			close();
 		}
 		if (hov instanceof Vertex && ((Vertex)hov).owner == null) {
@@ -57,7 +56,6 @@ class AddSettlementEvent extends Event {
 					hov.setImage("settlement");
 					((Vertex)hov).owner = player;
 					player.points++;
-					if (!setup) player.contents.getChild("SETTLEMENT_BUY").active = true;
 					close();
 				}
 
@@ -70,6 +68,13 @@ class AddSettlementEvent extends Event {
 			dummy.y = mouseY-dummy.h/2;
 		}
 		mousePrevious = mousePressed;
+	}
+
+	void close() {
+		super.close();
+		if (!setup) {
+			player.contents.getChild("SETTLEMENT_BUY").active = true;
+		}
 	}
 }
 
@@ -100,7 +105,6 @@ class AddCityEvent extends Event {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 		if (hov == null && !mousePressed && mousePrevious) {
 			VIEWPORT.children.remove(dummy);
-			player.contents.getChild("CITY_BUY").active = true;
 			close();
 		}
 		if (hov instanceof Vertex && ((Vertex)hov).owner == player && ((Vertex)hov).hasSettlement) {
@@ -114,7 +118,6 @@ class AddCityEvent extends Event {
 				((Vertex)hov).hasCity = true;
 				hov.setImage("city");
 				player.points++;
-				player.contents.getChild("CITY_BUY").active = true;
 				close();
 			}
 
@@ -123,6 +126,11 @@ class AddCityEvent extends Event {
 			dummy.y = mouseY-dummy.h/2;
 		}
 		mousePrevious = mousePressed;
+	}
+
+	void close() {
+		super.close();
+		player.contents.getChild("CITY_BUY").active = true;
 	}
 }
 
@@ -155,7 +163,6 @@ class AddRoadEvent extends Event {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 		if (hov == null && !setup && !mousePressed && mousePrevious) {
 			VIEWPORT.children.remove(dummy);
-			player.contents.getChild("ROAD_BUY").active = true;
 			close();
 		}
 		if (hov instanceof Link && ((Link)hov).owner == null) {
@@ -192,20 +199,26 @@ class AddRoadEvent extends Event {
 					((Link)hov).hasRoad = true;
 					hov.setImage(((Link)hov).type.imageName());
 					((Link)hov).owner = player;
-					if (!setup) player.contents.getChild("ROAD_BUY").active = true;
 					close();
 				}
 			} else {
-				position();
+				dummy.x = mouseX-dummy.w/2;
+				dummy.y = mouseY-dummy.h/2;
 			}
 		} else {
-			position();
+			dummy.x = mouseX-dummy.w/2;
+			dummy.y = mouseY-dummy.h/2;
 		}
 		mousePrevious = mousePressed;
 	}
 
-	void position() {
-		dummy.x = mouseX-dummy.w/2;
-		dummy.y = mouseY-dummy.h/2;
+	void close() {
+		super.close();
+		if (!setup) {
+			player.contents.getChild("ROAD_BUY").active = true;
+			RemoveCardsEvent event = new RemoveCardsEvent();
+			event.addCards((CardArray)player.contents.getChild("CARDS"), road_cost);
+			addEvent(event);
+		}
 	}
 }
