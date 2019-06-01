@@ -21,44 +21,43 @@ class MoveRobberEvent extends Event {
 		
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
 
-		// check if the mouse has been interacted with
-		if (mousePressed && !mousePrevious && hov == ROBBER) { // mouse down
+		if (!mousePressed && mousePrevious) { // mouse up
 
-			selected = true;
-			ROBBER.detach();
-			// zoom the robber a little
-			ROBBER.x -= ROBBER.w*0.1;
-			ROBBER.y -= ROBBER.h*0.1;
-			ROBBER.resize(ROBBER.w*1.2, ROBBER.h*1.2);
+			if (selected) {
+				selected = false;
+				ROBBER.parent.children.remove(ROBBER);
 
-		} else if (!mousePressed && mousePrevious && selected) { // mouse up
-
-			selected = false;
-			ROBBER.parent.children.remove(ROBBER);
-
-			if (hov instanceof Tile && hov != source_tile) { // move the robber from its old tile onto the new tile
-				hov.addChild(ROBBER);
-				ArrayList<Player> victims = new ArrayList<Player>();
-				for (Vertex v : ((Tile)hov).vertices) {
-					if (v.owner != null && v.owner != player && !victims.contains(v.owner) && v.owner.contents.getChild("CARDS").children.size() > 0) {
-						victims.add(v.owner);
+				if (hov instanceof Tile && hov != source_tile) { // move the robber from its old tile onto the new tile
+					hov.addChild(ROBBER);
+					ArrayList<Player> victims = new ArrayList<Player>();
+					for (Vertex v : ((Tile)hov).vertices) {
+						if (v.owner != null && v.owner != player && !victims.contains(v.owner) && v.owner.contents.getChild("CARDS").children.size() > 0) {
+							victims.add(v.owner);
+						}
 					}
+					if (victims.size() > 0) {
+						addEvent(new StealCardEvent(player)); // stealing the card
+						SelectPlayerEvent select = new SelectPlayerEvent(player+", choose someone to rob:", true);
+						for (Player p : victims) select.addPlayer(p);
+						addEvent(select);
+					}
+					close();
+				} else { // put the robber back on its original tile
+					source_tile.addChild(ROBBER);
 				}
-				if (victims.size() > 0) {
-					addEvent(new StealCardEvent(player)); // stealing the card
-					SelectPlayerEvent select = new SelectPlayerEvent(player+", choose someone to rob:", true);
-					for (Player p : victims) select.addPlayer(p);
-					addEvent(select);
-				}
-				close();
-			} else { // put the robber back on its original tile
-				source_tile.addChild(ROBBER);
-			}
 
-			// unzoom the robber
-			ROBBER.resize(ROBBER.w/1.2, ROBBER.h/1.2);
-			ROBBER.x = source_x;
-			ROBBER.y = source_y;
+				// unzoom the robber
+				ROBBER.resize(ROBBER.w/1.2, ROBBER.h/1.2);
+				ROBBER.x = source_x;
+				ROBBER.y = source_y;
+			} else {
+				selected = true;
+				ROBBER.detach();
+				// zoom the robber a little
+				ROBBER.x -= ROBBER.w*0.1;
+				ROBBER.y -= ROBBER.h*0.1;
+				ROBBER.resize(ROBBER.w*1.2, ROBBER.h*1.2);
+			}
 		}
 		mousePrevious = mousePressed;
 
