@@ -30,7 +30,7 @@ class TurnEvent extends Event {
 			dicesum += ((Die)DICE.getChild("RIGHT_DIE")).number;
 
 			if (dicesum == 7) {
-				addEvent(new MoveRobberEvent());
+				addEvent(new MoveRobberEvent(player));
 				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {
 				for (Tile t : BOARD.tiles) {
@@ -59,9 +59,10 @@ class TurnEvent extends Event {
 					addEvent(new AddSettlementEvent(player,false));
 				} else if (hov.id.equals("CITY_BUY") && resources[2] > 2 && resources[3] > 1) {
 					addEvent(new AddCityEvent(player));
-				} else if (hov.id.equals("SCRATCHY_STACK") && resources[1] > 0 && resources[2] > 0 && resources[3] > 0) {
+				} else if (hov.id.equals("SCRATCHY_STACK") && resources[1] > 0 && resources[2] > 0 && resources[3] > 0 && DECK.size() > 0) {
 					RemoveCardsEvent rm = new RemoveCardsEvent();
 					rm.addCards((CardArray)player.contents.getChild("CARDS"), card_cost);
+					addEvent(rm);
 					addEvent(new AddCardEvent(player, DECK.remove(DECK.size()-1)));
 				}
 			}

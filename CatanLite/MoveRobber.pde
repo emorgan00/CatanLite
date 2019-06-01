@@ -3,6 +3,11 @@ class MoveRobberEvent extends Event {
 	boolean selected, mousePrevious;
 	float source_x, source_y;
 	Container source_tile;
+	Player player;
+
+	MoveRobberEvent(Player p) {
+		player = p;
+	}
 
 	void load() {
 		selected = false;
@@ -33,6 +38,15 @@ class MoveRobberEvent extends Event {
 
 			if (hov instanceof Tile && hov != source_tile) { // move the robber from its old tile onto the new tile
 				hov.addChild(ROBBER);
+				ArrayList<Player> victims = new ArrayList<Player>();
+				for (Vertex v : ((Tile)hov).vertices) {
+					if (v.owner != null && v.owner != player && !victims.contains(v.owner)) victims.add(v.owner);
+				}
+				if (victims.size() > 0) {
+					SelectPlayerEvent select = new SelectPlayerEvent(player+", choose someone to rob:", true);
+					for (Player p : victims) select.addPlayer(p);
+					addEvent(select);
+				}
 				close();
 			} else { // put the robber back on its original tile
 				source_tile.addChild(ROBBER);

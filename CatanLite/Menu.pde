@@ -123,5 +123,4 @@ class PlayerMenuEvent extends Event {
 			x += box.w*0.2;
 		}
 	}
-
 }

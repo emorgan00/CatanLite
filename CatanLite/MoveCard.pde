@@ -51,7 +51,7 @@ class AddCardEvent extends Event {
 			float frac = ((float)timer)/maxtimer;
 			item.x = sx+dx*frac;
 			item.y = sy+dy*frac;
-			item.rotation = HALF_PI*(1-frac);
+			item.rotation = -HALF_PI*(1-frac);
 			timer += DT;
 		}
 	}

@@ -3,7 +3,7 @@ enum CardType {
 	KNIGHT, ROAD_BUILDING, YEAR_OF_PLENTY, MONOPOLY, MARKET, UNIVERSITY, GREAT_HALL, CHAPEL, LIBRARY;
 
 	String imageName() {
-		return "desert"; // to do
+		return "cardborder"; // to do
 	}
 }
 
