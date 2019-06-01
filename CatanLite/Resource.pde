@@ -28,4 +28,13 @@ enum Resource {
 		else if (this == WOOD) return "WOOD_STACK";
 		else return "SCRATCHY_STACK";
 	}
+
+	int order() {
+		if (this == BRICK) return 0;
+		else if (this == WOOL) return 1;
+		else if (this == ORE) return 2;
+		else if (this == WHEAT) return 3;
+		else if (this == WOOD) return 4;
+		else return 5;
+	}
 }

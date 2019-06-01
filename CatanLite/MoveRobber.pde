@@ -15,6 +15,7 @@ class MoveRobberEvent extends Event {
 		source_x = ROBBER.x;
 		source_y = ROBBER.y;
 		source_tile = ROBBER.parent;
+		ROBBER.highlight();
 	}
 
 	void tick() {
@@ -52,6 +53,7 @@ class MoveRobberEvent extends Event {
 				ROBBER.y = source_y;
 			} else {
 				selected = true;
+				if (ROBBER.highlighted) ROBBER.highlight();
 				ROBBER.detach();
 				// zoom the robber a little
 				ROBBER.x -= ROBBER.w*0.1;

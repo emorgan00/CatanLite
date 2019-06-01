@@ -4,7 +4,7 @@ class Container {
 	String id, img_name;
 	PImage img;
 
-	boolean active, rotated;
+	boolean active, rotated, highlighted;
 
 	ArrayList<Container> children;
 	Container parent;
@@ -67,12 +67,12 @@ class Container {
 	}
 
 	void display(float x, float y) {
-    if (active) {
-		  draw(x, y);
-		  for (Container child : children) {
-			  child.display(x+this.x, y+this.y);
-		  }
-    }
+		if (active) {
+			draw(x, y);
+			for (Container child : children) {
+				child.display(x+this.x, y+this.y);
+			}
+		}
 	}
 
 	void draw(float x, float y) {
@@ -123,7 +123,24 @@ class Container {
 		w = h;
 		h = sto;
 		rotated = !rotated;
-		if (rotated) setImage("rot_"+img_name);
-		else setImage(img_name);
+		if (rotated) setImage("rotated_"+img_name);
+		else setImage(img_name.replace("rotated_", ""));
+	}
+
+	void highlight() {
+		if (highlighted) {
+			x += HOFFSET;
+			y += HOFFSET;
+			w -= 2*HOFFSET;
+			h -= 2*HOFFSET;
+			setImage(img_name.replace("highlighted_", ""));
+		} else {
+			x -= HOFFSET;
+			y -= HOFFSET;
+			w += 2*HOFFSET;
+			h += 2*HOFFSET;
+			setImage("highlighted_"+img_name);
+		}
+		highlighted = !highlighted;
 	}
 }

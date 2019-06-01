@@ -29,7 +29,7 @@ class TurnEvent extends Event {
 			dicesum += ((Die)DICE.getChild("LEFT_DIE")).number;
 			dicesum += ((Die)DICE.getChild("RIGHT_DIE")).number;
 
-			if (dicesum == 7) {
+			if (dicesum > 7) {
 				addEvent(new MoveRobberEvent(player));
 				addEvent(new MessageBoxEvent(player+" has rolled a 7,\nand will now move the robber.", false));
 			} else {

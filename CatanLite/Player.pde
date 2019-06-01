@@ -1,6 +1,7 @@
 class Player {
 
 	int red, green, blue, points;
+	int[] ratios; // trade ratios, {brick, wool, ore, wheat, wood}
 	String name;
 	
 	ArrayList<Vertex> settlements, cities;
@@ -16,9 +17,14 @@ class Player {
 		settlements = new ArrayList<Vertex>();
 		cities = new ArrayList<Vertex>();
 		roads = new ArrayList<Link>();
+		ratios = new int[] {4, 4, 4, 4, 4};
 	}
 
 	String toString() {
 		return name;
+	}
+
+	int tradeRatio(Resource r) {
+		return ratios[r.order()];
 	}
 }
