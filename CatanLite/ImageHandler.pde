@@ -8,8 +8,6 @@ static String[] card_images = {
 	"brick_card", "wool_card", "wood_card", "wheat_card", "ore_card", "scratchy"
 };
 
-static final int HOFFSET = 5;
-
 void loadImages() { // this should be called once in setup.
 	File data = new File(dataPath(""));
 	IMG = new HashMap<String, PImage>();
@@ -69,32 +67,35 @@ void rotatedImage(String name) {
 	IMG.put("rotated_"+name, out);
 }
 
-static final int[][] neighbors = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-
 class Pair {int x, y; Pair(int x, int y) {this.x = x; this.y = y;} }
 
 void highlightedImage(String name) {
+
 	PImage in = IMG.get(name);
-	PImage out = createImage(in.width+HOFFSET*2, in.height+HOFFSET*2, ARGB);
-	out.copy(in, 0, 0, in.width, in.height, HOFFSET, HOFFSET, in.width, in.height);
+	PImage out = createImage((int)(in.width*1.2), (int)(in.height*1.2), ARGB);
+	out.copy(in, 0, 0, in.width, in.height, (int)(in.width*0.1), (int)(in.height*0.1), in.width, in.height);
 	out.loadPixels();
+
 	int white = color(255, 255, 255, 255);
+	int offset = 5;
+
 	ArrayList<Pair> buffer = new ArrayList<Pair>();
-	for (int i = 0; i < HOFFSET; i++) {
-		buffer.clear();
-		for (int x = 0; x < out.width; x++) {
-			for (int y = 0; y < out.height; y++) {
-				if (alpha(out.get(x, y)) != 0) {
-					for (int[] n : neighbors) {
-						if (alpha(out.get(x+n[0], y+n[1])) == 0) {
-							buffer.add(new Pair(x+n[0], y+n[1]));
+	for (int x = 0; x < out.width; x++) {
+		for (int y = 0; y < out.height; y++) {
+			if (alpha(out.get(x, y)) != 0) {
+
+				for (int dx = -offset; dx <= offset+1; dx++) {
+					for (int dy = -offset; dy <= offset+1; dy++) {
+						if (alpha(out.get(x+dx, y+dy)) == 0 && Math.hypot(dx, dy) <= offset) {
+							buffer.add(new Pair(x+dx, y+dy));
 						}
 					}
 				}
 			}
 		}
-		for (Pair p : buffer) out.set(p.x, p.y, white);
 	}
+
+	for (Pair p : buffer) out.set(p.x, p.y, white);
 	out.updatePixels();
 	IMG.put("highlighted_"+name, out);
 }

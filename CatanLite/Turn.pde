@@ -3,7 +3,7 @@ class TurnEvent extends Event {
 	Player player;
 	int phase;
 
-	boolean mousePrev;
+	boolean mousePrev, loaded2;
 
 	TurnEvent(Player p) {
 		player = p;
@@ -45,9 +45,19 @@ class TurnEvent extends Event {
 					}
 				}
 			}
+
+			// highlight clickable things
 			phase = 2;
 
 		} else if (phase == 2) { // we are in the build phase
+
+			if (!loaded2) {
+				CARDS.getChild("SCRATCHY_STACK").highlight();
+				player.contents.getChild("ROAD_BUY").highlight();
+				player.contents.getChild("SETTLEMENT_BUY").highlight();
+				player.contents.getChild("CITY_BUY").highlight();
+				loaded2 = true;
+			}
 
 			Container hov = VIEWPORT.getLowestHovered(mouseX, mouseY);
 
@@ -69,6 +79,10 @@ class TurnEvent extends Event {
 			
 			if (keyPressed) {
 				if (key == ENTER) {
+					CARDS.getChild("SCRATCHY_STACK").highlight();
+					player.contents.getChild("ROAD_BUY").highlight();
+					player.contents.getChild("SETTLEMENT_BUY").highlight();
+					player.contents.getChild("CITY_BUY").highlight();
 					close();
 				}
 			}
@@ -76,5 +90,4 @@ class TurnEvent extends Event {
 			mousePrev = mousePressed;
 		}
 	}
-
 }

@@ -129,16 +129,16 @@ class Container {
 
 	void highlight() {
 		if (highlighted) {
-			x += HOFFSET;
-			y += HOFFSET;
-			w -= 2*HOFFSET;
-			h -= 2*HOFFSET;
+			w /= 1.2;
+			h /= 1.2;
+			x += w*0.1;
+			y += h*0.1;
 			setImage(img_name.replace("highlighted_", ""));
 		} else {
-			x -= HOFFSET;
-			y -= HOFFSET;
-			w += 2*HOFFSET;
-			h += 2*HOFFSET;
+			x -= w*0.1;
+			y -= h*0.1;
+			w *= 1.2;
+			h *= 1.2;
 			setImage("highlighted_"+img_name);
 		}
 		highlighted = !highlighted;
