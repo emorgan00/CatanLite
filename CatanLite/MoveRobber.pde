@@ -40,9 +40,12 @@ class MoveRobberEvent extends Event {
 				hov.addChild(ROBBER);
 				ArrayList<Player> victims = new ArrayList<Player>();
 				for (Vertex v : ((Tile)hov).vertices) {
-					if (v.owner != null && v.owner != player && !victims.contains(v.owner)) victims.add(v.owner);
+					if (v.owner != null && v.owner != player && !victims.contains(v.owner) && v.owner.contents.getChild("CARDS").children.size() > 0) {
+						victims.add(v.owner);
+					}
 				}
 				if (victims.size() > 0) {
+					addEvent(new StealCardEvent(player)); // stealing the card
 					SelectPlayerEvent select = new SelectPlayerEvent(player+", choose someone to rob:", true);
 					for (Player p : victims) select.addPlayer(p);
 					addEvent(select);

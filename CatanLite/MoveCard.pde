@@ -5,6 +5,9 @@ class AddCardEvent extends Event {
 
 	float sx, sy, dx, dy;
 	long timer, maxtimer;
+	boolean steal;
+
+	AddCardEvent() {} // empty super constructor
 
 	AddCardEvent(Player p, Resource r) {
 		Card source = (Card)CARDS.getChild(r.getStackName());
@@ -127,5 +130,21 @@ class RemoveCardsEvent extends Event {
 			timer += DT;
 		}
 	}
+}
 
+class StealCardEvent extends AddCardEvent {
+
+	StealCardEvent(Player p) { // steal a random card from SELECTED_PLAYER
+		destination = (CardArray)p.contents.getChild("CARDS");
+	}
+
+	void load() {
+		Container source = SELECTED_PLAYER.contents.getChild("CARDS");
+		item = (Card)source.children.get((int)(Math.random()*source.children.size()));
+		source.children.remove(item);
+		((CardArray)source).refresh();
+		item.x = width/2;
+		item.y = -CARD_WIDTH*2;
+		super.load();
+	}
 }
