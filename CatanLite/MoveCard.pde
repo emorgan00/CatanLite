@@ -13,17 +13,21 @@ class AddCardEvent extends Event {
 		destination = (CardArray)p.contents.getChild("CARDS");
 	}
 
+	AddCardEvent(Player p, CardType c) {
+		Card source = (Card)CARDS.getChild("SCRATCHY_STACK");
+		item = new DevelopmentCard("scratchy_card", source.absX(), source.absY(), c);
+		item.rotated = true;
+		destination = (CardArray)p.contents.getChild("DEVCARDS");
+	}
+
 	void load() {
 		sx = item.x;
 		sy = item.y+CARD_WIDTH;
 		if (destination.parent.active) { // we are giving to an active player
 			dx = destination.absX()-sx;
 			dy = destination.absY()-sy;
-			if (item instanceof DevelopmentCard) sx += CARD_WIDTH;
 
 			for (int i = 0; i < destination.children.size(); i++) {
-				if (destination.children.get(i) instanceof DevelopmentCard)
-					break;
 				if (item instanceof ResourceCard && ((ResourceCard)destination.children.get(i)).resource == ((ResourceCard)item).resource)
 					break;
 				sx += CARD_WIDTH/3;
@@ -75,7 +79,6 @@ class RemoveCardsEvent extends Event {
 
 	// {brick, wool, ore, wheat, wood}
 	void addCards(CardArray array, int[] resources) {
-		println(array.children, resources);
 		int[] copy = new int[5];
 		for (int i = 0; i < 5; i++) copy[i] = resources[i];
 		resources = copy;
@@ -103,7 +106,6 @@ class RemoveCardsEvent extends Event {
 				}
 			}
 		}
-		println(cards);
 	}
 
 	void load() {

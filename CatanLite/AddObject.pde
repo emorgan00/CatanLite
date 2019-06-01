@@ -73,7 +73,7 @@ class AddSettlementEvent extends Event {
 	void close(boolean cancel) {
 		super.close();
 		player.contents.getChild("SETTLEMENT_BUY").active = true;
-		if (!setup && cancel) {
+		if (!setup && !cancel) {
 			RemoveCardsEvent event = new RemoveCardsEvent();
 			event.addCards((CardArray)player.contents.getChild("CARDS"), settlement_cost);
 			addEvent(event);
@@ -134,7 +134,7 @@ class AddCityEvent extends Event {
 	void close(boolean cancel) {
 		super.close();
 		player.contents.getChild("CITY_BUY").active = true;
-		if (cancel) {
+		if (!cancel) {
 			RemoveCardsEvent event = new RemoveCardsEvent();
 			event.addCards((CardArray)player.contents.getChild("CARDS"), city_cost);
 			addEvent(event);

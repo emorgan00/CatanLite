@@ -56,10 +56,8 @@ class CardArray extends Container {
 			boolean added = false;
 			for (int i = 0; i < children.size(); i++) {
 				if (children.get(i) instanceof DevelopmentCard) {
-					children.add(i, child);
-					added = true;
 					break;
-				} if (((ResourceCard)children.get(i)).resource == ((ResourceCard)child).resource) {
+				} else if (((ResourceCard)children.get(i)).resource == ((ResourceCard)child).resource) {
 					children.add(i, child);
 					added = true;
 					break;
@@ -72,18 +70,19 @@ class CardArray extends Container {
 	}
 
 	void refresh() {
-		boolean reached_gap = false;
 		float card_x = 0;
 		for (Container c : children) {
-			if (c instanceof DevelopmentCard && !reached_gap) {
-				card_x += CARD_WIDTH;
-				reached_gap = true;
-			}
 			c.x = card_x;
 			c.y = 0;
 			card_x += CARD_WIDTH/3;
 		}
 		w = card_x+CARD_WIDTH*0.667;
+		
+		// special case of moving development cards
+		if (id.equals("CARDS")) {
+			Container devcards = parent.getChild("DEVCARDS");
+			if (devcards != null) devcards.x = x+w+CARD_WIDTH/3;
+		}
 	}
 
 	Container getLowestHovered(float mx, float my) {
@@ -113,5 +112,4 @@ class CardArray extends Container {
 		}
 		return out;
 	}
-
 }

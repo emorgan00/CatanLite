@@ -6,6 +6,7 @@ void newGame() { // set up a new game
 		p.contents = new Container("PLAYER_"+p.name, 0, height*0.7, width, height*0.3);
 		p.contents.active = false;
 		p.contents.addChild(new CardArray("CARDS", width*0.095, height*0.12));
+		p.contents.addChild(new CardArray("DEVCARDS", width*0.095, height*0.12));
 
 		// purchasable objects
 		Vertex road = new Vertex("ROAD_BUY", width*0.7, height*0.14, CARD_WIDTH*0.8);
