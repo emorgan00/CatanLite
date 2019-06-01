@@ -49,7 +49,8 @@ class TurnEvent extends Event {
 
 		} else if (phase == 2) { // we are in the build phase
 
-			Container hov = player.contents.getLowestHovered(mouseX, mouseY);
+			Container hov = VIEWPORT.getLowestHovered(mouseX, mouseY);
+
 			if (!mousePressed && mousePrev && hov != null) {
 				int[] resources = ((CardArray)player.contents.getChild("CARDS")).resources();
 				if (hov.id.equals("ROAD_BUY") && resources[0] > 0 && resources[4] > 0) {
@@ -58,6 +59,10 @@ class TurnEvent extends Event {
 					addEvent(new AddSettlementEvent(player,false));
 				} else if (hov.id.equals("CITY_BUY") && resources[2] > 2 && resources[3] > 1) {
 					addEvent(new AddCityEvent(player));
+				} else if (hov.id.equals("SCRATCHY_STACK") && resources[1] > 0 && resources[2] > 0 && resources[3] > 0) {
+					RemoveCardsEvent rm = new RemoveCardsEvent();
+					rm.addCards((CardArray)player.contents.getChild("CARDS"), card_cost);
+					addEvent(new AddCardEvent(player, DECK.remove(DECK.size()-1)));
 				}
 			}
 			

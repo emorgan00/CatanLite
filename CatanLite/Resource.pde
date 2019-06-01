@@ -28,15 +28,4 @@ enum Resource {
 		else if (this == WOOD) return "WOOD_STACK";
 		else return "SCRATCHY_STACK";
 	}
-
-}
-
-enum CardType {
-
-	KNIGHT, ROAD_BUILDING, YEAR_OF_PLENTY, MONOPOLY, MARKET, UNIVERSITY, GREAT_HALL, CHAPEL, LIBRARY;
-
-	String imageName() {
-		return "desert"; // to do
-	}
-
 }

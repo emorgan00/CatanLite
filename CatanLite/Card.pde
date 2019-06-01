@@ -30,17 +30,6 @@ class ResourceCard extends Card {
 	}
 }
 
-class DevelopmentCard extends Card {
-
-	CardType type;
-
-	DevelopmentCard(String id, float x, float y, CardType type) {
-		super(id, x, y);
-		this.type = type;
-		setImage(type.imageName());
-	}
-}
-
 class CardArray extends Container {
 
 	CardArray(String id, float x, float y) {

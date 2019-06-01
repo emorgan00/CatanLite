@@ -26,6 +26,20 @@ void newGame() { // set up a new game
 		VIEWPORT.addChild(p.contents);
 	}
 
+	// create the development card deck
+	for (int i = 0; i < 14; i++) DECK.add(CardType.KNIGHT);
+	for (int i = 0; i < 2; i++) {
+		DECK.add(CardType.ROAD_BUILDING);
+		DECK.add(CardType.YEAR_OF_PLENTY);
+		DECK.add(CardType.MONOPOLY);
+	}
+	DECK.add(CardType.MARKET);
+	DECK.add(CardType.UNIVERSITY);
+	DECK.add(CardType.GREAT_HALL);
+	DECK.add(CardType.CHAPEL);
+	DECK.add(CardType.LIBRARY);
+	Collections.shuffle(DECK);
+
 	addEvent(new TurnLoopEvent());
 
 	// setup the board

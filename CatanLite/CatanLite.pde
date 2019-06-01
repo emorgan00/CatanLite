@@ -8,6 +8,7 @@ boolean DEBUG = false;
 float CARD_WIDTH;
 long DT, past_time;
 ArrayList<Player> PLAYERS = new ArrayList<Player>();
+ArrayList<CardType> DECK = new ArrayList<CardType>();
 
 void setup() {
 	// setup window
