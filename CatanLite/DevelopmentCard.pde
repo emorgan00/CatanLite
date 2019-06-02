@@ -4,6 +4,9 @@ enum CardType {
 
 	String imageName() {
 		if (this == KNIGHT) return "knight_"+(int)(Math.random()*3);
+		else if (this == ROAD_BUILDING) return "road_building";
+		else if (this == YEAR_OF_PLENTY) return "year_of_plenty";
+		else if (this == MONOPOLY) return "monopoly";
 		else return "cardborder";
 	}
 }
