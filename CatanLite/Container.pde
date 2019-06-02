@@ -128,19 +128,24 @@ class Container {
 	}
 
 	void highlight() {
+		if (!highlighted) {
+			x -= w*0.1;
+			y -= h*0.1;
+			w *= 1.2;
+			h *= 1.2;
+			setImage("highlighted_"+img_name);
+			highlighted = true;
+		}
+	}
+
+	void unhighlight() {
 		if (highlighted) {
 			w /= 1.2;
 			h /= 1.2;
 			x += w*0.1;
 			y += h*0.1;
 			setImage(img_name.replace("highlighted_", ""));
-		} else {
-			x -= w*0.1;
-			y -= h*0.1;
-			w *= 1.2;
-			h *= 1.2;
-			setImage("highlighted_"+img_name);
+			highlighted = false;
 		}
-		highlighted = !highlighted;
 	}
 }

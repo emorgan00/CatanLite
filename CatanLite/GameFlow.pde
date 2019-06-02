@@ -29,31 +29,32 @@ class DelayEvent extends Event {
 
 class SwitchPlayerEvent extends Event {
 
-	Container prev, next;
+	Player prev, next;
 	float miny;
 	long timer;
 
 	static final long maxtimer = 400;
 
 	SwitchPlayerEvent(Player prev, Player next) {
-		this.prev = prev.contents;
-		this.next = next.contents;
+		this.prev = prev;
+		this.next = next;
 	}
 
 	void load() {
-		miny = next.y;
-		next.y = height;
-		next.active = true;
+		miny = next.contents.y;
+		next.contents.y = height;
+		next.contents.active = true;
 		timer = maxtimer;
 	}
 
 	void tick() {
-		next.y = miny+(height-miny)*((float)timer/maxtimer);
-		prev.y = miny+(height-miny)*(1-(float)timer/maxtimer);
+		next.contents.y = miny+(height-miny)*((float)timer/maxtimer);
+		prev.contents.y = miny+(height-miny)*(1-(float)timer/maxtimer);
 		if (timer < 0) {
-			prev.y = miny;
-			next.y = miny;
-			prev.active = false;
+			prev.contents.y = miny;
+			next.contents.y = miny;
+			prev.contents.active = false;
+			refreshHighlights(next);
 			close();
 		}
 		timer -= DT;

@@ -77,3 +77,22 @@ void showAll() {
 	DICE.active = diceActive;
 	CARDS.active = cardsActive;
 }
+
+void refreshHighlights(Player player) {
+	Container scratchy = CARDS.getChild("SCRATCHY_STACK");
+	Container road = player.contents.getChild("ROAD_BUY");
+	Container settlement = player.contents.getChild("SETTLEMENT_BUY");
+	Container city = player.contents.getChild("CITY_BUY");
+
+	int[] resources = ((CardArray)player.contents.getChild("CARDS")).resources();
+
+	// road, settlement, city, scratchy
+	if (resources[0] > 0 && resources[4] > 0) road.highlight(); 
+	else road.unhighlight();
+	if (resources[0] > 0 && resources[1] > 0 && resources[3] > 0 && resources[4] > 0) settlement.highlight(); 
+	else settlement.unhighlight();
+	if (resources[2] > 2 && resources[3] > 1) city.highlight(); 
+	else city.unhighlight();
+	if (resources[1] > 0 && resources[2] > 0 && resources[3] > 0 && DECK.size() > 0) scratchy.highlight(); 
+	else scratchy.unhighlight();
+}

@@ -77,7 +77,7 @@ void highlightedImage(String name) {
 	out.loadPixels();
 
 	int white = color(255, 255, 255, 255);
-	int offset = 5;
+	int offset = 8;
 
 	ArrayList<Pair> buffer = new ArrayList<Pair>();
 	for (int x = 0; x < out.width; x++) {
@@ -86,7 +86,8 @@ void highlightedImage(String name) {
 
 				for (int dx = -offset; dx <= offset+1; dx++) {
 					for (int dy = -offset; dy <= offset+1; dy++) {
-						if (alpha(out.get(x+dx, y+dy)) == 0 && Math.hypot(dx, dy) <= offset) {
+						double h = Math.hypot(dx, dy);
+						if (alpha(out.get(x+dx, y+dy)) == 0 && h > 3 && h <= offset) {
 							buffer.add(new Pair(x+dx, y+dy));
 						}
 					}
