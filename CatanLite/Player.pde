@@ -1,7 +1,7 @@
 class Player {
 
 	int red, green, blue, points;
-	int[] ratios; // trade ratios, {brick, wool, ore, wheat, wood}
+	int[][] ratios; // trade ratios, {brick, wool, ore, wheat, wood}
 	String name;
 	
 	ArrayList<Vertex> settlements, cities;
@@ -17,14 +17,21 @@ class Player {
 		settlements = new ArrayList<Vertex>();
 		cities = new ArrayList<Vertex>();
 		roads = new ArrayList<Link>();
-		ratios = new int[] {4, 4, 4, 4, 4};
+		ratios = new int[5][5];
+		for (int x = 0; x < 5; x++) {
+			for (int y = 0; y < 5; y++) ratios[x][y] = 4;
+		}
 	}
 
 	String toString() {
 		return name;
 	}
 
-	int tradeRatio(Resource r) {
-		return ratios[r.order()];
+	int tradeRatio(Resource buy, Resource sell) {
+		return ratios[buy.order()][sell.order()];
+	}
+
+	void setRatio(Resource buy, Resource sell, int r) {
+		ratios[buy.order()][sell.order()] = r;
 	}
 }
