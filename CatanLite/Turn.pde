@@ -77,8 +77,7 @@ class TurnEvent extends Event {
 					addEvent(new AddCardEvent(player, DECK.remove(DECK.size()-1)));
 
 				} else if (hov instanceof ResourceCard && hov.parent == CARDS && hov.highlighted) { // resource card
-					Resource r = ((ResourceCard)hov).resource;
-					
+					addEvent(new TradeResourceEvent(player, ((ResourceCard)hov).resource));
 
 				} else queueRefresh = false;
 			} else queueRefresh = false;

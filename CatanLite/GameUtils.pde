@@ -95,6 +95,17 @@ void refreshHighlights(Player player) {
 	else city.unhighlight();
 	if (resources[1] > 0 && resources[2] > 0 && resources[3] > 0 && DECK.size() > 0) scratchy.highlight(); 
 	else scratchy.unhighlight();
+
+	// resource trade-ins
+	for (Resource buy : Resource.values()) {
+		if (buy == Resource.DESERT) continue;
+		boolean isAble = false;
+		for (Resource sell : Resource.values()) {
+			if (sell == Resource.DESERT) continue;
+			if (resources[sell.order()] >= player.tradeRatio(buy, sell)) isAble = true;
+		}
+		if (isAble) CARDS.getChild(buy.getStackName()).highlight();
+	}
 }
 
 void clearHighlights() {
