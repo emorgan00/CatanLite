@@ -81,23 +81,30 @@ void highlightedImage(String name) {
 
 	ArrayList<Pair> buffer = new ArrayList<Pair>();
 	ArrayList<Pair> indices = new ArrayList<Pair>();
+	ArrayList<Pair> gap = new ArrayList<Pair>();
 
 	for (int dx = -offset; dx <= offset+1; dx++) {
 		for (int dy = -offset; dy <= offset+1; dy++) {
 			double h = Math.hypot(dx, dy);
-			if (h > 3 && h <= offset) indices.add(new Pair(dx, dy));
+			if (h <= 3) gap.add(new Pair(dx, dy));
+			if (h <= offset) indices.add(new Pair(dx, dy));
 		}
 	}
 
+	int[][] neighbors = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+
 	for (int x = 0; x < out.width; x++) {
 		for (int y = 0; y < out.height; y++) {
-			if (alpha(out.get(x, y)) != 0) {
+			if (alpha(out.get(x, y)) == 0) {
 
+				boolean isValid = false;
 				for (Pair p : indices) {
-					if (alpha(out.get(x+p.x, y+p.y)) == 0) {
-						buffer.add(new Pair(x+p.x, y+p.y));
-					}
+					if (alpha(out.get(x+p.x, y+p.y)) != 0) isValid = true;
 				}
+				for (Pair p : gap) {
+					if (alpha(out.get(x+p.x, y+p.y)) != 0) isValid = false;
+				}
+				if (isValid) buffer.add(new Pair(x, y));
 			}
 		}
 	}

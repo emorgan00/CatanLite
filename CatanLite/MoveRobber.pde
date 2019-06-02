@@ -37,7 +37,7 @@ class MoveRobberEvent extends Event {
 					}
 					if (victims.size() > 0) {
 						addEvent(new StealCardEvent(player)); // stealing the card
-						SelectPlayerEvent select = new SelectPlayerEvent(player+", choose someone to rob:", true);
+						SelectPlayerEvent select = new SelectPlayerEvent(player+", choose someone to rob:", false);
 						for (Player p : victims) select.addPlayer(p);
 						addEvent(select);
 					}
