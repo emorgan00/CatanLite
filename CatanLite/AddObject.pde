@@ -2,11 +2,17 @@ class AddSettlementEvent extends Event {
 	
 	Player player;
 	Vertex dummy;
-	boolean mousePrevious, setup;
+	boolean mousePrevious, setup, addResources;
+	
+	AddSettlementEvent(Player player, boolean setup, boolean addResources) {
+		this.player = player;
+		// in setup mode, settlements can go anywhere. otherwise, they need to be placed by a road.
+		this.setup = setup;
+		this.addResources = addResources;
+	}
 	
 	AddSettlementEvent(Player player, boolean setup) {
 		this.player = player;
-		// in setup mode, settlements can go anywhere. otherwise, they need to be placed by a road.
 		this.setup = setup;
 	}
 
@@ -56,6 +62,13 @@ class AddSettlementEvent extends Event {
 					hov.setImage("settlement");
 					((Vertex)hov).owner = player;
 					player.points++;
+					if (addResources) {
+						for (Tile t : ((Vertex)hov).tiles) {
+							Resource r = t.resource;
+							if (r == Resource.DESERT) continue;
+							player.contents.getChild("CARDS").addChild(new ResourceCard(r.cardImageName(), 0, 0, r));
+						}
+					}
 					close(false);
 				}
 

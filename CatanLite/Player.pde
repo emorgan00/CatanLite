@@ -19,7 +19,9 @@ class Player {
 		roads = new ArrayList<Link>();
 		ratios = new int[5][5];
 		for (int x = 0; x < 5; x++) {
-			for (int y = 0; y < 5; y++) ratios[x][y] = 4;
+			for (int y = 0; y < 5; y++) {
+				ratios[x][y] = x == y ? 999 : 4;
+			}
 		}
 	}
 
