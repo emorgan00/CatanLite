@@ -45,6 +45,7 @@ class SwitchPlayerEvent extends Event {
 		next.contents.y = height;
 		next.contents.active = true;
 		timer = maxtimer;
+		clearHighlights();
 	}
 
 	void tick() {
@@ -54,7 +55,6 @@ class SwitchPlayerEvent extends Event {
 			prev.contents.y = miny;
 			next.contents.y = miny;
 			prev.contents.active = false;
-			refreshHighlights(next);
 			close();
 		}
 		timer -= DT;

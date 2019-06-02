@@ -96,3 +96,13 @@ void refreshHighlights(Player player) {
 	if (resources[1] > 0 && resources[2] > 0 && resources[3] > 0 && DECK.size() > 0) scratchy.highlight(); 
 	else scratchy.unhighlight();
 }
+
+void clearHighlights() {
+	for (Container c : CARDS.children) c.unhighlight();
+	
+	for (Player player : PLAYERS) {
+		player.contents.getChild("ROAD_BUY").unhighlight();
+		player.contents.getChild("SETTLEMENT_BUY").unhighlight();
+		player.contents.getChild("CITY_BUY").unhighlight();
+	}
+}

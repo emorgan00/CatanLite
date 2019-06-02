@@ -8,6 +8,10 @@ static String[] card_images = {
 	"brick_card", "wool_card", "wood_card", "wheat_card", "ore_card", "scratchy"
 };
 
+static String[] highlighted_images = {
+	"brick_card", "wool_card", "wood_card", "wheat_card", "ore_card", "scratchy", "city", "settlement", "road_p"
+};
+
 void loadImages() { // this should be called once in setup.
 	File data = new File(dataPath(""));
 	IMG = new HashMap<String, PImage>();
@@ -15,8 +19,10 @@ void loadImages() { // this should be called once in setup.
 		String name = file.getName();
 		IMG.put(name.substring(0, name.indexOf(".")), loadImage(name));
 	}
+
 	for (String s : hex_images) hexImage(s);
 	for (String s : card_images) cardImage(s);
+	for (String s : highlighted_images) highlightedImage(s);
 	// cropping board background
 	rotatedImage("hexmask");
 	IMG.get("water").mask(IMG.get("rotated_hexmask"));
@@ -71,6 +77,8 @@ class Pair {int x, y; Pair(int x, int y) {this.x = x; this.y = y;} }
 
 void highlightedImage(String name) {
 
+	println("highlighting "+name+"...");
+
 	PImage in = IMG.get(name);
 	PImage out = createImage((int)(in.width*1.2), (int)(in.height*1.2), ARGB);
 	out.copy(in, 0, 0, in.width, in.height, (int)(in.width*0.1), (int)(in.height*0.1), in.width, in.height);
@@ -80,16 +88,22 @@ void highlightedImage(String name) {
 	int offset = 8;
 
 	ArrayList<Pair> buffer = new ArrayList<Pair>();
+	ArrayList<Pair> indices = new ArrayList<Pair>();
+
+	for (int dx = -offset; dx <= offset+1; dx++) {
+		for (int dy = -offset; dy <= offset+1; dy++) {
+			double h = Math.hypot(dx, dy);
+			if (h > 3 && h <= offset) indices.add(new Pair(dx, dy));
+		}
+	}
+
 	for (int x = 0; x < out.width; x++) {
 		for (int y = 0; y < out.height; y++) {
 			if (alpha(out.get(x, y)) != 0) {
 
-				for (int dx = -offset; dx <= offset+1; dx++) {
-					for (int dy = -offset; dy <= offset+1; dy++) {
-						double h = Math.hypot(dx, dy);
-						if (alpha(out.get(x+dx, y+dy)) == 0 && h > 3 && h <= offset) {
-							buffer.add(new Pair(x+dx, y+dy));
-						}
+				for (Pair p : indices) {
+					if (alpha(out.get(x+p.x, y+p.y)) == 0) {
+						buffer.add(new Pair(x+p.x, y+p.y));
 					}
 				}
 			}

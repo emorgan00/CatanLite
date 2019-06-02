@@ -12,7 +12,7 @@ ArrayList<CardType> DECK = new ArrayList<CardType>();
 
 void setup() {
 	// setup window
-	fullScreen();
+	size(1800, 1200);
 
 	// initialize globals
 	loadImages();
