@@ -91,7 +91,6 @@ class TurnEvent extends Event {
 					addEvent(new TradeResourceEvent(player, ((ResourceCard)hov).resource));
 
 				} else if (hov instanceof DevelopmentCard && hov.highlighted) { // playing a development card
-					for (Container card : player.contents.getChild("DEVCARDS").children) card.unhighlight();
 					playCard(player, (DevelopmentCard)hov);
 
 				} else queueRefresh = false;

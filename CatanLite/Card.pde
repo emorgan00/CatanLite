@@ -61,8 +61,13 @@ class CardArray extends Container {
 	void refresh() {
 		float card_x = 0;
 		for (Container c : children) {
-			if (c.highlighted) c.x = card_x-c.w*0.1;
-			else c.x = card_x;
+			if (c.highlighted) {
+				c.x = card_x-c.w*0.1;
+				c.y = -c.h*0.1;
+			} else {
+				c.x = card_x;
+				c.y = 0;
+			}
 			card_x += CARD_WIDTH/3;
 		}
 		w = card_x+CARD_WIDTH*0.667;

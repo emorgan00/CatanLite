@@ -1,6 +1,6 @@
 class Player {
 
-	int red, green, blue, points;
+	int red, green, blue, points, knights;
 	int[][] ratios; // trade ratios, {brick, wool, ore, wheat, wood}
 	String name;
 	

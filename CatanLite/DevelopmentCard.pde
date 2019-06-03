@@ -32,6 +32,11 @@ void playCard(Player player, DevelopmentCard card) {
 
 		addEvent(new MoveRobberEvent(player));
 		addEvent(new MessageBoxEvent(player+" has played a Knight,\nand will now move the robber.", false));
+		RemoveCardsEvent rm = new RemoveCardsEvent();
+		rm.addCard(card);
+		addEvent(rm);
+		player.knights++;
+		for (Container c : player.contents.getChild("DEVCARDS").children) c.unhighlight();
 
 	}
 
