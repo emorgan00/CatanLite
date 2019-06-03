@@ -37,7 +37,7 @@ void newGame() { // set up a new game
 	}
 	DECK.add(CardType.MARKET);
 	DECK.add(CardType.UNIVERSITY);
-	DECK.add(CardType.GREAT_HALL);
+	DECK.add(CardType.PALACE);
 	DECK.add(CardType.CHAPEL);
 	DECK.add(CardType.LIBRARY);
 	Collections.shuffle(DECK);

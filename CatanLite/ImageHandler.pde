@@ -6,7 +6,8 @@ static String[] hex_images = {
 
 static String[] card_images = {
 	"brick_card", "wool_card", "wood_card", "wheat_card", "ore_card", "scratchy",
-	"knight_0", "knight_1", "knight_2", "monopoly", "road_building", "year_of_plenty"
+	"knight_0", "knight_1", "knight_2", "monopoly", "road_building", "year_of_plenty",
+	"market", "chapel", "university", "library", "palace"
 };
 
 void loadImages() { // this should be called once in setup.
