@@ -138,9 +138,19 @@ class StealCardEvent extends AddCardEvent {
 		destination = (CardArray)p.contents.getChild("CARDS");
 	}
 
+	StealCardEvent(Player p, Card c) {
+		destination = (CardArray)p.contents.getChild("CARDS");
+		item = c;
+	}
+
 	void load() {
-		Container source = SELECTED_PLAYER.contents.getChild("CARDS");
-		item = (Card)source.children.get((int)(Math.random()*source.children.size()));
+		Container source;
+		if (item == null) {
+			source = SELECTED_PLAYER.contents.getChild("CARDS");
+			item = (Card)source.children.get((int)(Math.random()*source.children.size()));
+		} else {
+			source = item.parent;
+		}
 		source.children.remove(item);
 		((CardArray)source).refresh();
 		item.x = width/2;
