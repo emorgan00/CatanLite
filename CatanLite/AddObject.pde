@@ -159,12 +159,18 @@ class AddRoadEvent extends Event {
 	
 	Player player;
 	Link dummy, pastHov;
-	boolean mousePrevious, setup;
+	boolean mousePrevious, setup, forced;
 	
 	AddRoadEvent(Player player, boolean setup) {
 		this.player = player;
 		// in setup mode, roads need to go next to a settlement. otherwise, they need to be placed by another road.
 		this.setup = setup;
+	}
+	
+	AddRoadEvent(Player player, boolean setup, boolean forced) {
+		this.player = player;
+		this.setup = setup;
+		this.forced = forced;
 	}
 
 	String toString() {
@@ -182,7 +188,7 @@ class AddRoadEvent extends Event {
 	
 	void tick() {
 		Container hov = BOARD.getLowestHovered(mouseX, mouseY);
-		if (hov == null && !setup && !mousePressed && mousePrevious) {
+		if (hov == null && !setup && !mousePressed && mousePrevious && !forced) {
 			VIEWPORT.children.remove(dummy);
 			close(true);
 		}
@@ -236,7 +242,7 @@ class AddRoadEvent extends Event {
 	void close(boolean cancel) {
 		super.close();
 		player.contents.getChild("ROAD_BUY").active = true;
-		if (!setup && !cancel) {
+		if (!setup && !cancel && !forced) {
 			RemoveCardsEvent event = new RemoveCardsEvent();
 			event.addCards((CardArray)player.contents.getChild("CARDS"), road_cost);
 			addEvent(event);

@@ -11,21 +11,21 @@ class AddCardEvent extends Event {
 
 	AddCardEvent(Player p, Resource r) {
 		Card source = (Card)CARDS.getChild(r.getStackName());
-		item = new ResourceCard(r.cardImageName(), source.absX(), source.absY(), r);
+		item = new ResourceCard(r.cardImageName(), source.absX(), source.absY()+CARD_WIDTH, r);
 		item.rotated = true;
 		destination = (CardArray)p.contents.getChild("CARDS");
 	}
 
 	AddCardEvent(Player p, CardType c) {
 		Card source = (Card)CARDS.getChild("SCRATCHY_STACK");
-		item = new DevelopmentCard("scratchy_card", source.absX(), source.absY(), c);
+		item = new DevelopmentCard("scratchy_card", source.absX(), source.absY()+CARD_WIDTH, c);
 		item.rotated = true;
 		destination = (CardArray)p.contents.getChild("DEVCARDS");
 	}
 
 	void load() {
 		sx = item.x;
-		sy = item.y+CARD_WIDTH;
+		sy = item.y;
 		if (destination.parent.active) { // we are giving to an active player
 			dx = destination.absX()-sx;
 			dy = destination.absY()-sy;
@@ -33,7 +33,7 @@ class AddCardEvent extends Event {
 			for (int i = 0; i < destination.children.size(); i++) {
 				if (item instanceof ResourceCard && ((ResourceCard)destination.children.get(i)).resource == ((ResourceCard)item).resource)
 					break;
-				sx += CARD_WIDTH/3;
+				dx += CARD_WIDTH/3;
 			}
 		} else { // the player is inactive
 			dx = width/2-sx;

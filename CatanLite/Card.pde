@@ -63,7 +63,7 @@ class CardArray extends Container {
 		for (Container c : children) {
 			if (c.highlighted) {
 				c.x = card_x-c.w*0.1;
-				c.y = -c.h*0.1;
+				c.y = -c.h/12;
 			} else {
 				c.x = card_x;
 				c.y = 0;

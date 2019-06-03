@@ -44,45 +44,22 @@ void playCard(Player player, DevelopmentCard card) {
 		addEvent(new MonopolyEvent(player));
 		addEvent(new MessageBoxEvent(player+", please choose a resource to\ntake from all other players.", false));
 
+	} else if (card.type == CardType.YEAR_OF_PLENTY) {
+
+		addEvent(new FreeCardEvent(player));
+		addEvent(new FreeCardEvent(player));
+		addEvent(new MessageBoxEvent(player+", please take 2 resources for free.", false));
+	
+	} else if (card.type == CardType.ROAD_BUILDING) {
+
+		addEvent(new AddRoadEvent(player, false, true));
+		addEvent(new AddRoadEvent(player, false, true));
+		addEvent(new MessageBoxEvent(player+", please build 2 roads for free.", false));
+	
 	}
 
 	RemoveCardsEvent rm = new RemoveCardsEvent();
 	rm.addCard(card);
 	addEvent(rm);
 	for (Container c : player.contents.getChild("DEVCARDS").children) c.unhighlight();
-}
-
-class MonopolyEvent extends Event {
-
-	Player player;
-	boolean mousePrev;
-
-	MonopolyEvent(Player p) {
-		player = p;
-	}
-
-	void load() {
-		clearHighlights();
-		for (Container c : CARDS.children) {
-			if (!c.id.equals("SCRATCHY_STACK")) c.highlight();
-		}
-	}
-
-	void tick() {
-		Container hov = VIEWPORT.getLowestHovered(mouseX, mouseY);
-
-		if (!mousePressed && mousePrev && hov.highlighted) {
-			for (Player p : PLAYERS) {
-				if (p == player) continue;
-				for (Container c : p.contents.getChild("CARDS").children) {
-					if (((ResourceCard)c).resource == ((ResourceCard)hov).resource) {
-						addEvent(new StealCardEvent(player, (Card)c));
-					}
-				}
-			}
-			refreshHighlights(player);
-			close();
-		}
-		mousePrev = mousePressed;
-	}
 }
