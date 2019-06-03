@@ -14,10 +14,12 @@ void newGame() { // set up a new game
 		road.owner = p;
 		road.setImage("road_p");
 		p.contents.addChild(road);
+
 		Vertex settlement = new Vertex("SETTLEMENT_BUY", width*0.7+CARD_WIDTH, height*0.16, CARD_WIDTH*0.8);
 		settlement.owner = p;
 		settlement.setImage("settlement");
 		p.contents.addChild(settlement);
+
 		Vertex city = new Vertex("CITY_BUY", width*0.7+CARD_WIDTH*2, height*0.16, CARD_WIDTH*0.8);
 		city.owner = p;
 		city.setImage("city");
@@ -61,21 +63,16 @@ void loadGame() {
 
 }
 
-boolean boardActive, diceActive, cardsActive;
-
 void hideAll() {
-	boardActive = BOARD.active;
 	BOARD.active = false;
-	diceActive = DICE.active;
 	DICE.active = false;
-	cardsActive = CARDS.active;
 	CARDS.active = false;
 }
 
 void showAll() {
-	BOARD.active = boardActive;
-	DICE.active = diceActive;
-	CARDS.active = cardsActive;
+	BOARD.active = true;
+	DICE.active = true;
+	CARDS.active = true;
 }
 
 void refreshHighlights(Player player) {
@@ -105,6 +102,7 @@ void refreshHighlights(Player player) {
 			if (resources[sell.order()] >= player.tradeRatio(buy, sell)) isAble = true;
 		}
 		if (isAble) CARDS.getChild(buy.getStackName()).highlight();
+		else CARDS.getChild(buy.getStackName()).unhighlight();
 	}
 }
 
