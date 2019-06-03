@@ -25,3 +25,14 @@ class DevelopmentCard extends Card {
 		return super.toString()+"(type = "+type+")";
 	}
 }
+
+void playCard(Player player, DevelopmentCard card) {
+
+	if (card.type == CardType.KNIGHT) {
+
+		addEvent(new MoveRobberEvent(player));
+		addEvent(new MessageBoxEvent(player+" has played a Knight,\nand will now move the robber.", false));
+
+	}
+
+}

@@ -113,5 +113,6 @@ void clearHighlights() {
 		player.contents.getChild("ROAD_BUY").unhighlight();
 		player.contents.getChild("SETTLEMENT_BUY").unhighlight();
 		player.contents.getChild("CITY_BUY").unhighlight();
+		for (Container c : player.contents.getChild("DEVCARDS").children) c.unhighlight();
 	}
 }

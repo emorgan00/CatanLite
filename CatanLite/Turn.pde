@@ -20,6 +20,7 @@ class TurnEvent extends Event {
 	}
 
 	void tick() {
+
 		if (phase == 0) { // we just created this event. wait one call until dice have been rolled.
 			phase = 1;
 
@@ -49,7 +50,17 @@ class TurnEvent extends Event {
 			phase = 2;
 			queueRefresh = true;
 
-		} else if (phase == 2) { // we are in the build phase
+		} else if (phase == 2) { // highlight development cards which can be played
+
+			for (Container c : player.contents.getChild("DEVCARDS").children) {
+				CardType type = ((DevelopmentCard)c).type;
+				if (type == CardType.KNIGHT || type == CardType.ROAD_BUILDING || type == CardType.YEAR_OF_PLENTY || type == CardType.MONOPOLY) {
+					c.highlight();
+				}
+			}
+			phase = 3;
+
+		} else if (phase == 3) { // we are in the build phase
 
 			if (queueRefresh) {
 				refreshHighlights(player);
@@ -78,6 +89,10 @@ class TurnEvent extends Event {
 
 				} else if (hov instanceof ResourceCard && hov.parent == CARDS && hov.highlighted) { // resource card
 					addEvent(new TradeResourceEvent(player, ((ResourceCard)hov).resource));
+
+				} else if (hov instanceof DevelopmentCard && hov.highlighted) { // playing a development card
+					for (Container card : player.contents.getChild("DEVCARDS").children) card.unhighlight();
+					playCard(player, (DevelopmentCard)hov);
 
 				} else queueRefresh = false;
 			} else queueRefresh = false;
