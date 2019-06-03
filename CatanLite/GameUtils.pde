@@ -84,11 +84,11 @@ void refreshHighlights(Player player) {
 	int[] resources = ((CardArray)player.contents.getChild("CARDS")).resources();
 
 	// road, settlement, city, scratchy
-	if (resources[0] > 0 && resources[4] > 0) road.highlight(); 
+	if (resources[0] > 0 && resources[4] > 0 && player.roads.size() < 15) road.highlight(); 
 	else road.unhighlight();
-	if (resources[0] > 0 && resources[1] > 0 && resources[3] > 0 && resources[4] > 0) settlement.highlight(); 
+	if (resources[0] > 0 && resources[1] > 0 && resources[3] > 0 && resources[4] > 0 && player.settlements.size() < 5) settlement.highlight(); 
 	else settlement.unhighlight();
-	if (resources[2] > 2 && resources[3] > 1) city.highlight(); 
+	if (resources[2] > 2 && resources[3] > 1 && player.cities.size() < 4) city.highlight(); 
 	else city.unhighlight();
 	if (resources[1] > 0 && resources[2] > 0 && resources[3] > 0 && DECK.size() > 0) scratchy.highlight(); 
 	else scratchy.unhighlight();
