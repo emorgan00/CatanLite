@@ -92,3 +92,9 @@
     * Allowed players to cancel buying (by clicking outside the board)
   * Ethan:
     * Added the RemoveCardEvent
+
+6/3/19:
+  * Benjamin:
+    * Stopped user from buying (and hid buying location) when cap is 
+reached
+
