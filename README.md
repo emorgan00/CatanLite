@@ -2,9 +2,5 @@ Benjamin Avrahami and Ethan Morgan's APCS2 Final Project
 
 [Development Log](https://github.com/emorgan00/CatanLite/blob/master/devlog.md)
 
-immediate to do list: (all of these are things we can do right now without needing other parts working to build off of)
-  * (tricky) add PlayerSelectEvent, with parameter cancellable (for choosing who to rob and potentially who to trade with)
-  * (hard) add CardSelectEvent, with a CardArray as parameter
-
-down the line to do list: (no big deal if we don't get to these)
-  * (hard) add the ability to highlight and unhighlight objects, this will be a huge aesthetic improvement
+This is the game of Catan, which supports at least two players (but should be four or less). 
+Build settlements, roads and cities to hunt for resources, and be the first to 10 victory points!
