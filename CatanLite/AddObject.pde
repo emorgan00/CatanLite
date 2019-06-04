@@ -136,6 +136,7 @@ class AddCityEvent extends Event {
 				hov.setImage("city");
 				player.points++;
         player.cities.add((Vertex)hov);
+        player.settlements.remove((Vertex)hov);
 				close(false);
 			}
 
