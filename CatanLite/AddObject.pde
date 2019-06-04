@@ -62,6 +62,7 @@ class AddSettlementEvent extends Event {
 					hov.setImage("settlement");
 					((Vertex)hov).owner = player;
 					player.points++;
+          player.settlements.add((Vertex)hov);
 					if (addResources) {
 						for (Tile t : ((Vertex)hov).tiles) {
 							Resource r = t.resource;
@@ -134,6 +135,7 @@ class AddCityEvent extends Event {
 				((Vertex)hov).hasCity = true;
 				hov.setImage("city");
 				player.points++;
+        player.cities.add((Vertex)hov);
 				close(false);
 			}
 
@@ -222,6 +224,7 @@ class AddRoadEvent extends Event {
 				dummy.y = hov.absY()-dummy.h*0.08;
 
 				if (!mousePressed && mousePrevious) {
+          player.roads.add((Link)hov);
 					VIEWPORT.children.remove(dummy);
 					((Link)hov).hasRoad = true;
 					hov.setImage(((Link)hov).type.imageName());

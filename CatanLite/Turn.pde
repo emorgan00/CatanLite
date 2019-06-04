@@ -14,6 +14,15 @@ class TurnEvent extends Event {
 	}
 
 	void load() {
+    if (player.roads.size() >= 15) {
+      player.contents.getChild("ROAD_BUY").active = false;
+    }
+    if (player.settlements.size() >= 5) {
+      player.contents.getChild("SETTLEMENT_BUY").active = false;
+    }
+    if (player.cities.size() >= 4) {
+      player.contents.getChild("CITY_BUY").active = false;
+    }
 		addEvent(new RollDiceEvent());
 		addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
 		phase = 0; // we will next do robber/production
@@ -98,6 +107,9 @@ class TurnEvent extends Event {
 			
 			if (keyPressed) {
 				if (key == ENTER) {
+          player.contents.getChild("ROAD_BUY").active = true;
+          player.contents.getChild("SETTLEMENT_BUY").active = true;
+          player.contents.getChild("CITY_BUY").active = true;
 					close();
 				}
 			}
