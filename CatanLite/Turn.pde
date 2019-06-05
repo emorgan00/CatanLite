@@ -14,15 +14,6 @@ class TurnEvent extends Event {
 	}
 
 	void load() {
-    if (player.roads.size() >= 15) {
-      player.contents.getChild("ROAD_BUY").active = false;
-    }
-    if (player.settlements.size() >= 5) {
-      player.contents.getChild("SETTLEMENT_BUY").active = false;
-    }
-    if (player.cities.size() >= 4) {
-      player.contents.getChild("CITY_BUY").active = false;
-    }
 		addEvent(new RollDiceEvent());
 		addEvent(new MessageBoxEvent("It is now "+player+"'s turn.", false));
 		phase = 0; // we will next do robber/production
@@ -70,7 +61,20 @@ class TurnEvent extends Event {
 			phase = 3;
 
 		} else if (phase == 3) { // we are in the build phase
-
+      
+      if (player.roads.size() >= 15) {
+        player.contents.getChild("ROAD_BUY").active = false;
+      }
+      if (player.settlements.size() >= 5) {
+        player.contents.getChild("SETTLEMENT_BUY").active = false;
+      }
+      if (player.cities.size() >= 4) {
+        player.contents.getChild("CITY_BUY").active = false;
+      }
+      if (player.settlements.size() < 5) {
+        player.contents.getChild("SETTLEMENT_BUY").active = true;
+      }
+      
 			if (queueRefresh) {
 				refreshHighlights(player);
 			}
@@ -89,7 +93,7 @@ class TurnEvent extends Event {
 
 				} else if (hov.id.equals("CITY_BUY") && hov.highlighted) {
 					addEvent(new AddCityEvent(player));
-
+          
 				} else if (hov.id.equals("SCRATCHY_STACK") && hov.highlighted) {
 					RemoveCardsEvent rm = new RemoveCardsEvent();
 					rm.addCards((CardArray)player.contents.getChild("CARDS"), card_cost);
@@ -104,7 +108,11 @@ class TurnEvent extends Event {
 
 				} else queueRefresh = false;
 			} else queueRefresh = false;
-			
+      
+      if (player.points >= 10) {
+        addEvent(new MessageBoxEvent(player+" wins!", false));
+      }
+
 			if (keyPressed) {
 				if (key == ENTER) {
           player.contents.getChild("ROAD_BUY").active = true;

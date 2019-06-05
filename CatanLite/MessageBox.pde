@@ -77,6 +77,9 @@ class MessageBoxEvent extends Event {
 			if (hideOthers) {
 				showAll();
 			}
+      if (text.lastIndexOf("wins!")+5 == text.length()) {
+        exit();
+      }
 			close();
 		}
 		mousePrevious = mousePressed;

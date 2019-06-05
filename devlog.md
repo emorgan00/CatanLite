@@ -95,6 +95,8 @@
 
 6/3/19:
   * Benjamin:
-    * Stopped user from buying (and hid buying location) when cap is 
-reached
+    * Stopped user from buying (and hid buying location) when cap is reached
 
+6/4/19:
+  * Benjamin:
+    * Added a description and instructions for playing the game to the README
